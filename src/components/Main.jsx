@@ -1,3 +1,5 @@
+import '../assets/styles/Main.css';
+
 const Main = () => {
   return(
     <main>

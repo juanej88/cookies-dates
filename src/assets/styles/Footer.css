@@ -1,0 +1,15 @@
+footer {
+  background-color: hsla(180, 100%, 50%, 0.2);
+  padding: 0.7rem;
+  font-size: 0.7rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media only screen and (min-width: 550px) {
+  footer {
+    padding: 1rem;
+    font-size: 1rem;
+  }
+}

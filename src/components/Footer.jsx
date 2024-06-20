@@ -1,7 +1,25 @@
+import '../assets/styles/Footer.css';
+
 const Footer = () => {
+  const getYear = () => new Date().getFullYear();
+
   return(
     <footer>
-      <h3>Footer</h3>
+      <div>
+        <p>Copyright &#xa9; {getYear()} Cookies & Dates</p>
+      </div>
+      <div>
+        <p className='right'>
+          Made by <a 
+          href='https://juanespinosa.netlify.app/'
+          target='_blank'
+          rel="noreferrer"
+          title="Visit Juan's Portfolio"
+          >
+            Juan Espinosa Jorrin
+          </a>
+        </p>
+      </div>
     </footer>
   );
 };
