@@ -1,3 +1,64 @@
 header {
   background-color: hsla(240, 100%, 50%, 0.2);
+  padding: 0.7rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+}
+
+h1 {
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+h3 {
+  font-size: 1.1rem;
+}
+
+h1 > span {
+  display: block;
+}
+
+.date {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+.date > h3 {
+  background-color: hsla(240, 100%, 50%, 0.3);
+  border-radius: 0.5em;
+  padding: 0.5em
+}
+
+.user {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  align-items: center;
+}
+
+.user > h3 {
+  padding: 0.5em;
+}
+
+.cookie {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background-color: hsl(0, 0%, 0%);
+}
+
+@media only screen and (min-width: 550px) {
+  header {
+    padding: 1rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+  }
 }
