@@ -1,3 +1,46 @@
 main {
   background-color: hsla(0, 100%, 50%, 0.2);
+  display: flex;
+  justify-content: center;
+}
+
+main h1 {
+  text-align: center;
+  padding: 1rem;
+  margin: 1rem;
+}
+
+.event-card {
+  margin: 2rem 0;
+  padding: 1rem;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80vw;
+  max-width: 500px;
+}
+
+.event-card:first-of-type {
+  margin-top: 1rem;
+}
+
+.birthday {
+  background-color: hsla(0, 100%, 50%, 0.3);
+}
+
+.event {
+  background-color: hsla(45, 100%, 50%, 0.3);
+}
+
+.events p {
+  font-size: 1.2rem;
+  font-weight: 500;
+  padding-top: 0.5rem;
+}
+
+@media only screen and (min-width: 550px) {
+  .event-card {
+    padding: 2rem;
+  }
 }

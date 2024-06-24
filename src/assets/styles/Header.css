@@ -6,7 +6,7 @@ header {
   align-items: center;
 }
 
-h1 {
+header h1 {
   font-size: 1.25rem;
   line-height: 1;
 }
@@ -54,7 +54,7 @@ h1 > span {
     padding: 1rem;
   }
 
-  h1 {
+  header h1 {
     font-size: 2rem;
   }
 
