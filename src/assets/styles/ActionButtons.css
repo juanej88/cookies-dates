@@ -1,0 +1,34 @@
+#action-buttons-section {
+  background-color: hsla(5, 100%, 91%, 1);
+  width: 100%;
+  height: 4.25rem;
+  position: sticky;
+  bottom: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button {
+  background-color: hsl(0, 0%, 100%);
+  border: 1px solid hsl(0, 0%, 100%);
+  border-radius: 0.5rem;
+  margin: 0 1rem;
+  font-size: 1.25rem;
+  font-weight: 500;
+  width: 150px;
+  height: 3.25rem;
+  cursor: pointer;
+}
+
+@media only screen and (min-width: 550px) {
+  #action-button-section {
+    height: 5.75rem;
+  }
+  
+  .button {
+    font-size: 1.35rem;
+    width: 200px;
+    height: 3.5rem;
+  }
+}

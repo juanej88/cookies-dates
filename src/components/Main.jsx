@@ -1,4 +1,5 @@
 import '../assets/styles/Main.css';
+import ActionButtons from './ActionButtons';
 // import useConsoleLog from '../assets/helper_functions/useConsoleLog';
 import { useState, useEffect } from 'react';
 
@@ -53,6 +54,7 @@ const Main = () => {
         <h1>Upcoming Events:</h1>
         {eventCards}
       </section>
+      <ActionButtons />
     </main>
   );
 };
