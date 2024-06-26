@@ -1,0 +1,33 @@
+#date-section {
+  background-color: hsla(0, 0%, 0%, 85%);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#date-form {
+  background-color: hsl(0, 0%, 100%);
+  border-radius: 1rem;
+  padding: 2rem;
+  width: 80vw;
+  height: 30vh;
+}
+
+#date-form  h2 {
+  text-align: center;
+}
+
+@media only screen and (min-width: 550px) {
+  #date-form {
+    border-radius: 1rem;
+    padding: 2rem;
+    min-width: 550px;
+    width: 40vw;
+    height: 30vh;
+  }
+}
