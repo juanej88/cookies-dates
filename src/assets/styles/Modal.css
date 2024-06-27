@@ -31,3 +31,24 @@
     height: 30vh;
   }
 }
+
+label, input {
+  display: block;
+  border: 1px solid transparent;
+}
+
+label {
+  padding: 0.25rem 1rem 0;
+}
+
+input {
+  background-color: transparent;
+  width: 100%;
+  min-height: 2.2rem;
+  padding: 0.25rem 1rem;
+  border: 2px solid black;
+  border-radius: 1.5rem;
+  font-family: inherit;
+  font-size: 1.2rem;
+  text-align: center;
+}
