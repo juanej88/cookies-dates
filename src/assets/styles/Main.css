@@ -1,51 +1,77 @@
 main {
-  padding-top: 4rem;
+  min-height: 100vh;
+  padding-top: 6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: hsl(0, 0%, 95%);
+}
+
+.events > h1 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.month-container {
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  background-color: hsla(0, 0%, 100%);
+  border-radius: 0.5rem;
+  width: 90vw;
+  max-width: 500px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-main h1 {
-  text-align: center;
-  padding: 1rem;
-  margin: 1rem;
+h2.month-text {
+  font-size: 1.25rem;
+  padding-top: 1rem;
 }
 
 .event-card {
-  margin: 2rem 0;
-  padding: 1rem;
-  border-radius: 1rem;
+  margin: 1rem 0 0.5rem 0;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   align-items: center;
-  width: 80vw;
-  max-width: 500px;
+  width: 90%;
 }
 
-.event-card:first-of-type {
-  margin-top: 1rem;
+.event-card > p {
+  font-size: 1.25rem;
+}
+
+.event-card > h3 {
+  font-size: 1.5rem;
 }
 
 .birthday {
-  background-color: hsla(0, 100%, 50%, 0.3);
+  background-color: hsla(210, 100%, 88%);
 }
 
 .event {
-  background-color: hsla(45, 100%, 50%, 0.3);
-}
-
-.events p {
-  font-size: 1.2rem;
-  font-weight: 500;
-  padding-top: 0.5rem;
+  background-color: hsl(0, 100%, 88%);
 }
 
 @media only screen and (min-width: 550px) {
-  .event-card {
-    padding: 2rem;
+  main {
+    padding-top: 6.5rem;
   }
 
-  main {
-    padding-top: 6rem;
+  .month-container {
+    width: 80vw;
+  }
+
+  .event-card {
+    padding: 1rem;
+  }
+}
+
+@media only screen and (min-width: 1100px) {
+  .month-container {
+    width: 40vw;
+    max-width: 600px;
   }
 }

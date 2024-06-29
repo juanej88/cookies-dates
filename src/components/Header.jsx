@@ -8,7 +8,7 @@ const Header = () => {
       </p>
       <div className='user'>
         <p>Juan</p>
-        <span class='material-symbols-outlined'>cookie</span>
+        <span className='material-symbols-outlined'>cookie</span>
       </div>
     </header>
   );
