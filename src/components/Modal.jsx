@@ -82,14 +82,14 @@ const Modal = (props) => {
 
   return (
     <section id='date-section' onClick={handleExteriorClick}>
-      <form id='date-form' onSubmit={saveDate}>
-        <h2>Add a Date</h2>
-        <label htmlFor="name">Name</label>
+      <form id='date-form' onSubmit={saveDate} autocomplete="off">
+        <h2>New Event</h2>
+        <label htmlFor="name">Title</label>
         <input type="text" name='name' id='name' minLength='2' maxLength='20' value={formData.name} onChange={updateFormData} required autoFocus />
 
         {(formData.name || addYear !== null) && 
           <fieldset>
-            <legend>Add year?</legend>
+            <legend>Do you want to include the year of birth?</legend>
             <div className='yes-no-container'>
               <button className='yes-no' id='yes-option' onClick={showDate}>Yes</button>
               <button className='yes-no' id='no-option' onClick={showDate}>No</button>
@@ -114,7 +114,7 @@ const Modal = (props) => {
         </fieldset>}
 
         {formData.date && <button type='submit' id='save-date'>
-          Save
+          Add
         </button>}
       </form>
     </section>

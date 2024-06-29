@@ -18,7 +18,7 @@ const ActionButtons = () => {
   return (
     <section id='action-buttons-section'>
       {modal && <Modal toggleModal={toggleModal} />}
-      <button id='add-date-btn' className='button' onClick={toggleModal}>Add Date</button>
+      <button id='add-date-btn' className='button' onClick={toggleModal}>Add Event</button>
       <button id='show-calendar-btn' className='button'>Show Calendar</button>
     </section>
   );
