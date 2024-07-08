@@ -4,7 +4,6 @@ header {
   padding: 0.5rem;
   background-color: hsla(0, 0%, 100%, 95%);
   backdrop-filter: blur(5px) grayscale(0.5);
-  border-bottom: 1px solid hsl(0, 0%, 90%);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -15,7 +14,7 @@ header {
   flex-direction: column;
   justify-content: center;
   font-family: "Outfit", sans-serif;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 1.5rem;
   line-height: 1;
 }
@@ -27,25 +26,28 @@ header {
 }
 
 .user > p {
-  font-size: 1.25rem;
-  font-weight: 700;
+  font-size: 1.3rem;
+  font-weight: 600;
   padding-right: 0.5em;
+  font-family: "Outfit", sans-serif;
 }
 
 #menu-icon {
-  width: 2rem;
-  height: 2rem;
+  width: 1.8rem;
+  height: 1.8rem;
   background-image: url('../icons/menuIcon1.png');
   background-size: cover;
   cursor: pointer;
+  border: none;
+  background-color: transparent;
 }
 
 #menu-icon:hover {
-  background-image: url('../icons/menuIcon2.png');
+  transform: scale(1.05);
 }
 
 #menu-icon.menu-icon-active {
-  background-image: url('../icons/menuIcon3.png');
+  background-image: url('../icons/menuIcon2.png');
 }
 
 .material-symbols-outlined {
