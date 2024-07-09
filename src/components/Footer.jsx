@@ -9,7 +9,7 @@ const Footer = () => {
         <p>Copyright &#xa9; {getYear()} Cookies & Dates</p>
       </div>
       <div>
-        <p className='right'>
+        <p>
           Made by <a 
           href='https://juanespinosa.netlify.app/'
           target='_blank'

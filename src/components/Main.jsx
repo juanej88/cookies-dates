@@ -49,44 +49,57 @@ const Main = () => {
   // }, []);
 
   return (
-    <main>
-      <section className='events'>
-        <h1>Upcoming Events:</h1>
+    <main className='events'>
+      <h1>Upcoming Events:</h1>
 
-        <div className='month-container'>
-          <h2 className='month-text'>July</h2>
-          <div className={`event-card event`}>
-            <h3>John's BBQ</h3>
-            <p>Mon, 03 Jul</p>
-          </div>
-        </div>
+        <section className='month-events'>
+          <h2>July</h2>
+          <article className='event-card'>
+            <div className='event-identifier event'></div>
+            <aside className='event-details'>
+              <p>Mon, 03 Jul</p>
+              <p>John's BBQ</p>
+            </aside>
+          </article>
+        </section>
 
-        <div className='month-container'>
-          <h2 className='month-text'>August</h2>
-          <div className={`event-card birthday`}>
-            <h3>Aaron Sullivan</h3>
-            <p>Thu, 15 Aug</p>
-          </div>
-        </div>
+        <section className='month-events'>
+          <h2>August</h2>
+          <article className='event-card'>
+            <div className='event-identifier birthday'></div>
+            <aside className='event-details'>
+              <p>Thu, 15 Aug</p>
+              <p>Aaron Sullivan</p>
+            </aside>
+          </article>
+        </section>
 
-        <div className='month-container'>
-          <h2 className='month-text'>November</h2>
-          <div className={`event-card birthday`}>
-            <h3>Diane Kelley</h3>
-            <p>Fri, 01 Nov</p>
-          </div>
-          <div className={`event-card birthday`}>
-            <h3>Marlene Duncan</h3>
-            <p>Fri, 15 Nov</p>
-          </div>
-          <div className={`event-card birthday`}>
-            <h3>Ana Wells</h3>
-            <p>Sat, 16 Nov</p>
-          </div>
-        </div>
+        {/* <section className='month-events'>
+          <h2>November</h2>
+          <article className='event-card'>
+            <div className='event-identifier birthday'></div>
+            <aside className='event-details'>
+              <p>Fri, 01 Nov</p>
+              <p>Diane Kelley</p>
+            </aside>
+          </article>
+          <article className='event-card'>
+            <div className='event-identifier event'></div>
+            <aside className='event-details'>
+              <p>Fri, 15 Nov</p>
+              <p>Our Wedding Anniversary</p>
+            </aside>
+          </article>
+          <article className='event-card'>
+            <div className='event-identifier birthday'></div>
+            <aside className='event-details'>
+              <p>Sat, 16 Nov</p>
+              <p>Ana Wells</p>
+            </aside>
+          </article>
+        </section> */}
 
         {/* {eventCards} */}
-      </section>
       <ActionButtons />
     </main>
   );

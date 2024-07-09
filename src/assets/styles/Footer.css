@@ -1,14 +1,15 @@
 footer {
-  padding: 0.7rem;
+  height: 2.5rem;
+  padding: 0 1rem;
   font-size: 0.7rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-@media only screen and (min-width: 550px) {
+@media only screen and (min-width: 768px) {
   footer {
-    padding: 1rem;
+    padding: 0 1.5rem;
     font-size: 1rem;
   }
 }
