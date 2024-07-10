@@ -18,8 +18,14 @@ const ActionButtons = () => {
   return (
     <section id='action-buttons-section'>
       {modal && <Modal toggleModal={toggleModal} />}
-      <button id='add-date-btn' className='button' onClick={toggleModal}>Add Event</button>
-      <button id='show-calendar-btn' className='button'>Show Calendar</button>
+      <div role='button' id='add-event-btn' className='button' onClick={toggleModal}>
+        <span class="material-symbols-outlined">
+          calendar_add_on
+        </span><p>Add Event</p></div>
+      <div role='button' id='show-calendar-btn' className='button'>
+        <span class="material-symbols-outlined">
+          calendar_month
+        </span><p>Show Calendar</p></div>
     </section>
   );
 };

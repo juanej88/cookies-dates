@@ -68,7 +68,7 @@ aside.event-details > p {
 }
 
 aside.event-details > p:nth-child(2) {
-  border-left: 1px solid hsl(0, 0%, 25%);
+  border-left: 1px solid hsl(0, 0%, 75%);
   padding: 0 0.25rem;
   font-size: 1.25rem;
   font-weight: 700;

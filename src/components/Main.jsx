@@ -74,7 +74,7 @@ const Main = () => {
           </article>
         </section>
 
-        {/* <section className='month-events'>
+        <section className='month-events'>
           <h2>November</h2>
           <article className='event-card'>
             <div className='event-identifier birthday'></div>
@@ -87,7 +87,7 @@ const Main = () => {
             <div className='event-identifier event'></div>
             <aside className='event-details'>
               <p>Fri, 15 Nov</p>
-              <p>Our Wedding Anniversary</p>
+              <p>Wedding Anniversary</p>
             </aside>
           </article>
           <article className='event-card'>
@@ -97,7 +97,7 @@ const Main = () => {
               <p>Ana Wells</p>
             </aside>
           </article>
-        </section> */}
+        </section>
 
         {/* {eventCards} */}
       <ActionButtons />

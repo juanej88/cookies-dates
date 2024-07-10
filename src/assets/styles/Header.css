@@ -26,14 +26,14 @@ header {
 }
 
 .user > p {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 600;
   padding-right: 0.5em;
 }
 
 #menu-icon {
-  width: 1.8rem;
-  height: 1.8rem;
+  width: 1.5rem;
+  height: 1.5rem;
   background-image: url('../icons/menuIcon1.png');
   background-size: cover;
   cursor: pointer;
