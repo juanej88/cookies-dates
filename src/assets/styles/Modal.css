@@ -1,6 +1,7 @@
 #date-section {
   background-color: hsla(0, 0%, 0%, 85%);
   position: fixed;
+  z-index: 1;
   top: 0;
   left: 0;
   width: 100vw;
@@ -12,22 +13,46 @@
 
 #date-form {
   background-color: hsl(0, 0%, 100%);
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   padding: 1.25rem;
-  width: 80vw;
+  width: 90%;
+  max-width: 500px;
   display: flex;
   flex-direction: column;
 }
 
-#date-form  h2 {
+.form-title-container {
+  display: grid;
+  grid-template-columns: 2fr 8fr 2fr;
+  justify-content: center;
+  align-items: center;
+}
+
+#date-form h2 {
   text-align: center;
+  grid-column: 2;
+}
+
+.close-btn {
+  justify-self: end;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2.25rem;
+  width: 2.25rem;
+  font-size: 2rem;
+  font-weight: 100;
+  transform: rotate(45deg);
+  /* transform-origin: center; */
+  cursor: pointer;
+  background-color: hsl(0, 0%, 95%);
+  border-radius: 50%;
 }
 
 @media only screen and (min-width: 550px) {
   #date-form {
     border-radius: 1rem;
     padding: 2rem;
-    min-width: 550px;
     width: 40vw;
   }
 }
@@ -47,7 +72,7 @@ input, select {
   min-height: 2.2rem;
   padding: 0.25rem 1rem;
   border: 2px solid black;
-  border-radius: 1.5rem;
+  border-radius: 0.5rem;
   font-family: inherit;
   font-size: 1.2rem;
   text-align: center;

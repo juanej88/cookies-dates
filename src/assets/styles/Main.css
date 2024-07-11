@@ -39,7 +39,7 @@ section.month-events > h2 + article.event-card {
 
 .event-identifier {
   border-radius: 7px 7px 0 0;
-  height: 1.5rem;
+  height: 1.25rem;
   width: 100%;
 }
 

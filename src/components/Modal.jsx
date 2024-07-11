@@ -12,6 +12,10 @@ const Modal = (props) => {
     };
   };
 
+  const closeModal = () => {
+    props.toggleModal();
+  };
+
   const [formData, setFormData] = useState({
     name: '',
     date: '',
@@ -83,7 +87,10 @@ const Modal = (props) => {
   return (
     <section id='date-section' onClick={handleExteriorClick}>
       <form id='date-form' onSubmit={saveDate} autocomplete="off">
-        <h2>New Event</h2>
+        <div className='form-title-container'>
+          <h2>New Event</h2>
+          <div className='close-btn' onClick={closeModal}>+</div>
+        </div>
         <label htmlFor="name">Name</label>
         <input type="text" name='name' id='name' minLength='2' maxLength='20' value={formData.name} onChange={updateFormData} required autoFocus />
 
