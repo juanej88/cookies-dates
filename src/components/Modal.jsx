@@ -89,7 +89,7 @@ const Modal = (props) => {
       <form id='date-form' onSubmit={saveDate} autocomplete="off">
         <div className='form-title-container'>
           <h2>New Event</h2>
-          <div className='close-btn' onClick={closeModal}>+</div>
+          <div className='close-btn' tabIndex='0' role='button' onClick={closeModal}>+</div>
         </div>
         <label htmlFor="name">Name</label>
         <input type="text" name='name' id='name' minLength='2' maxLength='20' value={formData.name} onChange={updateFormData} required autoFocus />

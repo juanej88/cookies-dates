@@ -8,7 +8,7 @@ main {
 }
 
 main > h1 {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   margin-bottom: 1.25rem;
 }
 
@@ -22,7 +22,7 @@ section.month-events {
 }
 
 section.month-events > h2 {
-  font-size: 1.4rem;
+  font-size: 1.25rem;
 }
 
 article.event-card {
@@ -70,7 +70,7 @@ aside.event-details > p {
 aside.event-details > p:nth-child(2) {
   border-left: 1px solid hsl(0, 0%, 75%);
   padding: 0 0.25rem;
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   font-weight: 700;
 }
 

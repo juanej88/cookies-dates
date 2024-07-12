@@ -2,7 +2,6 @@
   background-color: hsl(0, 0%, 95%);
   width: 100%;
   max-width: 500px;
-  padding-top: 0.5rem;
   height: 4rem;
   position: sticky;
   bottom: 0px;
@@ -13,9 +12,9 @@
 
 .button {
   background-color: hsl(0, 0%, 95%);
-  font-size: 0.9rem;
+  border-radius: 0.5rem;
+  font-size: 0.85rem;
   font-weight: 500;
-  height: 3rem;
   cursor: pointer;
   display: flex;
   flex-direction: column;
@@ -24,12 +23,12 @@
 }
 
 .button p {
-  color: hsl(0, 0%, 10%);
+  color: hsl(0, 0%, 25%);
 }
 
 .material-symbols-outlined {
   font-size: 1.75rem;
-  color: hsl(0, 0%, 10%);
+  color: hsl(0, 0%, 25%);
   font-variation-settings:
   'FILL' 0,
   'wght' 300,
@@ -37,8 +36,13 @@
   'opsz' 48
 }
 
-#add-event-btn {
-  border-right: 1px solid hsl(0, 0%, 75%);
+.button:hover {
+  background-color: hsl(0, 0%, 90%);
+}
+
+.button:hover p, .button:hover .material-symbols-outlined {
+  transform: scale(1.05);
+  color: hsl(0, 0%, 0%);
 }
 
 @media only screen and (min-width: 768px) {
