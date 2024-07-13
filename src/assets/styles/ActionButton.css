@@ -1,0 +1,74 @@
+.action-btn {
+  height: 100%;
+  background-color: hsl(0, 0%, 95%);
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.action-btn:hover {
+  background-color: hsl(0, 0%, 90%);
+}
+
+.action-btn:hover p {
+  transform: scale(1.05);
+}
+
+#add-event-btn > p::after,
+#show-calendar-btn > p::after {
+  color: hsl(0, 0%, 25%);
+}
+
+#add-event-btn > p::after {
+  content: 'Add Event';
+}
+
+#show-calendar-btn > p::after {
+  content: 'Calendar';
+}
+
+#add-event-btn:hover > p::after,
+#show-calendar-btn:hover > p::after {
+  color: hsl(0, 0%, 0%);
+}
+
+@media only screen and (min-width: 768px) {
+  .action-btn {
+    background-color: hsl(0, 0%, 100%);
+    font-size: 0.75rem;
+  }
+
+  .action-btn:hover {
+    background-color: hsl(0, 0%, 95%);
+  }
+
+  #add-event-btn > p::after, 
+  #show-calendar-btn > p::after,
+  #menu-btn > p::after {
+    content: '';
+  }
+
+  #add-event-btn:hover > p::after, 
+  #show-calendar-btn:hover > p::after,
+  #menu-btn:hover > p::after {
+    color: hsl(0, 0%, 0%);
+  }
+  
+  #add-event-btn:hover > p::after {
+    content: 'Add Event';
+  }
+  
+  #show-calendar-btn:hover > p::after {
+    content: 'Calendar';
+  }
+
+  #menu-btn:hover > p::after {
+    content: 'Menu';
+  }
+}

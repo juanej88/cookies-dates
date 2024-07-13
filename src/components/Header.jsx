@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import '../assets/styles/Header.css';
+import ActionButton from './ActionButton';
 // import menuIcon1 from '../assets/icons/menuIcon1.svg';
 
 const Header = () => {
@@ -13,13 +14,17 @@ const Header = () => {
 
   return(
     <header>
-      <p id='logo'>Cookies
+      <div id='logo'>Cookies
         <span>& Dates</span>
-      </p>
-      <div className='user'>
-        <p>{today}</p>
-        <button id='menu-icon' className={openMenu ? 'menu-icon-active' : ''} onClick={handleClick}></button>
       </div>
+      <nav className='menu-container'>
+        <p>{today}</p>
+        <ActionButton id='menu-btn' handleClick={handleClick}>
+          <span 
+            className={`menu-icon ${openMenu ? 'menu-icon-active' : ''}`}
+          ></span>
+        </ActionButton>
+      </nav>
     </header>
   );
 };

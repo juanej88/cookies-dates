@@ -4,7 +4,7 @@
   box-sizing: border-box;
   text-decoration: none;
   color: hsl(0, 0%, 0%);
-  scrollbar-width: thin;
+  scrollbar-width: none;
   -webkit-tap-highlight-color: transparent;
 }
 

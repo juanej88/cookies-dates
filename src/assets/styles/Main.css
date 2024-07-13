@@ -1,18 +1,26 @@
 main {
   min-height: calc(100vh - 2.5rem);
-  padding-top: 5.5rem;
+  padding-top: 5.25rem;
   background-color: hsl(0, 0%, 95%);
+  display: grid;
+  grid-template-columns: 4fr;
+  grid-template-rows: 1fr 4rem;
+}
+
+section#upcoming-events {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-main > h1 {
+main h1 {
   font-size: 1.4rem;
+  font-weight: 600;
   margin-bottom: 1.25rem;
 }
 
-section.month-events {
+article.month-events {
   padding-bottom: 1.25rem;
   width: 90%;
   max-width: 500px;
@@ -21,11 +29,12 @@ section.month-events {
   align-items: center;
 }
 
-section.month-events > h2 {
+article.month-events > h2 {
   font-size: 1.25rem;
+  font-weight: 500;
 }
 
-article.event-card {
+aside.event-card {
   width: 100%;
   background-color: hsla(0, 0%, 100%);
   border: 1px solid hsl(0, 0%, 25%);
@@ -33,7 +42,7 @@ article.event-card {
   margin: 1.5rem 0 0.5rem 0;
 }
 
-section.month-events > h2 + article.event-card {
+article.month-events > h2 + aside.event-card {
   margin: 0.75rem 0 0.5rem 0;
 }
 
@@ -51,7 +60,7 @@ section.month-events > h2 + article.event-card {
   background-color: hsl(260, 60%, 75%);
 }
 
-aside.event-details {
+div.event-details {
   display: grid;
   grid-template-columns: 1fr 2fr;
   padding: 0.75rem 0;
@@ -59,7 +68,7 @@ aside.event-details {
   font-weight: 500;
 }
 
-aside.event-details > p {
+div.event-details > p {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -67,7 +76,7 @@ aside.event-details > p {
   text-align: center;
 }
 
-aside.event-details > p:nth-child(2) {
+div.event-details > p:nth-child(2) {
   border-left: 1px solid hsl(0, 0%, 75%);
   padding: 0 0.25rem;
   font-size: 1.2rem;
@@ -75,13 +84,17 @@ aside.event-details > p:nth-child(2) {
 }
 
 @media only screen and (min-width: 768px) {
-  section.month-events {
+  main {
+    grid-template-rows: 1fr;
+  }
+  
+  article.month-events {
     width: 60%;
   }
 }
 
 @media only screen and (min-width: 1024px) {
-  section.month-events {
+  article.month-events {
     width: 40%;
   }
 }

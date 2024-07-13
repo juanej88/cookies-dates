@@ -50,55 +50,56 @@ const Main = () => {
 
   return (
     <main className='events'>
-      <h1>Upcoming Events:</h1>
+      <section id='upcoming-events'>
+        <h1>Upcoming Events:</h1>
 
-        <section className='month-events'>
+        <article className='month-events'>
           <h2>July</h2>
-          <article className='event-card'>
+          <aside className='event-card'>
             <div className='event-identifier event'></div>
-            <aside className='event-details'>
+            <div className='event-details'>
               <p>Mon, 03 Jul</p>
               <p>John's BBQ</p>
-            </aside>
-          </article>
-        </section>
+            </div>
+          </aside>
+        </article>
 
-        <section className='month-events'>
+        <article className='month-events'>
           <h2>August</h2>
-          <article className='event-card'>
+          <aside className='event-card'>
             <div className='event-identifier birthday'></div>
-            <aside className='event-details'>
+            <div className='event-details'>
               <p>Thu, 15 Aug</p>
               <p>Aaron Sullivan</p>
-            </aside>
-          </article>
-        </section>
+            </div>
+          </aside>
+        </article>
 
-        <section className='month-events'>
+        <article className='month-events'>
           <h2>November</h2>
-          <article className='event-card'>
+          <aside className='event-card'>
             <div className='event-identifier birthday'></div>
-            <aside className='event-details'>
+            <div className='event-details'>
               <p>Fri, 01 Nov</p>
               <p>Diane Kelley</p>
-            </aside>
-          </article>
-          <article className='event-card'>
+            </div>
+          </aside>
+          <aside className='event-card'>
             <div className='event-identifier event'></div>
-            <aside className='event-details'>
+            <div className='event-details'>
               <p>Fri, 15 Nov</p>
               <p>Wedding Anniversary</p>
-            </aside>
-          </article>
-          <article className='event-card'>
+            </div>
+          </aside>
+          <aside className='event-card'>
             <div className='event-identifier birthday'></div>
-            <aside className='event-details'>
+            <div className='event-details'>
               <p>Sat, 16 Nov</p>
               <p>Ana Wells</p>
-            </aside>
-          </article>
-        </section>
-
+            </div>
+          </aside>
+        </article>
+      </section>
         {/* {eventCards} */}
       <ActionButtons />
     </main>
