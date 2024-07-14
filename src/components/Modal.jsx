@@ -5,7 +5,7 @@ const Modal = (props) => {
   // it hides the Modal component when a user double clicks anywhere outside the form
   const [doubleClick, setDoubleClick] = useState(false);
   const handleExteriorClick = (e) => {
-    if (e.target.getAttribute('id') === 'date-section') {
+    if (e.target.getAttribute('id') === 'add-event-section') {
       doubleClick ? props.toggleModal() : setDoubleClick(true);
     } else {
       setDoubleClick(false);
@@ -17,6 +17,7 @@ const Modal = (props) => {
   };
 
   const [formData, setFormData] = useState({
+    event: 'birthday',
     name: '',
     date: '',
     month: '',
@@ -49,15 +50,6 @@ const Modal = (props) => {
     
   };
 
-  // this state determines to show either the date input or the 2 select elements 
-  const [addYear, setAddYear] = useState(null);
-
-  const showDate = (e) => {
-    e.preventDefault();
-    const option = e.target.id;
-    option === 'yes-option' ? setAddYear(true) : setAddYear(false);
-  };
-
   const getMonths = () => {
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     const monthsElements = months.map((month, idx) => {
@@ -85,31 +77,33 @@ const Modal = (props) => {
   };
 
   return (
-    <section id='date-section' onClick={handleExteriorClick}>
-      <form id='date-form' onSubmit={saveDate} autocomplete="off">
+    <section id='add-event-section' onClick={handleExteriorClick}>
+      <form id='event-form' onSubmit={saveDate} autoComplete="off">
         <div className='form-title-container'>
           <h2>New Event</h2>
-          <div className='close-btn' tabIndex='0' role='button' onClick={closeModal}>+</div>
+          <button className='close-btn' onClick={closeModal}>+</button>
         </div>
-        <label htmlFor="name">Name</label>
-        <input type="text" name='name' id='name' minLength='2' maxLength='20' value={formData.name} onChange={updateFormData} required autoFocus />
 
-        {(formData.name || addYear !== null) && 
-          <fieldset>
-            <legend>Do you want to include the year?</legend>
-            <div className='yes-no-container'>
-              <button className='yes-no' id='yes-option' onClick={showDate}>Yes</button>
-              <button className='yes-no' id='no-option' onClick={showDate}>No</button>
-            </div>
-          </fieldset>
-        }
+        <fieldset>
+          <legend>Type</legend>
+          <div className='event-options-container'>
+            <input type='radio' name='event' id='birthday' className='event-options' value='birthday' onChange={updateFormData} checked={formData.event === 'birthday'} />
+            <label htmlFor='birthday' className='event-label'>
+              Birthday
+            </label>
+            <input type='radio' name='event' id='special' className='event-options' value='special' onChange={updateFormData} checked={formData.event === 'special'} />
+            <label htmlFor='special' className='event-label'>
+              Special Event
+            </label>
+          </div>
+        </fieldset>
 
-        {addYear === true && <fieldset>
-          <label htmlFor='date'>Date</label>
-          <input type='date' name='date' id='date' value={formData.date} onChange={updateFormData}  required/>
-        </fieldset>}
+        <fieldset>
+          <label htmlFor="name">Name</label>
+          <input type="text" name='name' id='name' minLength='2' maxLength='20' value={formData.name} onChange={updateFormData} required autoFocus />
+        </fieldset>
         
-        {addYear === false && <fieldset id='day-month'>
+        <fieldset id='date'>
           <label htmlFor='day'>Day</label>
           <select name="day" id="day" value={formData.day} onChange={updateFormData} required>
             {getDays()}
@@ -118,11 +112,11 @@ const Modal = (props) => {
           <select name="month" id="month" value={formData.month} onChange={updateFormData} required>
             {getMonths()}
           </select>
-        </fieldset>}
+        </fieldset>
 
-        {formData.date && <button type='submit' id='save-date'>
+        <button type='submit' id='save-date'>
           Add
-        </button>}
+        </button>
       </form>
     </section>
   );

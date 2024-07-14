@@ -1,4 +1,4 @@
-#date-section {
+#add-event-section {
   background-color: hsla(0, 0%, 0%, 85%);
   position: fixed;
   z-index: 1;
@@ -11,14 +11,27 @@
   align-items: center;
 }
 
-#date-form {
-  background-color: hsl(0, 0%, 100%);
+#event-form {
+  background-color: hsl(0, 0%, 95%);
   border-radius: 0.5rem;
-  padding: 1.25rem;
+  padding: 0.5rem 1rem 1.25rem;
   width: 90%;
   max-width: 500px;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: 1fr repeat(4, 2fr);
+  align-items: end;
+}
+
+@media only screen and (min-width: 768px) {
+  #event-form {
+    width: 60vw;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  #event-form {
+    width: 40vw;
+  }
 }
 
 .form-title-container {
@@ -28,7 +41,9 @@
   align-items: center;
 }
 
-#date-form h2 {
+.form-title-container > h2 {
+  font-size: 1.25rem;
+  font-weight: 500;
   text-align: center;
   grid-column: 2;
 }
@@ -38,14 +53,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 2.1rem;
-  width: 2.1rem;
+  height: 1.85rem;
+  width: 1.85rem;
   font-size: 2rem;
   font-weight: 300;
   transform: rotate(45deg);
   cursor: pointer;
   background-color: hsl(0, 0%, 95%);
   color: hsl(0, 0%, 25%);
+  border: none;
   border-radius: 50%;
 }
 
@@ -54,96 +70,122 @@
   color: hsl(0, 0%, 0%);
 }
 
-@media only screen and (min-width: 550px) {
-  #date-form {
-    border-radius: 1rem;
-    padding: 2rem;
-    width: 40vw;
-  }
-}
-
-label, input {
-  display: block;
-  border: 1px solid transparent;
-}
-
-label, legend {
-  padding: 0.25rem 1rem 0;
-}
-
-input, select {
-  background-color: transparent;
-  width: 100%;
-  min-height: 2.2rem;
-  padding: 0.25rem 1rem;
-  border: 2px solid black;
-  border-radius: 0.5rem;
-  font-family: inherit;
-  font-size: 1.2rem;
-  text-align: center;
-}
+/* -- First Fieldset: Event Options -- */
 
 fieldset {
   border: none;
 }
 
-.yes-no-container {
+legend {
+  padding: 0.75rem 0.25rem 0;
+}
+
+.event-options-container {
+  margin-top: 0.25rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+/* Hides the radio inputs */
+input.event-options {
+  visibility: hidden;
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+.event-label {
+  height: 2.25rem;
+  background-color: hsl(0, 0%, 100%);
+  border: 1px solid hsl(0, 0%, 0%);
+  border-radius: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 500;
   display: flex;
-}
-
-.yes-no {
-  width: 50%;
-  text-align: center;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
-  padding: 0.25rem 1rem;
+}
+
+.event-label:nth-child(2) {
+  border-radius: 0.5rem 0 0 0.5rem;
+  border-right: none;
+}
+
+.event-label:last-child {
+  border-radius: 0 0.5rem 0.5rem 0;
+}
+
+#birthday:checked + label {
+  background-color: hsl(0, 75%, 75%);
+}
+
+#special:checked + label {
+  background-color: hsl(260, 60%, 75%);
+}
+
+/* -- Second and Third Fieldset: Name/Title and Date -- */
+
+fieldset > label {
+  padding: 0.5rem 0.25rem 0;
+}
+
+input, select {
+  margin-top: 0.25rem;
+  height: 2.25rem;
+  width: 100%;
+  background-color: hsl(0, 0%, 100%);
+  border: 1px solid hsl(0, 0%, 25%);
+  border-radius: 0.5rem;
+  font-family: "Wix Madefor Display", sans-serif;
+  text-align: center;
+}
+
+input {
   font-size: 1.2rem;
-  border: 2px solid black;
-  background-color: hsl(0, 0%, 85%);
-}
-
-#yes-option {
-  border-radius: 1rem 0 0 1rem;
-  border-right: 0px;
-}
-
-#no-option {
-  border-radius: 0 1rem 1rem 0;
+  font-weight: 700;
 }
 
 select {
+  font-size: 1.1rem;
+  font-weight: 500;
   width: 50%;
   cursor: pointer;
+  text-align-last: center;
 }
 
-#day-month {
+#date {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
 }
 
-#day-month > label {
+#date > label {
   width: 50%;
   order: -1;
 }
 
 #day {
-  border-radius: 1rem 0 0 1rem;
-  border-right: 0px;
+  border-radius: 0.5rem 0 0 0.5rem;
+  border-right: none;
 }
 
 #month {
-  border-radius: 0 1rem 1rem 0;
+  border-radius: 0 0.5rem 0.5rem 0;
 }
 
+/* -- Add Button -- */
+
 #save-date {
+  width: 50%;
+  height: 2.2rem;
+  justify-self: center;
   background-color: hsl(0, 0%, 0%);
   color: hsl(0, 0%, 100%);
-  width: 50%;
-  min-height: 2.2rem;
+  font-family: "Wix Madefor Display", sans-serif;
   font-size: 1.2rem;
-  border: 1px solid transparent;
-  border-radius: 1.5rem;
-  align-self: center;
-  margin-top: 1.5rem;
+  font-weight: 500;
+  border: transparent;
+  border-radius: 0.5rem;
   cursor: pointer;
 }

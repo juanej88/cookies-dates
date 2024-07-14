@@ -21,13 +21,13 @@ const ActionButtons = () => {
       {modal && <Modal toggleModal={toggleModal} />}
       <section id='action-buttons'>
         <ActionButton handleClick={toggleModal} id='add-event-btn' >
-          <span class="material-symbols-outlined">
+          <span className="material-symbols-outlined">
             calendar_add_on
           </span>
         </ActionButton>
 
         <ActionButton id='show-calendar-btn' >
-          <span class="material-symbols-outlined">
+          <span className="material-symbols-outlined">
             calendar_month
           </span>
         </ActionButton>

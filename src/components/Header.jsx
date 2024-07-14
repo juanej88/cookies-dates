@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import '../assets/styles/Header.css';
 import ActionButton from './ActionButton';
-// import menuIcon1 from '../assets/icons/menuIcon1.svg';
 
 const Header = () => {
   const options = {weekday: 'short', day: '2-digit', month: 'short'};
@@ -14,9 +13,9 @@ const Header = () => {
 
   return(
     <header>
-      <div id='logo'>Cookies
+      <a id='logo' href='./'>Cookies
         <span>& Dates</span>
-      </div>
+      </a>
       <nav className='menu-container'>
         <p>{today}</p>
         <ActionButton id='menu-btn' handleClick={handleClick}>
