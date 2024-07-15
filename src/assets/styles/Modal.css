@@ -88,8 +88,8 @@ legend {
 
 /* Hides the radio inputs */
 input.event-options {
-  visibility: hidden;
   position: absolute;
+  border: none;
   width: 0;
   height: 0;
 }
@@ -138,39 +138,38 @@ input, select {
   border: 1px solid hsl(0, 0%, 25%);
   border-radius: 0.5rem;
   font-family: "Wix Madefor Display", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 500;
   text-align: center;
-}
-
-input {
-  font-size: 1.2rem;
-  font-weight: 700;
 }
 
 select {
   font-size: 1.1rem;
   font-weight: 500;
-  width: 50%;
   cursor: pointer;
   text-align-last: center;
 }
 
 #date {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+
 }
 
 #date > label {
-  width: 50%;
   order: -1;
 }
 
 #day {
   border-radius: 0.5rem 0 0 0.5rem;
-  border-right: none;
 }
 
 #month {
+  border-width: 1px 0;
+  border-radius: 0;
+}
+
+#year {
   border-radius: 0 0.5rem 0.5rem 0;
 }
 

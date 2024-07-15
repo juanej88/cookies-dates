@@ -19,9 +19,9 @@ const Modal = (props) => {
   const [formData, setFormData] = useState({
     event: 'birthday',
     name: '',
-    date: '',
-    month: '',
     day: '',
+    month: '',
+    year: '',
   });
 
   const updateFormData = (e) => {
@@ -50,8 +50,17 @@ const Modal = (props) => {
     
   };
 
+  const getDays = () => {
+    const daysElements = [<option key='no-day' value=''></option>];
+    for(let i = 1; i <= 31; i++) {
+      const num = i < 10 ? `0${i}` : i;
+      daysElements.push(<option key={num} value={num}>{i}</option>);
+    };
+    return daysElements;
+  };
+
   const getMonths = () => {
-    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     const monthsElements = months.map((month, idx) => {
       const num = idx < 9 ? `0${idx + 1}` : idx + 1
       return <option key={num} value={num}>{month}</option>;
@@ -60,14 +69,25 @@ const Modal = (props) => {
     return monthsElements;
   };
 
-  const getDays = () => {
-    const daysElements = [];
-    for(let i = 1; i <= 31; i++) {
+  //it renders if the user selects a Special Event
+  const getFutureYears = () => {
+    const yearsElements = [];
+    const year = new Date().getFullYear();
+    for(let i = year + 4; i >= year + 1; i--) {
       const num = i < 10 ? `0${i}` : i;
-      daysElements.push(<option key={num} value={num}>{i}</option>);
+      yearsElements.push(<option key={num} value={num}>{i}</option>);
     };
-    daysElements.unshift(<option key='no-day' value=''></option>);
-    return daysElements;
+    return yearsElements;
+  };
+
+  const getPrevYears = () => {
+    const yearsElements = [<option key='no-day' value=''></option>];
+    const year = new Date().getFullYear();
+    for(let i = year; i >= year - 110; i--) {
+      const num = i < 10 ? `0${i}` : i;
+      yearsElements.push(<option key={num} value={num}>{i}</option>);
+    };
+    return yearsElements;
   };
 
   const saveDate = (e) => {
@@ -111,6 +131,11 @@ const Modal = (props) => {
           <label htmlFor='month'>Month</label>
           <select name="month" id="month" value={formData.month} onChange={updateFormData} required>
             {getMonths()}
+          </select>
+          <label htmlFor='year'>Year</label>
+          <select name="year" id="year" value={formData.year} onChange={updateFormData} required>
+            {formData.event === 'special' && getFutureYears()}
+            {getPrevYears()}
           </select>
         </fieldset>
 
