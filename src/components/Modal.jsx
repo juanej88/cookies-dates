@@ -69,7 +69,7 @@ const Modal = (props) => {
     return monthsElements;
   };
 
-  //it renders if the user selects a Special Event
+  //it renders if the user selects Special Event
   const getFutureYears = () => {
     const yearsElements = [];
     const year = new Date().getFullYear();
@@ -118,22 +118,23 @@ const Modal = (props) => {
           </div>
         </fieldset>
 
-        <fieldset>
-          <label htmlFor="name">Name</label>
-          <input type="text" name='name' id='name' minLength='2' maxLength='20' value={formData.name} onChange={updateFormData} required autoFocus />
+        <fieldset className='form-name-container'>
+          <label htmlFor='name'>Name</label>
+          <input type='text' name='name' id='name' minLength='2' maxLength='25' value={formData.name} onChange={updateFormData} required autoFocus />
+          <span className='material-symbols-outlined valid'>check</span>
         </fieldset>
         
         <fieldset id='date'>
           <label htmlFor='day'>Day</label>
-          <select name="day" id="day" value={formData.day} onChange={updateFormData} required>
+          <select name='day' id='day' value={formData.day} onChange={updateFormData} required>
             {getDays()}
           </select>
           <label htmlFor='month'>Month</label>
-          <select name="month" id="month" value={formData.month} onChange={updateFormData} required>
+          <select name='month' id='month' value={formData.month} onChange={updateFormData} required>
             {getMonths()}
           </select>
           <label htmlFor='year'>Year</label>
-          <select name="year" id="year" value={formData.year} onChange={updateFormData} required>
+          <select name='year' id='year' value={formData.year} onChange={updateFormData}>
             {formData.event === 'special' && getFutureYears()}
             {getPrevYears()}
           </select>

@@ -131,7 +131,6 @@ fieldset > label {
 }
 
 input, select {
-  margin-top: 0.25rem;
   height: 2.25rem;
   width: 100%;
   background-color: hsl(0, 0%, 100%);
@@ -171,6 +170,42 @@ select {
 
 #year {
   border-radius: 0 0.5rem 0.5rem 0;
+}
+
+/* Valid and Invalid icons */
+
+.form-name-container {
+  display: grid;
+  grid-template-rows: 2fr;
+}
+
+#name {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+#name + span.valid {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+span.valid {
+  justify-self: end;
+  display: none;
+  width: 2.25rem;
+  font-size: 1.5rem;
+}
+
+#name:valid + span.valid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: hsl(120, 100%, 30%);
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 500,
+  'GRAD' 0,
+  'opsz' 24
 }
 
 /* -- Add Button -- */
