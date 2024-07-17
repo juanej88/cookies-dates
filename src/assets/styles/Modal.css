@@ -81,7 +81,6 @@ legend {
 }
 
 .event-options-container {
-  margin-top: 0.25rem;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
 }
@@ -126,8 +125,9 @@ input.event-options {
 
 /* -- Second and Third Fieldset: Name/Title and Date -- */
 
-fieldset > label {
-  padding: 0.5rem 0.25rem 0;
+fieldset > label,
+fieldset.date-container label {
+  padding-left: 0.25rem;
 }
 
 input, select {
@@ -142,21 +142,37 @@ input, select {
   text-align: center;
 }
 
+.form-name-container {
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+  align-items: end;
+}
+
+.form-name-container > input {
+  grid-column: 1;
+  grid-row: 2;
+}
+
 select {
-  font-size: 1.1rem;
-  font-weight: 500;
   cursor: pointer;
   text-align-last: center;
+  appearance: none;
 }
 
-#date {
+.date-container {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-
+  grid-template-columns: repeat(3, 1fr);
 }
 
-#date > label {
-  order: -1;
+.date-partition-container {
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+  align-items: end;
+}
+
+.date-partition-container > select {
+  grid-column: 1;
+  grid-row: 2;
 }
 
 #day {
@@ -174,36 +190,27 @@ select {
 
 /* Valid and Invalid icons */
 
-.form-name-container {
-  display: grid;
-  grid-template-rows: 2fr;
-}
-
-#name {
-  grid-column: 1;
-  grid-row: 2;
-}
-
-#name + span.valid {
-  grid-column: 1;
-  grid-row: 2;
-}
-
 span.valid {
+  grid-column: 1;
+  grid-row: 2;
   justify-self: end;
+  align-self: center;
   display: none;
-  width: 2.25rem;
-  font-size: 1.5rem;
+  width: 2rem;
+  font-size: 1rem;
 }
 
-#name:valid + span.valid {
+#name:valid + span.valid,
+#day:valid + span.valid,
+#month:valid + span.valid,
+#year:valid + span.valid {
   display: flex;
   justify-content: center;
   align-items: center;
   color: hsl(120, 100%, 30%);
   font-variation-settings:
   'FILL' 0,
-  'wght' 500,
+  'wght' 700,
   'GRAD' 0,
   'opsz' 24
 }

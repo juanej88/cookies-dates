@@ -5,11 +5,13 @@ footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-top: 1px solid hsl(0, 0%, 90%);
 }
 
 @media only screen and (min-width: 768px) {
   footer {
     padding: 0 1.5rem;
     font-size: 0.9rem;
+    border-top: none;
   }
 }

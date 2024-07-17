@@ -83,7 +83,7 @@ const Modal = (props) => {
   const getPrevYears = () => {
     const yearsElements = [<option key='no-day' value=''></option>];
     const year = new Date().getFullYear();
-    for(let i = year; i >= year - 110; i--) {
+    for(let i = year; i >= year - 122; i--) {
       const num = i < 10 ? `0${i}` : i;
       yearsElements.push(<option key={num} value={num}>{i}</option>);
     };
@@ -124,20 +124,31 @@ const Modal = (props) => {
           <span className='material-symbols-outlined valid'>check</span>
         </fieldset>
         
-        <fieldset id='date'>
-          <label htmlFor='day'>Day</label>
-          <select name='day' id='day' value={formData.day} onChange={updateFormData} required>
-            {getDays()}
-          </select>
-          <label htmlFor='month'>Month</label>
-          <select name='month' id='month' value={formData.month} onChange={updateFormData} required>
-            {getMonths()}
-          </select>
-          <label htmlFor='year'>Year</label>
-          <select name='year' id='year' value={formData.year} onChange={updateFormData}>
-            {formData.event === 'special' && getFutureYears()}
-            {getPrevYears()}
-          </select>
+        <fieldset className='date-container'>
+          <div className='date-partition-container'>
+            <label htmlFor='day'>Day</label>
+            <select name='day' id='day' value={formData.day} onChange={updateFormData} required>
+              {getDays()}
+            </select>
+            <span className='material-symbols-outlined valid'>check</span>
+          </div>
+
+          <div className='date-partition-container'>
+            <label htmlFor='month'>Month</label>
+            <select name='month' id='month' value={formData.month} onChange={updateFormData} required>
+              {getMonths()}
+            </select>
+            <span className='material-symbols-outlined valid'>check</span>
+          </div>
+
+          <div className='date-partition-container'>
+            <label htmlFor='year'>Year</label>
+            <select name='year' id='year' value={formData.year} onChange={updateFormData} required>
+              {formData.event === 'special' && getFutureYears()}
+              {getPrevYears()}
+            </select>
+            <span className='material-symbols-outlined valid'>check</span>
+          </div>
         </fieldset>
 
         <button type='submit' id='save-date'>
