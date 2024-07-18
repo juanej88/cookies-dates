@@ -207,7 +207,7 @@ span.valid {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: hsl(120, 100%, 30%);
+  color: hsl(210, 60%, 35%);
   font-variation-settings:
   'FILL' 0,
   'wght' 700,
@@ -221,7 +221,7 @@ span.valid {
   width: 50%;
   height: 2.2rem;
   justify-self: center;
-  background-color: hsl(0, 0%, 0%);
+  background-color: hsl(210, 60%, 35%);
   color: hsl(0, 0%, 100%);
   font-family: "Wix Madefor Display", sans-serif;
   font-size: 1.2rem;
@@ -229,4 +229,10 @@ span.valid {
   border: transparent;
   border-radius: 0.5rem;
   cursor: pointer;
+}
+
+#save-date:disabled {
+  background-color: hsl(210, 10%, 90%);
+  color: hsl(0, 0%, 25%);
+  cursor: not-allowed;
 }

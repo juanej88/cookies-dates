@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import '../assets/styles/Modal.css';
 
 const Modal = (props) => {
@@ -22,6 +22,7 @@ const Modal = (props) => {
     day: '',
     month: '',
     year: '',
+    date: '',
   });
 
   const updateFormData = (e) => {
@@ -49,6 +50,13 @@ const Modal = (props) => {
     };
     
   };
+
+  const [isFormInvalid, setIsFormInvalid] = useState(true);
+
+  useEffect(() => {
+    formData.name && formData.date ? setIsFormInvalid(false)
+    : setIsFormInvalid(true);
+  }, [formData.name, formData.date]);
 
   const getDays = () => {
     const daysElements = [<option key='no-day' value=''></option>];
@@ -151,7 +159,7 @@ const Modal = (props) => {
           </div>
         </fieldset>
 
-        <button type='submit' id='save-date'>
+        <button type='submit' id='save-date' disabled={isFormInvalid}>
           Add
         </button>
       </form>
