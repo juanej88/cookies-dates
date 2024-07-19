@@ -7,7 +7,7 @@ main {
   grid-template-rows: 1fr 4rem;
 }
 
-section#upcoming-events {
+#upcoming-events {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -26,75 +26,89 @@ article.month-events {
   max-width: 500px;
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
 article.month-events > h2 {
-  font-size: 1.25rem;
-  font-weight: 500;
-}
-
-aside.event-card {
-  width: 100%;
-  background-color: hsla(0, 0%, 100%);
-  border: 1px solid hsl(0, 0%, 25%);
-  border-radius: 8px;
-  margin: 1.5rem 0 0.5rem 0;
-}
-
-article.month-events > h2 + aside.event-card {
-  margin: 0.75rem 0 0.5rem 0;
-}
-
-.event-identifier {
-  border-radius: 7px 7px 0 0;
-  height: 1.25rem;
-  width: 100%;
-}
-
-.birthday {
-  background-color: hsl(0, 75%, 75%);
-}
-
-.event {
-  background-color: hsl(260, 60%, 75%);
-}
-
-div.event-details {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  padding: 0.75rem 0;
-  font-size: 1.1rem;
-  font-weight: 500;
-}
-
-div.event-details > p {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 2.75rem;
-  text-align: center;
-}
-
-div.event-details > p:nth-child(2) {
-  border-left: 1px solid hsl(0, 0%, 75%);
-  padding: 0 0.25rem;
-  font-size: 1.2rem;
-  font-weight: 700;
+  font-size: 1.35rem;
+  font-weight: 600;
+  padding-left: 0.5rem;
 }
 
 @media only screen and (min-width: 768px) {
-  main {
-    grid-template-rows: 1fr;
-  }
-  
   article.month-events {
     width: 60%;
+  }
+
+  article.month-events > h2 {
+    padding-left: 1rem;
   }
 }
 
 @media only screen and (min-width: 1024px) {
   article.month-events {
     width: 40%;
+  }
+}
+
+aside.event-card {
+  height: 4.5rem;
+  width: 100%;
+  background-color: hsla(0, 0%, 100%);
+  border-radius: 8px;
+  box-shadow: 1px 1px 2px 0 hsla(0, 0%, 0%, 10%);
+  margin: 0.5rem 0 0.5rem 0;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  align-items: center;
+}
+
+.event-icon {
+  justify-self: end;
+  border-radius: 50%;
+  height: 0.75rem;
+  width: 0.75rem;
+}
+
+/* .birthday {
+  background-color: hsl(0, 80%, 65%);
+}
+
+.event {
+  background-color: hsl(250, 80%, 65%);
+} */
+
+.event-card > p {
+  font-size: 1.1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.event-card > p:last-child {
+  justify-content: flex-start;
+  height: 2.5rem;
+  border-left: 4px solid;
+  padding: 0 1rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.event-card.special > p:last-child {
+  border-left-color: hsl(250, 80%, 65%);
+}
+
+.event-card.birthday > p:last-child {
+  border-left-color: hsl(0, 80%, 65%);
+}
+
+@media only screen and (min-width: 768px) {
+  .event-card > p:last-child {
+    padding: 0 1.5rem;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .event-card > p:last-child {
+    padding: 0 2rem;
   }
 }
