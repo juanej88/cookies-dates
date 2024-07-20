@@ -1,95 +1,75 @@
+import { useState } from 'react';
 import '../assets/styles/Main.css';
 import ActionButtons from './ActionButtons';
+import futureEvents from '../assets/helper_functions/futureEvents';
 // import useConsoleLog from '../assets/helper_functions/useConsoleLog';
-// import { useState, useEffect } from 'react';
 
 const Main = () => {
-  // const [events, setEvents] = useState([]);
-  // const [today] = useState({date: new Date().getTime(), year: new Date().getFullYear()});
-  // useConsoleLog(events); // custom hook
+  const today = new Date();
+  const thisYear = today.getFullYear();
+  const dateFormat = {weekday: 'short', day: '2-digit', month: 'short'};
 
-  // const eventCards = events.sort((a, b) => {  
-  //   const eventA = new Date(a.dob.date);
-  //   eventA.setFullYear(today.year);
-  //   const eventB = new Date(b.dob.date)
-  //   eventB.setFullYear(today.year);
+  const [eventObj] = useState(futureEvents);
 
-  //   // if the event has passed on the current year, it displays it next year
-  //   if (eventA < today.date) eventA.setFullYear(today.year + 1);
-  //   if (eventB < today.date) eventB.setFullYear(today.year + 1);
-    
-  //   return eventA - eventB;
-  // }).map(event => {
-  //   const eventType = `${event.type === 'event' ? 'event' : 'birthday'}`;
-  //   const options = {weekday: 'short', day: '2-digit', month: 'short'};
-  //   const originalDate = new Date(event.dob.date);
-  //   // if the event has passed on the current year, it displays it next year
-  //   originalDate.setFullYear(today.year);
-  //   if (originalDate < today.date) originalDate.setFullYear(today.year + 1);
-  //   const eventDate = new Date(originalDate).toLocaleString(undefined, options);
+  const getEvents = day => {
+    return day.map(event => {
+      let eventDate = new Date(event.date).setFullYear(thisYear);
+      if (event.year > thisYear) eventDate = new Date(event.date)
+      else if (eventDate < today) eventDate = new Date(event.date).setFullYear(thisYear + 1);
+      const formattedDate = new Date(eventDate).toLocaleDateString(undefined, dateFormat);
+      return (
+        <aside key={event.id} className={`event-card ${event.event}`}>
+          <p>{formattedDate}</p>
+          <p>{event.name}</p>
+        </aside>
+      );
+    });
+  };
 
-  //   return (
-  //     <div key={event.id.value} className={`event-card ${eventType}`}>
-  //       <p>{eventDate}</p>
-  //       <h2>{event.name.first} {event.name.last}</h2>
-  //     </div>
-  //   );
-  // });
+  const getDays = (year, month, days) => {
+    return days.map(day => {
+      return getEvents(eventObj[year][month][day]);
+    });
+  };
 
-  // const fetchData = () => {
-  //   const parameters = 'nat=au&page=4&results=10&seed=abc&inc=id,name,dob';
-  //   fetch(`https://randomuser.me/api/?${parameters}`)
-  //     .then(response => response.json())
-  //     .then(data => setEvents(data.results))
-  //     .catch(e => console.log(e));
-  // };
+  const getMonths = (year, months) => {
+    return months.map(month => {
+      const days = Object.keys(eventObj[year][month]);
+      const firstDate = eventObj[year][month][days[0]][0]['date'];
+      const monthText = new Date(firstDate).toLocaleDateString(undefined, {month: 'long'});
+      return (
+        <article key={year + month} className='month-events'>
+          <h2>{monthText}</h2>
+          {getDays(year, month, days)}
+        </article>
+      );
+    });
+  };
 
-  // useEffect(() => {
-  //   fetchData();
-  // }, []);
+  const yearsArr = Object.keys(eventObj);
+  const getYears = yearsArr.map(year => {
+
+    // CHECK !!
+    // -> I need to check the edge case when a user enters a birthday without a year
+    // CHECK !!
+
+    const title = Number(year) === thisYear ? 'Upcoming Events' : year;
+    const months = Object.keys(eventObj[year]);
+    return (
+      <section key={year} className='events-section'>
+        <h1>{title}</h1>
+        {getMonths(year, months)}
+      </section>
+    )
+  })
 
   return (
     <main className='events'>
-      <section id='upcoming-events'>
-        <h1>Upcoming Events</h1>
-
-        <article className='month-events'>
-          <h2>July</h2>
-          <aside className='event-card special'>
-            <p>Mon, 03 Jul</p>
-            <p>John's BBQ</p>
-          </aside>
-        </article>
-
-        <article className='month-events'>
-          <h2>August</h2>
-          <aside className='event-card birthday'>
-            <p>Thu, 15 Aug</p>
-            <p>Aaron Sullivan</p>
-          </aside>
-          <aside className='event-card birthday'>
-            <p>Sun, 18 Aug</p>
-            <p>Elton Muller</p>
-          </aside>
-        </article>
-
-        <article className='month-events'>
-          <h2>November</h2>
-          <aside className='event-card birthday'>
-            <p>Fri, 01 Nov</p>
-            <p>Diane Kelley</p>
-          </aside>
-          <aside className='event-card special'>
-            <p>Fri, 15 Nov</p>
-            <p>Wedding Anniversary</p>
-          </aside>
-          <aside className='event-card birthday'>
-            <p>Sat, 16 Nov</p>
-            <p>Ana Wells</p>
-          </aside>
-        </article>
+      {/* I need to delete this section tags once I move up the ActionButtons to avoid having a section tag parent and section tag children */}
+      <section className='events-section'>
+        {getYears}
       </section>
-        {/* {eventCards} */}
+      {/* I need to move ActionButtons Up for the future feature --> Past Events */}
       <ActionButtons />
     </main>
   );
