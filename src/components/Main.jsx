@@ -1,4 +1,5 @@
 // import { useState } from 'react';
+import { useEffect } from 'react';
 import '../assets/styles/Main.css';
 import Modal from './Modal';
 // import useConsoleLog from '../assets/helper_functions/useConsoleLog';
@@ -15,7 +16,10 @@ const Main = props => {
       else if (eventDate < today) eventDate = new Date(event.date).setFullYear(thisYear + 1);
       const formattedDate = new Date(eventDate).toLocaleDateString(undefined, dateFormat);
       return (
-        <aside key={event.id} className={`event-card ${event.event}`}>
+        // -----------------      ATTENTION       ------------------------
+        // I need to toggle the event.new to false after 2.1 seconds!!
+        // -----------------      ATTENTION       ------------------------
+        <aside key={event.id} className={`event-card ${event.event}`} id={`${event.new ? 'newEvent' : ''}`}>
           <p>{formattedDate}</p>
           <p>{event.name}</p>
         </aside>
@@ -59,6 +63,24 @@ const Main = props => {
       </section>
     );
   });
+
+  // it scrolls to an event which has been created on the add Event form and centers it to the screen height
+  useEffect(() => {
+    const newEvent = document.getElementById('newEvent');
+    const windowHeight = window.innerHeight;
+    if(newEvent) {
+      window.scrollTo({
+        // 36px is half of the newEvent height
+        top: newEvent.offsetTop + 36 - (windowHeight / 2),
+      });
+      // it removes the id newEvent after the animation has concluded (2.1s)  so the id can be used for future new events
+      const timeOutId = setTimeout(() => {
+        newEvent.removeAttribute('id');
+      }, 2100);
+
+      return () => clearTimeout(timeOutId);
+    };
+  }, [props.eventsObj]);
 
   return (
     <main className='events'>

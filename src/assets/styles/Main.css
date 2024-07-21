@@ -2,15 +2,6 @@ main {
   min-height: calc(100vh - 2.5rem);
   padding-top: 5.25rem;
   background-color: hsl(0, 0%, 95%);
-  display: grid;
-  grid-template-columns: 4fr;
-  grid-template-rows: 1fr;
-}
-
-@media only screen and (min-width: 768px) {
-  main {
-    grid-template-rows: 1fr;
-  }
 }
 
 .events-section {
@@ -90,6 +81,37 @@ aside.event-card {
 
 .event-card.birthday > p:last-child {
   border-left-color: hsl(0, 80%, 65%);
+}
+
+/* Animation for New Events added to the DOM when updating eventsObj state */
+
+#newEvent {
+  opacity: 0;
+  border: 1px solid hsl(210, 60%, 35%);
+  animation: 2s ease-in showNewEvent forwards;
+  animation-delay: 0.10s;
+}
+
+@keyframes showNewEvent {
+  0% {
+    scale: 0.95;
+    opacity: 0;
+  }
+
+  10% {
+    scale: 1;
+    opacity: 1;
+  }
+
+  90% {
+    border: 1px solid hsl(210, 60%, 35%);
+  }
+
+  100% {
+    scale: 1;
+    opacity: 1;
+    border: 1px solid hsl(210, 100%, 100%);
+  }
 }
 
 @media only screen and (min-width: 768px) {

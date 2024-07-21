@@ -76,8 +76,11 @@ const App = () => {
   };
   
   const checkYear = data => {
-    const today = new Date();
+    // newDate gets formatted to pass the first second of the current day to the today variable so it can add the events which are on the current day to the top of the Upcoming Events
+    const newDate = new Date().toLocaleDateString(undefined, {day: '2-digit', month: 'short',  year:'numeric'});
+    const today = new Date(newDate);
     const thisYear = today.getFullYear();
+
     data.events.forEach(event => {
       let eventDate = new Date(event.date).setFullYear(thisYear);
       event.month = Number(event.month);
@@ -103,6 +106,7 @@ const App = () => {
     month: '',
     year: '',
     date: '',
+    new: true,
   });
 
   const saveDate = event => {
@@ -120,6 +124,7 @@ const App = () => {
       month: '',
       year: '',
       date: '',
+      new: true,
     });
     toggleModal();
   };

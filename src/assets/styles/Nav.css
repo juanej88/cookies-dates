@@ -8,6 +8,7 @@
   bottom: 0px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  z-index: 10;
 }
 
 @media only screen and (min-width: 768px) {

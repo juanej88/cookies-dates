@@ -30,7 +30,7 @@ const dummyData = {
     {
       id: 4,
       name: 'Hilda Owens',
-      day: 23,
+      day: 19,
       month: 7,
       year: 1964,
       date: '1964-07-19',
