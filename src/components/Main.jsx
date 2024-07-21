@@ -1,15 +1,11 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 import '../assets/styles/Main.css';
-import ActionButtons from './ActionButtons';
-import futureEvents from '../assets/helper_functions/futureEvents';
 // import useConsoleLog from '../assets/helper_functions/useConsoleLog';
 
-const Main = () => {
+const Main = props => {
   const today = new Date();
   const thisYear = today.getFullYear();
   const dateFormat = {weekday: 'short', day: '2-digit', month: 'short'};
-
-  const [eventObj] = useState(futureEvents);
 
   const getEvents = day => {
     return day.map(event => {
@@ -28,14 +24,14 @@ const Main = () => {
 
   const getDays = (year, month, days) => {
     return days.map(day => {
-      return getEvents(eventObj[year][month][day]);
+      return getEvents(props.eventsObj[year][month][day]);
     });
   };
 
   const getMonths = (year, months) => {
     return months.map(month => {
-      const days = Object.keys(eventObj[year][month]);
-      const firstDate = eventObj[year][month][days[0]][0]['date'];
+      const days = Object.keys(props.eventsObj[year][month]);
+      const firstDate = props.eventsObj[year][month][days[0]][0]['date'];
       const monthText = new Date(firstDate).toLocaleDateString(undefined, {month: 'long'});
       return (
         <article key={year + month} className='month-events'>
@@ -46,7 +42,7 @@ const Main = () => {
     });
   };
 
-  const yearsArr = Object.keys(eventObj);
+  const yearsArr = Object.keys(props.eventsObj);
   const getYears = yearsArr.map(year => {
 
     // CHECK !!
@@ -54,7 +50,7 @@ const Main = () => {
     // CHECK !!
 
     const title = Number(year) === thisYear ? 'Upcoming Events' : year;
-    const months = Object.keys(eventObj[year]);
+    const months = Object.keys(props.eventsObj[year]);
     return (
       <section key={year} className='events-section'>
         <h1>{title}</h1>
@@ -65,12 +61,7 @@ const Main = () => {
 
   return (
     <main className='events'>
-      {/* I need to delete this section tags once I move up the ActionButtons to avoid having a section tag parent and section tag children */}
-      <section className='events-section'>
-        {getYears}
-      </section>
-      {/* I need to move ActionButtons Up for the future feature --> Past Events */}
-      <ActionButtons />
+      {getYears}
     </main>
   );
 };

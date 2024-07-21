@@ -1,25 +1,18 @@
-import { useEffect, useState } from 'react';
-import '../assets/styles/ActionButtons.css';
+import { useState } from 'react';
+import '../assets/styles/Nav.css';
 import Modal from './Modal';
 import ActionButton from './ActionButton';
 
-const ActionButtons = () => {
+const Nav = () => {
   const [modal, setModal] = useState(false);
   const toggleModal = () => {
     setModal(prevState => !prevState);
   };
 
-  // it doesn't allow the body to be scrolled while the modal is active
-  useEffect(() => {
-    modal ? 
-      document.body.style.overflow = 'hidden' : 
-      document.body.style.overflow = 'visible';
-  }, [modal]);
-
   return (
     <>
       {modal && <Modal toggleModal={toggleModal} />}
-      <section id='action-buttons'>
+      <nav id='action-buttons'>
         <ActionButton handleClick={toggleModal} id='add-event-btn' >
           <span className="material-symbols-outlined">
             calendar_add_on
@@ -31,9 +24,9 @@ const ActionButtons = () => {
             calendar_month
           </span>
         </ActionButton>
-      </section>
+      </nav>
     </>
   );
 };
 
-export default ActionButtons;
+export default Nav;
