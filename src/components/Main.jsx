@@ -1,5 +1,6 @@
 // import { useState } from 'react';
 import '../assets/styles/Main.css';
+import Modal from './Modal';
 // import useConsoleLog from '../assets/helper_functions/useConsoleLog';
 
 const Main = props => {
@@ -56,12 +57,21 @@ const Main = props => {
         <h1>{title}</h1>
         {getMonths(year, months)}
       </section>
-    )
-  })
+    );
+  });
 
   return (
     <main className='events'>
       {getYears}
+      {
+        props.modal && 
+        <Modal
+          toggleModal={props.toggleModal} 
+          handleForm={props.handleForm}
+          formData={props.formData}
+          setFormData={props.setFormData}
+        />
+      }
     </main>
   );
 };
