@@ -16,31 +16,63 @@ const Modal = (props) => {
     props.toggleModal();
   };
 
-  const updateFormData = (e) => {
-    if (e.target.name ==='day' && props.formData.month) {
-      const year = new Date().getFullYear();
-      const newDate = `${year}-${props.formData.month}-${e.target.value}`;
+  const [cursorPosition, setCursorPosition] = useState(0);
+
+  const updateFormData = e => {
+    if(e.target.name !== 'dateInput') {
       props.setFormData({
         ...props.formData,
         [e.target.name]: e.target.value,
-        date: newDate,
-      });
-    } else if(e.target.name === 'month' && props.formData.day) {
-      const year = new Date().getFullYear();
-      const newDate = `${year}-${e.target.value}-${props.formData.day}`;
-      props.setFormData({
-        ...props.formData,
-        [e.target.name]: e.target.value,
-        date: newDate,
       });
     } else {
-      props.setFormData({
-        ...props.formData,
-        [e.target.name]: e.target.value,
+      // it formats the date input to display DD/MM/YYYY
+      let dateInput = e.target.value.split('');
+      dateInput.forEach((element, idx) => {
+        if ((idx === 2 || idx === 5) && element !== '/') {
+          dateInput.splice(idx, 0, '/');
+        } else if ((idx === 2 || idx === 5) && element === '/') {
+          if(dateInput.length === idx + 1) dateInput.splice(idx, 1);
+        } else if((idx !== 2 || idx !== 5) && element === '/') {
+          dateInput.splice(idx, 1);
+        }
       });
+      // it updates the cursor position if the user edits the input from the beginning to the second last character
+      if (dateInput.length - props.formData.dateInput.length > 1) {
+        setCursorPosition(e.target.selectionStart + 1);
+      } else {
+        setCursorPosition(e.target.selectionStart);
+      }
+      dateInput = dateInput.join('');
+      if(dateInput.length !== 10) {
+        props.setFormData({
+          ...props.formData,
+          [e.target.name]: dateInput,
+          day: '',
+          month: '',
+          year: '',
+          date: '',
+        });
+      } else {
+        const [day, month, year] = dateInput.split('/');
+        const date = dateInput.split('/').reverse().join('-');
+        props.setFormData({
+          ...props.formData,
+          [e.target.name]: dateInput,
+          day: day,
+          month: Number(month),
+          year: Number(year),
+          date: date,
+        });
+      };
     };
-    
   };
+
+  
+  // it moves the cursor to the previous position when a user edits the date input from the beginning to the second last character
+  useEffect(() => {
+    const dateInput = document.getElementById('date-input');
+    dateInput.setSelectionRange(cursorPosition, cursorPosition);
+  }, [cursorPosition]);
 
   const [isFormInvalid, setIsFormInvalid] = useState(true);
 
@@ -48,46 +80,6 @@ const Modal = (props) => {
     props.formData.name && props.formData.date ? setIsFormInvalid(false)
     : setIsFormInvalid(true);
   }, [props.formData.name, props.formData.date]);
-
-  const getDays = () => {
-    const daysElements = [<option key='no-day' value=''></option>];
-    for(let i = 1; i <= 31; i++) {
-      const num = i < 10 ? `0${i}` : i;
-      daysElements.push(<option key={num} value={num}>{i}</option>);
-    };
-    return daysElements;
-  };
-
-  const getMonths = () => {
-    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    const monthsElements = months.map((month, idx) => {
-      const num = idx < 9 ? `0${idx + 1}` : idx + 1
-      return <option key={num} value={num}>{month}</option>;
-    });
-    monthsElements.unshift(<option key='no-month' value=''></option>);
-    return monthsElements;
-  };
-
-  //it renders if the user selects Special Event
-  const getFutureYears = () => {
-    const yearsElements = [];
-    const year = new Date().getFullYear();
-    for(let i = year + 4; i >= year + 1; i--) {
-      const num = i < 10 ? `0${i}` : i;
-      yearsElements.push(<option key={num} value={num}>{i}</option>);
-    };
-    return yearsElements;
-  };
-
-  const getPrevYears = () => {
-    const yearsElements = [<option key='no-day' value=''></option>];
-    const year = new Date().getFullYear();
-    for(let i = year; i >= year - 122; i--) {
-      const num = i < 10 ? `0${i}` : i;
-      yearsElements.push(<option key={num} value={num}>{i}</option>);
-    };
-    return yearsElements;
-  };
 
   return (
     <section id='add-event-section' onClick={handleExteriorClick}>
@@ -111,39 +103,18 @@ const Modal = (props) => {
           </div>
         </fieldset>
 
-        <fieldset className='form-name-container'>
+        <fieldset className='form-input-container'>
           <label htmlFor='name'>Name</label>
           <input type='text' name='name' id='name' minLength='2' maxLength='25' value={props.formData.name} onChange={updateFormData} required autoFocus />
           <span className='material-symbols-outlined valid'>check</span>
         </fieldset>
-        
-        <fieldset className='date-container'>
-          <div className='date-partition-container'>
-            <label htmlFor='day'>Day</label>
-            <select name='day' id='day' value={props.formData.day} onChange={updateFormData} required>
-              {getDays()}
-            </select>
-            <span className='material-symbols-outlined valid'>check</span>
-          </div>
 
-          <div className='date-partition-container'>
-            <label htmlFor='month'>Month</label>
-            <select name='month' id='month' value={props.formData.month} onChange={updateFormData} required>
-              {getMonths()}
-            </select>
-            <span className='material-symbols-outlined valid'>check</span>
-          </div>
-
-          <div className='date-partition-container'>
-            <label htmlFor='year'>Year</label>
-            <select name='year' id='year' value={props.formData.year} onChange={updateFormData} required>
-              {props.formData.event === 'special' && getFutureYears()}
-              {getPrevYears()}
-            </select>
-            <span className='material-symbols-outlined valid'>check</span>
-          </div>
+        <fieldset className='form-input-container'>
+          <label htmlFor='date-input'>Date</label>
+          <input type='text' name='dateInput' id='date-input' minLength='5' maxLength='10' value={props.formData.dateInput} onChange={updateFormData} inputMode='numeric' placeholder='DD/MM/YYYY' required />
+          <span className='material-symbols-outlined valid'>check</span>
         </fieldset>
-
+        
         <button type='submit' id='save-date' disabled={isFormInvalid}>
           Add
         </button>

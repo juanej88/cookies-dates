@@ -83,8 +83,6 @@ const App = () => {
 
     data.events.forEach(event => {
       let eventDate = new Date(event.date).setFullYear(thisYear);
-      event.month = Number(event.month);
-      event.day = Number(event.day);
       if (event.year > thisYear) {
         // pass data as it is if the event is in the upcoming years
         checkEventObj(event.year, event.month, event.day, event);
@@ -102,6 +100,7 @@ const App = () => {
     id: 99, // I need to remove it once it's sent to the back-end
     event: 'birthday',
     name: '',
+    dateInput: '',
     day: '',
     month: '',
     year: '',
@@ -120,6 +119,7 @@ const App = () => {
       id: 100,
       event: 'birthday',
       name: '',
+      dateInput: '',
       day: '',
       month: '',
       year: '',

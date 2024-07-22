@@ -110,7 +110,7 @@ const dummyData = {
     },
     {
       id: 13,
-      name: 'Moving Back to Sydney',
+      name: 'Going to Europe',
       day: 1,
       month: 8,
       year: 2026,
