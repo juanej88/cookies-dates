@@ -152,7 +152,7 @@ fieldset.date-container label {
 
 /* Valid and Invalid icons */
 
-span.valid {
+span.valid, span.invalid {
   grid-column: 1;
   grid-row: 2;
   justify-self: end;
@@ -163,7 +163,7 @@ span.valid {
 }
 
 #name:valid + span.valid,
-#date-input:valid + span.valid {
+#date-input + span.valid {
   display: flex;
   justify-content: center;
   align-items: center;

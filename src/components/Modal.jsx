@@ -16,6 +16,20 @@ const Modal = (props) => {
     props.toggleModal();
   };
 
+  const [isFormValid, setIsFormValid] = useState({
+    nameValid: false,
+    dateValid: false,
+  });
+
+  useEffect(() => {
+    console.log(isFormValid);
+  }, [isFormValid]);
+
+  const validateDate = (inputDate, inputDay) => {
+    const newDay = new Date(inputDate).getDate();
+    return newDay === inputDay;
+  };
+
   const [cursorPosition, setCursorPosition] = useState(0);
 
   const updateFormData = e => {
@@ -52,34 +66,43 @@ const Modal = (props) => {
           year: '',
           date: '',
         });
+        setIsFormValid({
+          ...isFormValid,
+          dateValid: false,
+        });
       } else {
         const [day, month, year] = dateInput.split('/');
         const date = dateInput.split('/').reverse().join('-');
         props.setFormData({
           ...props.formData,
           [e.target.name]: dateInput,
-          day: day,
+          day: Number(day),
           month: Number(month),
           year: Number(year),
           date: date,
         });
+        validateDate(date, Number(day)) ? 
+          setIsFormValid({
+            ...isFormValid,
+            dateValid: true,
+          })
+        :
+          setIsFormValid({
+            ...isFormValid,
+            dateValid: false,
+          });
       };
     };
   };
-
   
   // it moves the cursor to the previous position when a user edits the date input from the beginning to the second last character
   useEffect(() => {
-    const dateInput = document.getElementById('date-input');
-    dateInput.setSelectionRange(cursorPosition, cursorPosition);
-  }, [cursorPosition]);
-
-  const [isFormInvalid, setIsFormInvalid] = useState(true);
-
-  useEffect(() => {
-    props.formData.name && props.formData.date ? setIsFormInvalid(false)
-    : setIsFormInvalid(true);
-  }, [props.formData.name, props.formData.date]);
+    // the if statement prevents the name input autofocus to be passed to the date input
+    if(props.formData.dateInput !== '') {
+      const dateInput = document.getElementById('date-input');
+      dateInput.setSelectionRange(cursorPosition, cursorPosition);
+    };
+  }, [props.formData.dateInput, cursorPosition]);
 
   return (
     <section id='add-event-section' onClick={handleExteriorClick}>
@@ -111,11 +134,16 @@ const Modal = (props) => {
 
         <fieldset className='form-input-container'>
           <label htmlFor='date-input'>Date</label>
-          <input type='text' name='dateInput' id='date-input' minLength='5' maxLength='10' value={props.formData.dateInput} onChange={updateFormData} inputMode='numeric' placeholder='DD/MM/YYYY' required />
-          <span className='material-symbols-outlined valid'>check</span>
+          <input type='text' name='dateInput' id='date-input' min-length='5' maxLength='10' value={props.formData.dateInput} onChange={updateFormData} inputMode='numeric' placeholder='DD/MM/YYYY' required />
+          {isFormValid.dateValid ?
+          <span className='material-symbols-outlined valid'>check</span> :
+          <span className='material-symbols-outlined invalid'>check</span>
+          }
         </fieldset>
         
-        <button type='submit' id='save-date' disabled={isFormInvalid}>
+        <button type='submit' id='save-date' disabled={!isFormValid.dateValid}>
+        {/* I need to validate the name input to replace the above line with the below line */}
+        {/* <button type='submit' id='save-date' disabled={!isFormValid.nameValid || !isFormValid.dateValid}> */}
           Add
         </button>
       </form>
