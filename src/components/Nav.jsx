@@ -1,19 +1,24 @@
+import { useState } from 'react';
 import '../assets/styles/Nav.css';
 import ActionButton from './ActionButton';
 
 const Nav = props => {
+  const [displayMenu, setDisplayMenu] = useState(false);
+  const openMenu = () => {
+    setDisplayMenu(prevState => !prevState);
+  };
+
   return (
     <nav id='action-buttons'>
-      <ActionButton handleClick={props.toggleModal} id='add-event-btn' >
+      <ActionButton id='add-event-btn' handleClick={props.toggleModal}>
         <span className="material-symbols-outlined">
-          calendar_add_on
+          add
         </span>
       </ActionButton>
-
-      <ActionButton id='show-calendar-btn' >
-        <span className="material-symbols-outlined">
-          calendar_month
-        </span>
+      <ActionButton id='menu-btn' handleClick={openMenu}>
+        <span 
+          className={`menu-icon ${displayMenu ? 'menu-icon-active' : ''}`}
+        ></span>
       </ActionButton>
     </nav>
   );

@@ -6,11 +6,11 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0 0.5rem;
   z-index: 10;
 }
 
 #logo {
-  padding: 0.25rem 0.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -22,65 +22,25 @@ header {
 
 .menu-container {
   height: 3.5rem;
-  margin-right: 0.5rem;
   display: flex;
   justify-content: right;
   align-items: center;
 }
 
 .menu-container > p {
-  font-size: 1.1rem;
+  display: none;
+  font-size: 1.15rem;
   font-weight: 500;
-  color: hsl(0, 0%, 25%);
-  padding-right: 0.5em;
+  padding-right: 0.75em;
   cursor: default;
 }
 
-#menu-btn {
-  background-color: transparent;
-  width: 35px;
-}
-
-.menu-icon {
-  width: 22px;
-  height: 22px;
-  margin: 0.15rem 0;
-  background-image: url('../icons/menuIcon1.png');
-  background-size: cover;
-}
-
-#menu-btn:hover > .menu-icon {
-  background-image: url('../icons/menuIcon2.png');
-}
-
-#menu-btn > .menu-icon.menu-icon-active {
-  background-image: url('../icons/menuIcon3.png');
-}
-
 @media only screen and (min-width: 768px) {
-  #logo {
-    padding: 0.25rem 1.5rem;
-  }
-
-  .menu-container {
-    margin-right: 1.5rem;
+  header {
+    padding: 0 1rem;
   }
 
   .menu-container > p {
-    font-weight: 450;
-    color: hsl(0, 0%, 25%);
-    padding-right: calc(1.5em + 140px);
-  }
-
-  #menu-btn {
-    width: 70px;
-  }
-
-  #menu-btn:hover {
-    background-color: hsl(0, 0%, 95%);
-  }
-
-  .menu-icon {
-    background-image: url('../icons/menuIcon1.png');
+    display: block;
   }
 }

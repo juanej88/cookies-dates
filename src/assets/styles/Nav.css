@@ -1,44 +1,37 @@
 #action-buttons {
-  justify-self: center;
-  background-color: hsl(0, 0%, 100%);
-  width: 100%;
-  max-width: 500px;
-  height: 4rem;
-  position: sticky;
-  bottom: 0px;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  z-index: 10;
+  grid-template-columns: repeat(2, 2.5rem);
+  column-gap: 0.5rem;
+  z-index: 30;
+}
+
+#add-event-btn > span {
+  font-size: 1.75rem;
+  color: hsl(0, 0%, 0%);
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 600,
+  'GRAD' 0,
+  'opsz' 48
+}
+
+.action-btn:hover span {
+  transform: scale(1.05);
+}
+
+.menu-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  background-image: url('../icons/menuIcon2.png');
+  background-size: cover;
+}
+
+#menu-btn > .menu-icon.menu-icon-active {
+  background-image: url('../icons/menuIcon3.png');
 }
 
 @media only screen and (min-width: 768px) {
-  #action-buttons {
-    background-color: transparent;
-    max-width: 140px;
-    height: 3.5rem;
-    justify-self: end;
-    position: fixed;
-    top: 0;
-    right: calc(70px + 1.5rem);
+  #menu-btn:hover {
+    background-color: hsl(0, 0%, 95%);
   }
-}
-
-.material-symbols-outlined {
-  font-size: 1.75rem;
-  color: hsl(0, 0%, 25%);
-  font-variation-settings:
-  'FILL' 0,
-  'wght' 300,
-  'GRAD' 0,
-  'opsz' 48
-}
-
-.action-btn:hover .material-symbols-outlined {
-  transform: scale(1.05);
-  color: hsl(0, 0%, 0%);
-  font-variation-settings:
-  'FILL' 1,
-  'wght' 300,
-  'GRAD' 0,
-  'opsz' 48
 }

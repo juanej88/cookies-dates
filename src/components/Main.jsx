@@ -27,6 +27,9 @@ const Main = props => {
           </div>
           <div className='event-container'>
             <p>{event.name}</p>
+            <span className='material-symbols-outlined'>
+              more_vert
+            </span>
           </div>
         </aside>
       );
@@ -60,11 +63,11 @@ const Main = props => {
     // -> I need to check the edge case when a user enters a birthday without a year
     // CHECK !!
 
-    const title = Number(year) === thisYear ? 'Upcoming Events' : year;
+    // const title = Number(year) === thisYear ? 'Upcoming Events' : year;
     const months = Object.keys(props.eventsObj[year]);
     return (
       <section key={year} className='events-section'>
-        <h1>{title}</h1>
+        <h1>{year}</h1>
         {getMonths(year, months)}
       </section>
     );

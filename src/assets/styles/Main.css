@@ -1,24 +1,29 @@
 main {
-  min-height: calc(100vh - 2.5rem);
-  padding-top: 5.25rem;
+  min-height: calc(100vh - 3rem);
+  padding-top: 3.5rem;
   background-color: hsl(0, 0%, 95%);
 }
 
 .events-section {
-  width: 100%;
+  padding-top: 1.25rem;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 main h1 {
-  font-size: 1.4rem;
+  font-size: 1.25rem;
   font-weight: 600;
-  margin-bottom: 1.25rem;
+  position: sticky;
+  top: 1rem;
+  padding-bottom: 0.5rem;
+  display: flex;
+  justify-content: center;
+  z-index: 25;
 }
 
 article.month-events {
-  padding-bottom: 1.25rem;
+  padding-bottom: 1.2rem;
   width: 90%;
   max-width: 500px;
   display: flex;
@@ -26,7 +31,7 @@ article.month-events {
 }
 
 article.month-events > h2 {
-  font-size: 1.35rem;
+  font-size: 1.25rem;
   font-weight: 600;
   padding-left: 0.5rem;
 }
@@ -35,10 +40,6 @@ article.month-events > h2 {
   article.month-events {
     width: 60%;
   }
-
-  /* article.month-events > h2 {
-    padding-left: 1rem;
-  } */
 }
 
 @media only screen and (min-width: 1024px) {
@@ -48,10 +49,10 @@ article.month-events > h2 {
 }
 
 aside.event-card {
+  cursor: pointer;
   height: 3.75rem;
   width: 100%;
   background-color: hsl(0, 0%, 100%);
-  /* border: 1px solid hsl(0, 0%, 100%); */
   border-radius: 8px;
   box-shadow: 1px 1px 2px 0 hsla(0, 0%, 0%, 15%);
   margin: 0.5rem 0 0.5rem 0;
@@ -105,12 +106,22 @@ aside.event-card {
 .event-container {
   height: 100%;
   display: flex;
+  justify-content: space-between;
   align-items: center;
 }
 
 .event-container > p {
   font-size: 1.2rem;
   font-weight: 500;
+}
+
+.event-container > span {
+  font-size: 2rem;
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 250,
+  'GRAD' 0,
+  'opsz' 24
 }
 
 /* Animation for New Events added to the DOM when updating eventsObj state */
