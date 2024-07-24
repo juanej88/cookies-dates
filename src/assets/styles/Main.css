@@ -36,9 +36,9 @@ article.month-events > h2 {
     width: 60%;
   }
 
-  article.month-events > h2 {
+  /* article.month-events > h2 {
     padding-left: 1rem;
-  }
+  } */
 }
 
 @media only screen and (min-width: 1024px) {
@@ -48,39 +48,69 @@ article.month-events > h2 {
 }
 
 aside.event-card {
-  height: 4.5rem;
+  height: 3.75rem;
   width: 100%;
-  background-color: hsla(0, 0%, 100%);
+  background-color: hsl(0, 0%, 100%);
+  /* border: 1px solid hsl(0, 0%, 100%); */
   border-radius: 8px;
-  box-shadow: 1px 1px 2px 0 hsla(0, 0%, 0%, 10%);
+  box-shadow: 1px 1px 2px 0 hsla(0, 0%, 0%, 15%);
   margin: 0.5rem 0 0.5rem 0;
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 4rem 5fr;
+  column-gap: 1.5rem;
   align-items: center;
 }
 
-.event-card > p {
-  font-size: 1.1rem;
-  display: flex;
+.date-container {
+  height: 100%;
+  background-color: hsla(0, 0%, 100%);
+  box-shadow: 1px 1px 2px 0 hsla(0, 0%, 0%, 15%);
+  border-radius: 0.5rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1.75fr;
   justify-content: center;
   align-items: center;
 }
 
-.event-card > p:last-child {
-  justify-content: flex-start;
-  height: 2.5rem;
-  border-left: 4px solid;
-  padding: 0 1rem;
+.date-container > p {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.date-container > p:first-child {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: hsl(0, 0%, 100%);
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+
+.event-card.birthday .date-container > p:first-child {
+  background-color: hsl(0, 80%, 65%);
+}
+
+.event-card.special .date-container > p:first-child {
+  background-color: hsl(250, 80%, 65%);
+}
+
+.date-container > p:last-child {
+  font-size: 1.5rem;
+  text-shadow: 1px 1px 2px 0 hsla(0, 0%, 0%, 100%);
+  font-weight: 400;
+}
+
+.event-container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.event-container > p {
   font-size: 1.2rem;
   font-weight: 500;
-}
-
-.event-card.special > p:last-child {
-  border-left-color: hsl(250, 80%, 65%);
-}
-
-.event-card.birthday > p:last-child {
-  border-left-color: hsl(0, 80%, 65%);
 }
 
 /* Animation for New Events added to the DOM when updating eventsObj state */
