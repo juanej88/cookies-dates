@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import '../assets/styles/Modal.css';
 
-const Modal = (props) => {
+const Modal = props => {
   // it hides the Modal component when a user double clicks anywhere outside the form
   const [doubleClick, setDoubleClick] = useState(false);
   const handleExteriorClick = (e) => {
@@ -104,6 +104,15 @@ const Modal = (props) => {
     };
   }, [props.formData.dateInput, cursorPosition]);
 
+  const [outOfFocus, setOutOfFocus] = useState({name: false, dateInput: false});
+
+  const handleOnBlur = event => {
+    const eventName = event.target.name;
+    setOutOfFocus(prevState => {
+      return {...prevState, [eventName]: true};
+    });
+  };
+
   return (
     <section id='add-event-section' onClick={handleExteriorClick}>
       <form id='event-form' onSubmit={props.handleForm} autoComplete="off">
@@ -129,16 +138,23 @@ const Modal = (props) => {
         <fieldset className='form-input-container'>
           <label htmlFor='name'>Name</label>
           <input type='text' name='name' id='name' minLength='2' maxLength='25' value={props.formData.name} onChange={updateFormData} required autoFocus />
-          <span className='material-symbols-outlined valid'>check</span>
+          <span className='material-symbols-outlined checker valid'>check</span>
         </fieldset>
 
         <fieldset className='form-input-container'>
           <label htmlFor='date-input'>Date</label>
-          <input type='text' name='dateInput' id='date-input' min-length='5' maxLength='10' value={props.formData.dateInput} onChange={updateFormData} inputMode='numeric' placeholder='DD/MM/YYYY' required />
-          {isFormValid.dateValid ?
-          <span className='material-symbols-outlined valid'>check</span> :
-          <span className='material-symbols-outlined invalid'>check</span>
+          <input type='text' name='dateInput' id='date-input' min-length='5' maxLength='10' value={props.formData.dateInput} onChange={updateFormData} inputMode='numeric' placeholder='DD/MM/YYYY' required onBlur={handleOnBlur} />
+          {isFormValid.dateValid &&
+            <span className='material-symbols-outlined checker valid'>
+              check
+            </span>
           }
+          {!isFormValid.dateValid && outOfFocus.dateInput &&
+            <span className='material-symbols-outlined checker invalid'>
+              close
+            </span>
+          }
+          
         </fieldset>
         
         <button type='submit' id='save-date' disabled={!isFormValid.dateValid}>

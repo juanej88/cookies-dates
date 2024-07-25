@@ -31,8 +31,8 @@ article.month-events {
 }
 
 article.month-events > h2 {
-  font-size: 1.25rem;
-  font-weight: 600;
+  font-size: 1.2rem;
+  font-weight: 500;
   padding-left: 0.5rem;
 }
 
@@ -112,7 +112,7 @@ aside.event-card {
 
 .event-container > p {
   font-size: 1.2rem;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .event-container > span {
