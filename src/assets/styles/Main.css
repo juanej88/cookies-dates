@@ -1,7 +1,6 @@
 main {
   min-height: calc(100vh - 3rem);
   padding-top: 3.5rem;
-  background-color: hsl(0, 0%, 95%);
 }
 
 .events-section {
@@ -12,70 +11,90 @@ main {
 }
 
 main h1 {
+  width: 90%;
+  max-width: 500px;
   font-size: 1.25rem;
   font-weight: 600;
-  position: sticky;
-  top: 1rem;
-  padding-bottom: 0.5rem;
+  /* position: sticky;
+  top: calc(3.5rem + 1px); */
+  padding: 0.5rem;
+  /* margin-bottom: 1.2rem; */
   display: flex;
   justify-content: center;
-  z-index: 25;
+  /* z-index: 25; */
+  background-color: hsl(0, 0%, 96%);
+  border-bottom: 1px solid hsl(0, 0%, 90%);
+  box-shadow: 0px 1px 4px 0 hsla(0, 0%, 0%, 20%);
+  border-radius: 0.5rem 0.5rem 0 0;
 }
 
 article.month-events {
-  padding-bottom: 1.2rem;
+  margin-bottom: 1.2rem;
+  padding: 0.75rem 0.5rem 0.5rem;
   width: 90%;
   max-width: 500px;
   display: flex;
   flex-direction: column;
+  background-color: hsl(0, 0%, 96%);
+  box-shadow: 0px 1px 4px 0 hsla(0, 0%, 0%, 20%);
+  border-radius: 0.5rem;
+}
+
+article.month-events:first-of-type {
+  /* padding-top: 0; */
+  border-radius: 0 0 0.5rem 0.5rem;
 }
 
 article.month-events > h2 {
   font-size: 1.2rem;
   font-weight: 500;
-  padding-left: 0.5rem;
+  padding-left: 0.25rem;
 }
 
 @media only screen and (min-width: 768px) {
-  article.month-events {
+  main h1, article.month-events {
     width: 60%;
   }
 }
 
 @media only screen and (min-width: 1024px) {
-  article.month-events {
+  main h1, article.month-events {
     width: 40%;
   }
 }
 
-aside.event-card {
+.event-card {
   cursor: pointer;
-  height: 3.75rem;
+  height: 3.5rem;
   width: 100%;
   background-color: hsl(0, 0%, 100%);
   border-radius: 8px;
-  box-shadow: 1px 1px 2px 0 hsla(0, 0%, 0%, 15%);
-  margin: 0.5rem 0 0.5rem 0;
+  box-shadow: 0 0 4px 0 hsla(0, 0%, 0%, 15%);
+  margin-top: 1rem;
   display: grid;
-  grid-template-columns: 4rem 5fr;
+  grid-template-columns: 3.5rem 5fr;
   column-gap: 1.5rem;
   align-items: center;
+}
+
+.event-card:first-of-type {
+  margin-top: 0.75rem;
 }
 
 .date-container {
   height: 100%;
   background-color: hsla(0, 0%, 100%);
-  box-shadow: 1px 1px 2px 0 hsla(0, 0%, 0%, 15%);
+  box-shadow: 0 0 4px 0 hsla(0, 0%, 0%, 15%);
   border-radius: 0.5rem;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr 1.75fr;
+  grid-template-rows: 1fr 2fr;
   justify-content: center;
   align-items: center;
 }
 
 .date-container > p {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: 700;
   text-align: center;
 }
@@ -98,7 +117,7 @@ aside.event-card {
 }
 
 .date-container > p:last-child {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   text-shadow: 1px 1px 2px 0 hsla(0, 0%, 0%, 100%);
   font-weight: 400;
 }
@@ -128,30 +147,19 @@ aside.event-card {
 
 #newEvent {
   opacity: 0;
-  border: 1px solid hsl(210, 60%, 35%);
-  animation: 2s ease-in showNewEvent forwards;
-  animation-delay: 0.10s;
+  animation: 0.2s ease-in showNewEvent forwards;
+  animation-delay: 0.1s;
 }
 
 @keyframes showNewEvent {
-  0% {
-    scale: 0.95;
+  from {
+    scale: 0.9;
     opacity: 0;
   }
 
-  10% {
+  to {
     scale: 1;
     opacity: 1;
-  }
-
-  90% {
-    border: 1px solid hsl(210, 60%, 35%);
-  }
-
-  100% {
-    scale: 1;
-    opacity: 1;
-    border: 1px solid hsl(210, 100%, 100%);
   }
 }
 

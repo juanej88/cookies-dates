@@ -63,11 +63,11 @@ const Main = props => {
     // -> I need to check the edge case when a user enters a birthday without a year
     // CHECK !!
 
-    const title = Number(year) === thisYear ? 'Upcoming Events' : year;
+    // const title = Number(year) === thisYear ? 'Upcoming Events' : year;
     const months = Object.keys(props.eventsObj[year]);
     return (
       <section key={year} className='events-section'>
-        <h1>{title}</h1>
+        <h1>{year}</h1>
         {getMonths(year, months)}
       </section>
     );
@@ -82,10 +82,10 @@ const Main = props => {
         // 36px is half of the newEvent height
         top: newEvent.offsetTop + 36 - (windowHeight / 2),
       });
-      // it removes the id newEvent after the animation has concluded (2.1s)  so the id can be used for future new events
+      // it removes the id newEvent after the animation has concluded (0.3s)  so the id can be reused for future new events
       const timeOutId = setTimeout(() => {
         newEvent.removeAttribute('id');
-      }, 2100);
+      }, 300);
 
       return () => clearTimeout(timeOutId);
     };
