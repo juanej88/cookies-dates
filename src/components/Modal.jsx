@@ -21,10 +21,6 @@ const Modal = props => {
     dateValid: false,
   });
 
-  useEffect(() => {
-    console.log(isFormValid);
-  }, [isFormValid]);
-
   const validateDate = (inputDate, inputDay) => {
     const newDay = new Date(inputDate).getDate();
     return newDay === inputDay;
@@ -104,6 +100,19 @@ const Modal = props => {
     };
   }, [props.formData.dateInput, cursorPosition]);
 
+  // it validates the date
+  useEffect(() => {
+    const validateName = () => {
+      // nameRegex asserts to have a name input of minimum 2 characters (together or separate) up to 25, excluding whitespaces around them, and does not accept the following characters @#$%^*=+?<>
+      const nameRegex = /^\s*[^\s@#$%^*=+?<>]{1}\s*[^\s@#$%^*=+?<>]{1}[^@#$%^*=+?<>]{0,23}$/;
+      const isNameValid = nameRegex.test(props.formData.name);
+      return isNameValid;
+    };
+    setIsFormValid(prevState => {
+      return {...prevState, nameValid: validateName()};
+    });
+  }, [props.formData.name]);
+
   const [outOfFocus, setOutOfFocus] = useState({name: false, dateInput: false});
 
   const handleOnBlur = event => {
@@ -136,9 +145,18 @@ const Modal = props => {
         </fieldset>
 
         <fieldset className='form-input-container'>
-          <label htmlFor='name'>Name</label>
-          <input type='text' name='name' id='name' minLength='2' maxLength='25' value={props.formData.name} onChange={updateFormData} required autoFocus />
-          <span className='material-symbols-outlined checker valid'>check</span>
+          <label htmlFor='name-input'>Name</label>
+          <input type='text' name='name' id='name-input' minLength='2' maxLength='25' value={props.formData.name} onChange={updateFormData} required onBlur={handleOnBlur} autoFocus />
+          {isFormValid.nameValid &&
+            <span className='material-symbols-outlined checker valid'>
+              check
+            </span>
+          }
+          {!isFormValid.nameValid && outOfFocus.name &&
+            <span className='material-symbols-outlined checker invalid'>
+              close
+            </span>
+          }
         </fieldset>
 
         <fieldset className='form-input-container'>
@@ -154,12 +172,9 @@ const Modal = props => {
               close
             </span>
           }
-          
         </fieldset>
         
-        <button type='submit' id='save-date' disabled={!isFormValid.dateValid}>
-        {/* I need to validate the name input to replace the above line with the below line */}
-        {/* <button type='submit' id='save-date' disabled={!isFormValid.nameValid || !isFormValid.dateValid}> */}
+        <button type='submit' id='save-date' disabled={!isFormValid.nameValid || !isFormValid.dateValid}>
           Add
         </button>
       </form>

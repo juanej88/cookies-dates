@@ -169,13 +169,13 @@ span.checker {
   'opsz' 24
 }
 
-#name:valid + span.valid,
+#name-input + span.valid,
 #date-input + span.valid {
   display: flex;
   color: hsl(210, 60%, 35%);
 }
 
-#name + span.invalid,
+#name-input + span.invalid,
 #date-input + span.invalid {
   display: flex;
   color: hsl(0, 60%, 35%);
