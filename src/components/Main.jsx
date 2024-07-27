@@ -7,7 +7,7 @@ import Modal from './Modal';
 const Main = props => {
   const today = new Date();
   const thisYear = today.getFullYear();
-  const dateFormat = {weekday: 'short', day: '2-digit'};
+  const dateFormat = {day: '2-digit', month: 'short'};
 
   const getEvents = day => {
     return day.map(event => {
@@ -15,18 +15,19 @@ const Main = props => {
       if (event.year > thisYear) eventDate = new Date(event.date)
       else if (eventDate < today) eventDate = new Date(event.date).setFullYear(thisYear + 1);
       const formattedDate = new Date(eventDate).toLocaleDateString(undefined, dateFormat);
-      const [weekday, dayNum] = formattedDate.split(' ');
       return (
         // -----------------      ATTENTION       ------------------------
         // I need to toggle the event.new to false after 2.1 seconds!!
         // -----------------      ATTENTION       ------------------------
         <aside key={event.id} className={`event-card ${event.event}`} id={`${event.new ? 'newEvent' : ''}`}>
-          <div className='date-container'>
-            <p>{weekday.toUpperCase()}</p>
-            <p>{dayNum}</p>
-          </div>
           <div className='event-container'>
+            <span></span>
             <p>{event.name}</p>
+          </div>
+          <div className='date-container'>
+            <p>{formattedDate}</p>
+          </div>
+          <div className='more-options-container'>
             <span className='material-symbols-outlined'>
               more_vert
             </span>
@@ -63,11 +64,11 @@ const Main = props => {
     // -> I need to check the edge case when a user enters a birthday without a year
     // CHECK !!
 
-    // const title = Number(year) === thisYear ? 'Upcoming Events' : year;
+    const title = Number(year) === thisYear ? 'Upcoming Events' : year;
     const months = Object.keys(props.eventsObj[year]);
     return (
       <section key={year} className='events-section'>
-        <h1>{year}</h1>
+        <h1>{title}</h1>
         {getMonths(year, months)}
       </section>
     );

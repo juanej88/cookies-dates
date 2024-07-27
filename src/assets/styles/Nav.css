@@ -1,6 +1,6 @@
 #action-buttons {
   display: grid;
-  grid-template-columns: repeat(2, 2.5rem);
+  grid-template-columns: repeat(2, 2.25rem);
   column-gap: 0.5rem;
   z-index: 30;
 }
