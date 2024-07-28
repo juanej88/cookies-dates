@@ -11,19 +11,15 @@ main {
 }
 
 main h1 {
-  width: 90%;
-  max-width: 500px;
   font-size: 1.25rem;
   font-weight: 600;
   padding-bottom: 1rem;
-  display: flex;
-  justify-content: center;
 }
 
 article.month-events {
   margin-bottom: 1.2rem;
-  padding: 0.75rem 0.5rem 0.5rem;
-  width: 90%;
+  padding: 0.75rem 0.5rem;
+  width: calc(100% - 1rem);
   max-width: 500px;
   display: flex;
   flex-direction: column;
@@ -39,127 +35,14 @@ article.month-events > h2 {
 }
 
 @media only screen and (min-width: 768px) {
-  main h1, article.month-events {
+  article.month-events {
+    padding: 0.75rem;
     width: 60%;
   }
 }
 
 @media only screen and (min-width: 1024px) {
-  main h1, article.month-events {
+  article.month-events {
     width: 40%;
-  }
-}
-
-.event-card {
-  cursor: pointer;
-  height: 3.5rem;
-  width: 100%;
-  background-color: hsl(0, 0%, 100%);
-  border-right: 1px solid hsl(0, 0%, 90%);
-  border-bottom: 1px solid hsl(0, 0%, 90%);
-  box-shadow: 1px 1px 4px 0 hsla(0, 0%, 0%, 10%);
-  display: grid;
-  grid-template-columns: 4fr 5rem 2rem;
-  column-gap: 0.5rem;
-  align-items: center;
-}
-
-.event-card:first-of-type {
-  margin-top: 0.75rem;
-  border-top: 1px solid hsl(0, 0%, 90%);
-}
-
-.event-card:nth-child(2) {
-  border-top-left-radius: 0.25rem;
-  border-top-right-radius: 0.5rem;
-}
-
-.event-card:last-child {
-  border-bottom-left-radius: 0.25rem;
-  border-bottom-right-radius: 0.5rem;
-}
-
-.event-container {
-  height: 100%;
-  display: grid;
-  grid-template-columns: 0.25rem 1fr;
-}
-
-.event-container > p {
-  font-size: 1.2rem;
-  font-weight: 400;
-  display: flex;
-  align-items: center;
-  padding-left: 1rem;
-}
-
-.event-card.special > .event-container > span {
-  background-color: hsl(250, 80%, 65%);
-}
-
-.event-card.birthday > .event-container > span {
-  background-color: hsl(0, 80%, 65%);
-}
-
-.event-card:nth-child(2) > .event-container > span {
-  border-top-left-radius: 0.5rem;
-}
-
-.event-card:last-child > .event-container > span {
-  border-bottom-left-radius: 0.5rem;
-}
-
-.date-container {
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.date-container > p {
-  font-size: 1.1rem;
-}
-
-.more-options-container > span {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 2rem;
-  font-variation-settings:
-  'FILL' 0,
-  'wght' 250,
-  'GRAD' 0,
-  'opsz' 24
-}
-
-/* Animation for New Events added to the DOM when updating eventsObj state */
-
-#newEvent {
-  opacity: 0;
-  animation: 0.2s ease-in showNewEvent forwards;
-  animation-delay: 0.1s;
-}
-
-@keyframes showNewEvent {
-  from {
-    scale: 0.9;
-    opacity: 0;
-  }
-
-  to {
-    scale: 1;
-    opacity: 1;
-  }
-}
-
-@media only screen and (min-width: 768px) {
-  .event-card > p:last-child {
-    padding: 0 1.5rem;
-  }
-}
-
-@media only screen and (min-width: 1024px) {
-  .event-card > p:last-child {
-    padding: 0 2rem;
   }
 }

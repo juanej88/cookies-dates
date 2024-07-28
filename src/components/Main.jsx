@@ -1,13 +1,15 @@
-// import { useState } from 'react';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import '../assets/styles/Main.css';
 import Modal from './Modal';
+import Event from './Event';
 // import useConsoleLog from '../assets/helper_functions/useConsoleLog';
 
 const Main = props => {
   const today = new Date();
   const thisYear = today.getFullYear();
   const dateFormat = {day: '2-digit', month: 'short'};
+
+  const [currentNode, setCurrentNode] = useState(undefined);
 
   const getEvents = day => {
     return day.map(event => {
@@ -17,22 +19,11 @@ const Main = props => {
       const formattedDate = new Date(eventDate).toLocaleDateString(undefined, dateFormat);
       return (
         // -----------------      ATTENTION       ------------------------
-        // I need to toggle the event.new to false after 2.1 seconds!!
+        // I need to toggle the event.new to false after 0.3 seconds!!
         // -----------------      ATTENTION       ------------------------
-        <aside key={event.id} className={`event-card ${event.event}`} id={`${event.new ? 'newEvent' : ''}`}>
-          <div className='event-container'>
-            <span></span>
-            <p>{event.name}</p>
-          </div>
-          <div className='date-container'>
-            <p>{formattedDate}</p>
-          </div>
-          <div className='more-options-container'>
-            <span className='material-symbols-outlined'>
-              more_vert
-            </span>
-          </div>
-        </aside>
+        <>
+          <Event key={event.id} event={event.event} new={event.new} name={event.name} date={formattedDate} currentNode={currentNode} setCurrentNode={setCurrentNode} />
+        </>
       );
     });
   };

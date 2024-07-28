@@ -10,12 +10,12 @@ const Nav = props => {
 
   return (
     <nav id='action-buttons'>
-      <ActionButton id='add-event-btn' handleClick={props.toggleModal}>
+      <ActionButton className='add-event-btn' handleClick={props.toggleModal}>
         <span className="material-symbols-outlined">
           add
         </span>
       </ActionButton>
-      <ActionButton id='menu-btn' handleClick={openMenu}>
+      <ActionButton className='menu-btn' handleClick={openMenu}>
         <span 
           className={`menu-icon ${displayMenu ? 'menu-icon-active' : ''}`}
         ></span>

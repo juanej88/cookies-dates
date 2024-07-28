@@ -178,7 +178,7 @@ span.checker {
 #name-input + span.invalid,
 #date-input + span.invalid {
   display: flex;
-  color: hsl(0, 60%, 35%);
+  color: hsl(0, 75%, 50%);
 }
 
 /* -- Add Button -- */
