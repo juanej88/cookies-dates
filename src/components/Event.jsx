@@ -23,7 +23,7 @@ const Event = props => {
   };
 
   return (
-    <aside key={props.key} className={`event-card ${props.event}`} id={`${props.new ? 'newEvent' : ''}`} onClick={openMoreOptions}>
+    <aside className={`event-card ${props.event}`} id={`${props.new ? 'newEvent' : ''}`} onClick={openMoreOptions}>
       <div className='event-container'>
         <span></span>
         <p>{props.name}</p>
@@ -36,14 +36,15 @@ const Event = props => {
           more_vert
         </span>
         <ActionButton className='update-btn'>
-        <span className="material-symbols-outlined">
-          edit
-        </span>
+          <span className="material-symbols-outlined">
+            edit
+          </span>
         </ActionButton>
         <ActionButton className='delete-btn'>
-        <span className="material-symbols-outlined">
-          delete
-        </span>
+        {/* <ActionButton className='delete-btn' handleClick={openDeletionWindow}> */}
+          <span className="material-symbols-outlined">
+            delete
+          </span>
         </ActionButton>
       </div>
       <div className='event-container-btn'></div>

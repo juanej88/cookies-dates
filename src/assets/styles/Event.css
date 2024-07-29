@@ -177,3 +177,27 @@
     padding: 0 2rem;
   }
 }
+
+.deletion-window {
+  background-color: hsla(0, 0%, 0%, 85%);
+  position: fixed;
+  z-index: 50;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.deletion-message-container {
+  background-color: hsl(0, 0%, 95%);
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem 1.25rem;
+  width: 90%;
+  max-width: 500px;
+  display: grid;
+  grid-template-rows: 1fr repeat(4, 2fr);
+  align-items: end;
+}

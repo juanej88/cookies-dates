@@ -1,0 +1,138 @@
+#event-form {
+  background-color: hsl(0, 0%, 95%);
+  border-radius: 0.5rem;
+  width: 100%;
+  max-width: 500px;
+  display: grid;
+  grid-template-rows: repeat(4, 2fr);
+  align-items: end;
+}
+
+/* -- First Fieldset: Event Options -- */
+fieldset {
+  border: none;
+}
+
+legend {
+  padding: 0.75rem 0.25rem 0;
+}
+
+.event-options-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+/* Hides the radio inputs */
+input.event-options {
+  position: absolute;
+  border: none;
+  width: 0;
+  height: 0;
+}
+
+.event-label {
+  height: 2.25rem;
+  background-color: hsl(0, 0%, 100%);
+  border: 1px solid hsl(0, 0%, 0%);
+  border-radius: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.event-label:nth-child(2) {
+  border-radius: 0.5rem 0 0 0.5rem;
+  border-right: none;
+}
+
+.event-label:last-child {
+  border-radius: 0 0.5rem 0.5rem 0;
+}
+
+#birthday:checked + label {
+  background-color: hsl(0, 75%, 75%);
+}
+
+#special:checked + label {
+  background-color: hsl(260, 60%, 75%);
+}
+
+/* -- Second and Third Fieldset: Name/Title and Date -- */
+fieldset > label,
+fieldset.date-container label {
+  padding-left: 0.25rem;
+}
+
+.form-input-container {
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+  align-items: end;
+}
+
+.form-input-container > input {
+  grid-column: 1;
+  grid-row: 2;
+  height: 2.25rem;
+  width: 100%;
+  background-color: hsl(0, 0%, 100%);
+  border: 1px solid hsl(0, 0%, 25%);
+  border-radius: 0.5rem;
+  font-family: "Wix Madefor Display", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* Valid and Invalid icons */
+span.checker {
+  grid-column: 1;
+  grid-row: 2;
+  justify-self: end;
+  align-self: center;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  width: 2rem;
+  font-size: 1rem;
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 700,
+  'GRAD' 0,
+  'opsz' 24
+}
+
+#name-input + span.valid,
+#date-input + span.valid {
+  display: flex;
+  color: hsl(210, 60%, 35%);
+}
+
+#name-input + span.invalid,
+#date-input + span.invalid {
+  display: flex;
+  color: hsl(0, 75%, 50%);
+}
+
+/* -- Add Button -- */
+#save-date {
+  width: 50%;
+  height: 2.2rem;
+  justify-self: center;
+  background-color: hsl(210, 60%, 35%);
+  color: hsl(0, 0%, 100%);
+  font-family: "Wix Madefor Display", sans-serif;
+  font-size: 1.2rem;
+  font-weight: 500;
+  border: transparent;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+#save-date:disabled {
+  background-color: hsl(210, 10%, 90%);
+  color: hsl(0, 0%, 25%);
+  cursor: not-allowed;
+}

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import '../assets/styles/Main.css';
 import Modal from './Modal';
+import AddEvent from './AddEvent';
 import Event from './Event';
 // import useConsoleLog from '../assets/helper_functions/useConsoleLog';
 
@@ -21,9 +22,7 @@ const Main = props => {
         // -----------------      ATTENTION       ------------------------
         // I need to toggle the event.new to false after 0.3 seconds!!
         // -----------------      ATTENTION       ------------------------
-        <>
-          <Event key={event.id} event={event.event} new={event.new} name={event.name} date={formattedDate} currentNode={currentNode} setCurrentNode={setCurrentNode} />
-        </>
+          <Event key={event.id}event={event.event} new={event.new} name={event.name} date={formattedDate} currentNode={currentNode} setCurrentNode={setCurrentNode}></Event>
       );
     });
   };
@@ -40,7 +39,7 @@ const Main = props => {
       const firstDate = props.eventsObj[year][month][days[0]][0]['date'];
       const monthText = new Date(firstDate).toLocaleDateString(undefined, {month: 'long'});
       return (
-        <article key={year + month} className='month-events'>
+        <article key={`${year}${month}`} className='month-events'>
           <h2>{monthText}</h2>
           {getDays(year, month, days)}
         </article>
@@ -83,17 +82,27 @@ const Main = props => {
     };
   }, [props.eventsObj]);
 
+  // const [showDeletionWindow, setShowDeletionWindow] = useState(false);
+
+  // const openDeletionWindow = () => {
+  //   setShowDeletionWindow(true);
+  // };
+
+  // useEffect(() => {
+  //   console.log(showDeletionWindow);
+  // }, [showDeletionWindow]);
+
   return (
     <main className='events'>
       {getYears}
+      {props.modal && 
+        <Modal toggleModal={props.toggleModal} title={'New Event'}>
+          <AddEvent handleForm={props.handleForm} formData={props.formData}setFormData={props.setFormData} />
+        </Modal>
+      }
       {
-        props.modal && 
-        <Modal
-          toggleModal={props.toggleModal} 
-          handleForm={props.handleForm}
-          formData={props.formData}
-          setFormData={props.setFormData}
-        />
+        // <Modal toggleModal={props.toggleModal} title={'Delete Event'}>
+        // </Modal>
       }
     </main>
   );
