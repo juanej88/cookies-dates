@@ -22,7 +22,7 @@ const Main = props => {
         // -----------------      ATTENTION       ------------------------
         // I need to toggle the event.new to false after 0.3 seconds!!
         // -----------------      ATTENTION       ------------------------
-          <Event key={event.id}event={event.event} new={event.new} name={event.name} date={formattedDate} currentNode={currentNode} setCurrentNode={setCurrentNode}></Event>
+          <Event key={event.id}event={event.event} new={event.new} name={event.name} date={formattedDate} currentNode={currentNode} setCurrentNode={setCurrentNode} updateModal={props.updateModal}></Event>
       );
     });
   };
@@ -95,14 +95,12 @@ const Main = props => {
   return (
     <main className='events'>
       {getYears}
-      {props.modal && 
-        <Modal toggleModal={props.toggleModal} title={'New Event'}>
-          <AddEvent handleForm={props.handleForm} formData={props.formData}setFormData={props.setFormData} />
+      {props.modal.show && 
+        <Modal updateModal={props.updateModal} eventID={props.modal.type}>
+          {props.modal.type === 'add-event' &&
+            <AddEvent handleForm={props.handleForm} formData={props.formData}setFormData={props.setFormData} />
+          }
         </Modal>
-      }
-      {
-        // <Modal toggleModal={props.toggleModal} title={'Delete Event'}>
-        // </Modal>
       }
     </main>
   );

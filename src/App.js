@@ -125,21 +125,38 @@ const App = () => {
       date: '',
       new: true,
     });
-    toggleModal();
+    updateModal();
   };
 
-  const [modal, setModal] = useState(false);
-  const toggleModal = () => {
-    setModal(prevState => !prevState);
+  // -- This section updates the modal status according to the clicked source --
+
+  const [modal, setModal] = useState({show: false, type: ''});
+  const updateModal = event => {
+    const eventID = !event ? undefined
+    : event.target.id ? event.target.id 
+    : event.target.parentNode.id;
+    
+    console.log(eventID);
+
+    setModal(() => {
+      switch(eventID) {
+        case 'add-event':
+        case 'update-event':
+        case 'delete-event':
+          return {show: true, type: eventID};
+        default:
+          return {show: false, type: ''};
+      };
+    });
   };
 
   return (
     <div className="App">
-      <Header toggleModal={toggleModal} />
+      <Header updateModal={updateModal} />
       <Main 
         eventsObj={eventsObj}
         modal={modal}
-        toggleModal={toggleModal}
+        updateModal={updateModal}
         formData={formData}
         setFormData={setFormData}
         handleForm={saveDate}

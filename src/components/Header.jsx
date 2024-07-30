@@ -5,8 +5,6 @@ const Header = props => {
   const options = {weekday: 'short', day: '2-digit', month: 'short'};
   const today = new Date().toLocaleString(undefined, options);
   
-  
-
   return(
     <header>
       <a id='logo' href='./'>Cookies
@@ -14,7 +12,7 @@ const Header = props => {
       </a>
       <div className='menu-container'>
         <p>{today}</p>
-        <Nav toggleModal={props.toggleModal} />
+        <Nav updateModal={props.updateModal} />
       </div>
     </header>
   );

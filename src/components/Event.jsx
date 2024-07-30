@@ -35,13 +35,12 @@ const Event = props => {
         <span className='material-symbols-outlined'>
           more_vert
         </span>
-        <ActionButton className='update-btn'>
+        <ActionButton id='update-event' className='update-btn' handleClick={props.updateModal}>
           <span className="material-symbols-outlined">
             edit
           </span>
         </ActionButton>
-        <ActionButton className='delete-btn'>
-        {/* <ActionButton className='delete-btn' handleClick={openDeletionWindow}> */}
+        <ActionButton id='delete-event' className='delete-btn' handleClick={props.updateModal}>
           <span className="material-symbols-outlined">
             delete
           </span>
