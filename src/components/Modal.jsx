@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import '../assets/styles/Modal.css';
+import ActionButton from './ActionButton';
 
 const Modal = props => {
-  // it hides the Modal component when a user double clicks anywhere outside the form
+  // it hides the Modal component when a user double clicks anywhere outside the modal window
   const [doubleClick, setDoubleClick] = useState(false);
   const handleExteriorClick = (e) => {
     if (e.target.getAttribute('id') === 'modal-container') {
@@ -22,9 +23,13 @@ const Modal = props => {
   return (
     <section id='modal-container' onClick={handleExteriorClick}>
       <article className='modal-window'>
-        <aside className='form-title-container'>
+        <aside className='modal-title-container'>
           <h2>{getTitle()}</h2>
-          <button className='close-btn' onClick={props.updateModal}>+</button>
+          <ActionButton id='close-btn' handleClick={props.updateModal}>
+            <span className="material-symbols-outlined">
+              close
+            </span>
+          </ActionButton>
         </aside>
         {props.children}
       </article>

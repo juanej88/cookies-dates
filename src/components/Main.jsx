@@ -82,16 +82,6 @@ const Main = props => {
     };
   }, [props.eventsObj]);
 
-  // const [showDeletionWindow, setShowDeletionWindow] = useState(false);
-
-  // const openDeletionWindow = () => {
-  //   setShowDeletionWindow(true);
-  // };
-
-  // useEffect(() => {
-  //   console.log(showDeletionWindow);
-  // }, [showDeletionWindow]);
-
   return (
     <main className='events'>
       {getYears}

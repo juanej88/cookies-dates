@@ -110,18 +110,18 @@ const AddEvent = props => {
 
   return (
       <form id='event-form' onSubmit={props.handleForm} autoComplete="off">
-        <fieldset>
-          <legend>Type</legend>
-          <div className='event-options-container'>
-            <input type='radio' name='event' id='birthday' className='event-options' value='birthday' onChange={updateFormData} checked={props.formData.event === 'birthday'} />
-            <label htmlFor='birthday' className='event-label'>
-              Birthday
-            </label>
-            <input type='radio' name='event' id='special' className='event-options' value='special' onChange={updateFormData} checked={props.formData.event === 'special'} />
-            <label htmlFor='special' className='event-label'>
-              Special Event
-            </label>
-          </div>
+        <fieldset className='event-options-container'>
+          <legend className='event-options-title'>Type</legend>
+          <input type='radio' name='event' id='birthday' className='event-options' value='birthday' onChange={updateFormData} checked={props.formData.event === 'birthday'} />
+          <label htmlFor='birthday' className='event-label'>
+            <span></span>
+            Birthday
+          </label>
+          <input type='radio' name='event' id='special' className='event-options' value='special' onChange={updateFormData} checked={props.formData.event === 'special'} />
+          <label htmlFor='special' className='event-label'>
+            <span></span>
+            Special Event
+          </label>
         </fieldset>
 
         <fieldset className='form-input-container'>

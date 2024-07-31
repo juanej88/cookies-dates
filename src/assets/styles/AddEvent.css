@@ -1,8 +1,4 @@
 #event-form {
-  background-color: hsl(0, 0%, 95%);
-  border-radius: 0.5rem;
-  width: 100%;
-  max-width: 500px;
   display: grid;
   grid-template-rows: repeat(4, 2fr);
   align-items: end;
@@ -14,54 +10,56 @@ fieldset {
 }
 
 legend {
-  padding: 0.75rem 0.25rem 0;
+  padding: 0 0 0.25rem 0.25rem;
 }
 
 .event-options-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  column-gap: 0.5rem;
 }
 
 /* Hides the radio inputs */
 input.event-options {
   position: absolute;
-  border: none;
   width: 0;
   height: 0;
 }
 
 .event-label {
-  height: 2.25rem;
-  background-color: hsl(0, 0%, 100%);
-  border: 1px solid hsl(0, 0%, 0%);
+  height: 3.5rem;
+  background-color: hsl(0, 0%, 90%);
+  box-shadow: 1px 1px 4px 0 hsla(0, 0%, 0%, 10%);
+  border: 1px solid hsl(0, 0%, 90%);
   border-radius: 0.5rem;
-  font-size: 1.1rem;
-  font-weight: 500;
-  display: flex;
-  justify-content: center;
+  text-align: center;
+  font-size: 1.2rem;
+  display: grid;
+  grid-template-columns: 0.25rem 1fr;
   align-items: center;
   cursor: pointer;
 }
 
-.event-label:nth-child(2) {
-  border-radius: 0.5rem 0 0 0.5rem;
-  border-right: none;
+.event-label > span {
+  height: 100%;
+  border-top-left-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem;
 }
 
-.event-label:last-child {
-  border-radius: 0 0.5rem 0.5rem 0;
+.event-options:checked + label {
+  background-color: hsl(0, 0%, 100%);
+  border-radius: 0.25rem 0.5rem 0.5rem 0.25rem;
 }
 
-#birthday:checked + label {
-  background-color: hsl(0, 75%, 75%);
+#birthday:checked + label > span {
+  background-color: hsl(0, 80%, 65%);
 }
 
-#special:checked + label {
-  background-color: hsl(260, 60%, 75%);
+#special:checked + label >  span {
+  background-color: hsl(260, 80%, 65%);
 }
 
 /* -- Second and Third Fieldset: Name/Title and Date -- */
-fieldset > label,
 fieldset.date-container label {
   padding-left: 0.25rem;
 }
