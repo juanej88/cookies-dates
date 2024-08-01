@@ -1,6 +1,6 @@
 #event-form {
   display: grid;
-  grid-template-rows: repeat(4, 2fr);
+  grid-template-rows: repeat(4, 1fr);
   align-items: end;
 }
 
@@ -10,7 +10,8 @@ fieldset {
 }
 
 legend {
-  padding: 0 0 0.25rem 0.25rem;
+  font-size: 1.1rem;
+  padding: 1rem 0 0.25rem 0.25rem;
 }
 
 .event-options-container {
@@ -27,7 +28,7 @@ input.event-options {
 }
 
 .event-label {
-  height: 3.5rem;
+  height: 3rem;
   background-color: hsl(0, 0%, 90%);
   box-shadow: 1px 1px 4px 0 hsla(0, 0%, 0%, 10%);
   border: 1px solid hsl(0, 0%, 90%);
@@ -60,28 +61,32 @@ input.event-options {
 }
 
 /* -- Second and Third Fieldset: Name/Title and Date -- */
-fieldset.date-container label {
-  padding-left: 0.25rem;
-}
-
 .form-input-container {
   display: grid;
-  grid-template-rows: repeat(2, 1fr);
-  align-items: end;
+}
+
+.form-input-container > label {
+  font-size: 1.1rem;
+  padding: 0 0 0.25rem 0.25rem;
 }
 
 .form-input-container > input {
   grid-column: 1;
   grid-row: 2;
-  height: 2.25rem;
+  height: 3rem;
   width: 100%;
   background-color: hsl(0, 0%, 100%);
-  border: 1px solid hsl(0, 0%, 25%);
+  box-shadow: 1px 1px 4px 0 hsla(0, 0%, 0%, 10%);
+  border: 1px solid hsl(0, 0%, 90%);
   border-radius: 0.5rem;
   font-family: "Wix Madefor Display", sans-serif;
-  font-size: 1.1rem;
-  font-weight: 500;
+  font-size: 1.2rem;
   text-align: center;
+}
+
+.form-input-container > input:focus {
+  outline: 2px solid hsl(210, 60%, 35%);
+  caret-color: hsl(210, 60%, 35%);
 }
 
 /* Valid and Invalid icons */
@@ -116,21 +121,22 @@ span.checker {
 
 /* -- Add Button -- */
 #save-date {
+  height: 3rem;
   width: 50%;
-  height: 2.2rem;
-  justify-self: center;
   background-color: hsl(210, 60%, 35%);
   color: hsl(0, 0%, 100%);
+  box-shadow: 1px 1px 4px 0 hsla(0, 0%, 0%, 10%);
+  border: 1px solid hsl(0, 0%, 90%);
+  border-radius: 0.5rem;
+  justify-self: center;
   font-family: "Wix Madefor Display", sans-serif;
   font-size: 1.2rem;
   font-weight: 500;
-  border: transparent;
-  border-radius: 0.5rem;
   cursor: pointer;
 }
 
 #save-date:disabled {
-  background-color: hsl(210, 10%, 90%);
-  color: hsl(0, 0%, 25%);
+  background-color: hsl(0, 0%, 90%);
+  color: hsl(0, 0%, 20%);
   cursor: not-allowed;
 }

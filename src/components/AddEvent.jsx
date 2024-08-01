@@ -126,7 +126,7 @@ const AddEvent = props => {
 
         <fieldset className='form-input-container'>
           <label htmlFor='name-input'>Name</label>
-          <input type='text' name='name' id='name-input' minLength='2' maxLength='25' value={props.formData.name} onChange={updateFormData} required onBlur={handleOnBlur} autoFocus />
+          <input type='text' name='name' id='name-input' minLength='2' maxLength='25' value={props.formData.name} onChange={updateFormData} placeholder='John Smith' required onBlur={handleOnBlur} autoFocus />
           {isFormValid.nameValid &&
             <span className='material-symbols-outlined checker valid'>
               check
@@ -141,7 +141,7 @@ const AddEvent = props => {
 
         <fieldset className='form-input-container'>
           <label htmlFor='date-input'>Date</label>
-          <input type='text' name='dateInput' id='date-input' min-length='5' maxLength='10' value={props.formData.dateInput} onChange={updateFormData} inputMode='numeric' placeholder='DD/MM/YYYY' required onBlur={handleOnBlur} />
+          <input type='text' name='dateInput' id='date-input' min-length='5' maxLength='10' value={props.formData.dateInput} onChange={updateFormData} inputMode='numeric' placeholder='dd/mm/yyyy' required onBlur={handleOnBlur} />
           {isFormValid.dateValid &&
             <span className='material-symbols-outlined checker valid'>
               check
