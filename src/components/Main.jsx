@@ -12,6 +12,43 @@ const Main = props => {
 
   const [currentNode, setCurrentNode] = useState(undefined);
 
+  const openMoreOptions = event => {
+    let targetNode = event.target.parentNode.id === 'more-options-btn' ? event.target.parentNode : undefined
+    if(!targetNode) return;
+
+    // this removes the class close-more-options if it was clicked before to allow to play the class open-more-options animation
+    if (targetNode.className.split(' ').indexOf('close-more-options') !== -1) targetNode.classList.remove('close-more-options');
+
+    // this opens the options menu or closes it if it's clicked again
+    if(targetNode !== currentNode) {
+      // this closes the previous menu (if it was left open) when clicking another event card
+      if(currentNode) {
+        currentNode.classList.remove('open-more-options');
+        currentNode.classList.add('close-more-options');
+      };
+      targetNode.classList.add('open-more-options');
+      setCurrentNode(targetNode);
+    } else {
+      currentNode.classList.remove('open-more-options');
+      currentNode.classList.add('close-more-options');
+      setCurrentNode(undefined);
+    };
+  };
+
+  // closes the more-options menu when clicking anywhere else
+  useEffect(() => {
+    const closeMoreOptions = () => {
+      if(currentNode) {
+        currentNode.classList.remove('open-more-options');
+        currentNode.classList.add('close-more-options');
+        setCurrentNode(undefined);
+      };
+    };
+    window.addEventListener('click', (event) => {
+      if (event.target.parentNode.id !== 'more-options-btn') closeMoreOptions();
+    });
+  }, [currentNode]);
+
   const getEvents = day => {
     return day.map(event => {
       let eventDate = new Date(event.date).setFullYear(thisYear);
@@ -22,7 +59,7 @@ const Main = props => {
         // -----------------      ATTENTION       ------------------------
         // I need to toggle the event.new to false after 0.3 seconds!!
         // -----------------      ATTENTION       ------------------------
-          <Event key={event.id}event={event.event} new={event.new} name={event.name} date={formattedDate} currentNode={currentNode} setCurrentNode={setCurrentNode} updateModal={props.updateModal}></Event>
+          <Event key={event.id}event={event.event} new={event.new} name={event.name} date={formattedDate} currentNode={currentNode} setCurrentNode={setCurrentNode} updateModal={props.updateModal} openMoreOptions={openMoreOptions}></Event>
       );
     });
   };

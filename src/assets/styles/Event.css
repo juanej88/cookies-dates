@@ -1,5 +1,4 @@
 .event-card {
-  cursor: pointer;
   height: 3.5rem;
   width: 100%;
   background-color: hsl(0, 0%, 100%);
@@ -78,6 +77,7 @@
   overflow: hidden;
   background-color: hsl(0, 0%, 100%);
   border-left: 1px solid transparent;
+  border-radius: 0 0.5rem 0.5rem 0;
   display: grid;
   grid-template-columns: 2rem repeat(2, 2.25rem);
   column-gap: 0.5rem;
@@ -88,7 +88,7 @@
   border-left-color: hsl(0, 0%, 90%);
 }
 
-.event-card.open-more-options > .more-options-container {
+.more-options-container.open-more-options {
   width: 10rem;
   right: 8rem;
   border-left-color: hsl(0, 0%, 90%);
@@ -107,8 +107,8 @@
   }
 }
 
-.event-card.close-more-options > .more-options-container {
-  animation: 0.1s ease-out closeRight forwards;
+.more-options-container.close-more-options {
+  animation: 0.1s ease-in closeRight forwards;
 }
 
 @keyframes closeRight {
@@ -124,6 +124,8 @@
 }
 
 .more-options-container > span {
+  cursor: pointer;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -137,13 +139,6 @@
 
 .delete-btn > span {
   color: hsl(0, 75%, 50%);
-}
-
-.event-container-btn {
-  grid-area: 1 / 1 / span 1 / span 3;
-  width: 100%;
-  height: 100%;
-  z-index: 5;
 }
 
 /* Animation for New Events added to the DOM when updating eventsObj state */
