@@ -10,8 +10,7 @@ fieldset {
 }
 
 legend {
-  font-size: 1.1rem;
-  padding: 1rem 0 0.25rem 0.25rem;
+  padding: 0.75rem 0 0.25rem 0.25rem;
 }
 
 .event-options-container {
@@ -27,8 +26,12 @@ input.event-options {
   height: 0;
 }
 
+input.event-options:focus + label {
+  outline: 2px solid hsl(210, 60%, 35%);
+}
+
 .event-label {
-  height: 3rem;
+  height: 2.5rem;
   background-color: hsl(0, 0%, 90%);
   box-shadow: 1px 1px 4px 0 hsla(0, 0%, 0%, 10%);
   border: 1px solid hsl(0, 0%, 90%);
@@ -66,14 +69,13 @@ input.event-options {
 }
 
 .form-input-container > label {
-  font-size: 1.1rem;
   padding: 0 0 0.25rem 0.25rem;
 }
 
 .form-input-container > input {
   grid-column: 1;
   grid-row: 2;
-  height: 3rem;
+  height: 2.5rem;
   width: 100%;
   background-color: hsl(0, 0%, 100%);
   box-shadow: 1px 1px 4px 0 hsla(0, 0%, 0%, 10%);
@@ -121,7 +123,7 @@ span.checker {
 
 /* -- Add Button -- */
 #save-date {
-  height: 3rem;
+  height: 2.5rem;
   width: 50%;
   background-color: hsl(210, 60%, 35%);
   color: hsl(0, 0%, 100%);

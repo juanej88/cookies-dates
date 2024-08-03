@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import '../assets/styles/Main.css';
 import Modal from './Modal';
 import AddEvent from './AddEvent';
+import DeleteEvent from './DeleteEvent';
 import Event from './Event';
 // import useConsoleLog from '../assets/helper_functions/useConsoleLog';
 
@@ -37,16 +38,15 @@ const Main = props => {
 
   // closes the more-options menu when clicking anywhere else
   useEffect(() => {
-    const closeMoreOptions = () => {
-      if(currentNode) {
+    const closeMoreOptions = event => {
+      if (event.target.parentNode.id !== 'more-options-btn') {
         currentNode.classList.remove('open-more-options');
         currentNode.classList.add('close-more-options');
         setCurrentNode(undefined);
       };
     };
-    window.addEventListener('click', (event) => {
-      if (event.target.parentNode.id !== 'more-options-btn') closeMoreOptions();
-    });
+    if (currentNode) window.addEventListener('click', closeMoreOptions);
+    return () => window.removeEventListener('click', closeMoreOptions);
   }, [currentNode]);
 
   const getEvents = day => {
@@ -59,7 +59,7 @@ const Main = props => {
         // -----------------      ATTENTION       ------------------------
         // I need to toggle the event.new to false after 0.3 seconds!!
         // -----------------      ATTENTION       ------------------------
-          <Event key={event.id}event={event.event} new={event.new} name={event.name} date={formattedDate} currentNode={currentNode} setCurrentNode={setCurrentNode} updateModal={props.updateModal} openMoreOptions={openMoreOptions}></Event>
+          <Event key={event.id} event={event.event} new={event.new} name={event.name} date={formattedDate} currentNode={currentNode} setCurrentNode={setCurrentNode} updateModal={props.updateModal} openMoreOptions={openMoreOptions} data={event}></Event>
       );
     });
   };
@@ -126,6 +126,9 @@ const Main = props => {
         <Modal updateModal={props.updateModal} eventID={props.modal.type}>
           {props.modal.type === 'add-event' &&
             <AddEvent handleForm={props.handleForm} formData={props.formData}setFormData={props.setFormData} />
+          }
+          {props.modal.type === 'delete-event' &&
+          <DeleteEvent data={props.formData} />
           }
         </Modal>
       }

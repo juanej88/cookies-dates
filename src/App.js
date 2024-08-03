@@ -129,14 +129,27 @@ const App = () => {
   };
 
   // -- This section updates the modal status according to the clicked source --
-
   const [modal, setModal] = useState({show: false, type: ''});
-  const updateModal = event => {
+  const updateModal = (event, data) => {
     const eventID = !event ? undefined
     : event.target.id ? event.target.id 
     : event.target.parentNode.id;
+
+    // it gets the event-card data to update and delete events, else, it blanks the form to add event
+    if (data) setFormData(data)
+    else setFormData({
+      id: 99, // I need to remove it once it's sent to the back-end
+      event: 'birthday',
+      name: '',
+      dateInput: '',
+      day: '',
+      month: '',
+      year: '',
+      date: '',
+      new: true,
+    })
     
-    console.log(eventID);
+    console.log(eventID, data);
 
     setModal(() => {
       switch(eventID) {
