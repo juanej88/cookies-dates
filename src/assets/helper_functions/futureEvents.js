@@ -13,11 +13,17 @@ const addEvent = (year, month, day, event) => {
   };
   // add day if it doesn't exist
   if(!(day in futureEvents[year][month])) {
-    futureEvents[year][month][day] = [event];
+    futureEvents[year][month][day] = [{
+      ...event,
+      displayYear: year,
+    }];
   } else { // or update the day array
     futureEvents[year][month][day] = [
       ...futureEvents[year][month][day],
-      event
+      {
+        ...event,
+        displayYear: year,
+      }
     ];
   };
 };

@@ -10,11 +10,15 @@ const DeleteEvent = props => {
     <p>Are you sure you want to delete the event titled <strong>"{props.data.name}"</strong>?</p>
   };
 
+  const handleClick = () => {
+    props.deleteEvent(props.data);
+  };
+
   return (
     <aside className='delete-message-container'>
       <p><strong>Warning</strong>: Deleting this event is permanent and cannot be undone.</p>
       {getMessage()}
-      <button type='submit'>Yes, delete it</button>
+      <button type='submit' onClick={handleClick}>Yes, delete it</button>
     </aside>
   );
 };

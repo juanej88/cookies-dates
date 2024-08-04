@@ -9,6 +9,10 @@
   font-size: 1.1rem;
 }
 
+.delete-message-container > p > strong {
+  font-weight: 600;
+}
+
 .delete-message-container > button {
   height: 2.5rem;
   width: 50%;

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import Header from './components/Header';
 import Main from './components/Main';
@@ -12,7 +12,7 @@ const App = () => {
     setEventsObj(prevState => {
       return {
         ...prevState,
-        [year]: {[month]: {[day]: [event]}},
+        [year]: {[month]: {[day]: [{...event, displayYear: year}]}},
       };
     });
   };
@@ -23,7 +23,7 @@ const App = () => {
         ...prevState,
         [year]: {
           ...prevState[year],
-          [month]: {[day]: [event]},
+          [month]: {[day]: [{...event, displayYear: year}]},
         },
       };
     });
@@ -37,7 +37,7 @@ const App = () => {
           ...prevState[year],
           [month]: {
             ...prevState[year][month],
-            [day]: [event]
+            [day]: [{...event, displayYear: year}]
           },
         },
       };
@@ -54,7 +54,7 @@ const App = () => {
             ...prevState[year][month],
             [day]: [
               ...prevState[year][month][day],
-              event
+              {...event, displayYear: year}
             ],
           },
         },
@@ -136,7 +136,7 @@ const App = () => {
     : event.target.parentNode.id;
 
     // it gets the event-card data to update and delete events, else, it blanks the form to add event
-    if (data) setFormData(data)
+    if (data) setFormData(data);
     else setFormData({
       id: 99, // I need to remove it once it's sent to the back-end
       event: 'birthday',
@@ -147,10 +147,8 @@ const App = () => {
       year: '',
       date: '',
       new: true,
-    })
+    });
     
-    console.log(eventID, data);
-
     setModal(() => {
       switch(eventID) {
         case 'add-event':
@@ -163,6 +161,32 @@ const App = () => {
     });
   };
 
+  // -- Delete Event --
+  const deleteEvent = eventData => {
+    const { id, day, month, displayYear } = eventData;
+    setEventsObj(prevState => {
+      const newState = {...prevState};
+      if (newState[displayYear][month][day].length > 1) {
+        const idx = newState[displayYear][month][day].findIndex(event => {
+          return event.id === id;
+        });
+        // delete event in the array day
+        newState[displayYear][month][day].splice(idx, 1);
+      } else if (Object.keys(newState[displayYear][month]).length > 1) {
+        // delete event and day
+        delete newState[displayYear][month][day];
+      } else if (Object.keys(newState[displayYear]).length > 1) {
+        // delete event, day and month
+        delete newState[displayYear][month];
+      } else {
+        // delete event, day, month and year
+        delete newState[displayYear];
+      };
+      return newState;
+    });
+    updateModal();
+  };
+
   return (
     <div className="App">
       <Header updateModal={updateModal} />
@@ -173,6 +197,7 @@ const App = () => {
         formData={formData}
         setFormData={setFormData}
         handleForm={saveDate}
+        deleteEvent={deleteEvent}
       /> 
       <Footer />
     </div>

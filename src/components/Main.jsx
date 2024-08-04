@@ -128,7 +128,7 @@ const Main = props => {
             <AddEvent handleForm={props.handleForm} formData={props.formData}setFormData={props.setFormData} />
           }
           {props.modal.type === 'delete-event' &&
-          <DeleteEvent data={props.formData} />
+          <DeleteEvent data={props.formData} deleteEvent={props.deleteEvent} />
           }
         </Modal>
       }
