@@ -196,3 +196,71 @@
   grid-template-rows: 1fr repeat(4, 2fr);
   align-items: end;
 }
+
+/* -- Deletion animations (aside, article and section) */
+
+aside.delete-animation {
+  transform-origin: top;
+  animation: 0.2s ease-in deleteAside forwards;
+  animation-delay: 0.1s;
+}
+
+@keyframes deleteAside {
+  from {
+    height: 3.5rem;
+    opacity: 1;
+    transform: scale(1);
+  }
+  
+  to {
+    height: 0rem;
+    opacity: 0;
+    transform: scale(0);
+  }
+}
+
+article.delete-animation {
+  transform-origin: top;
+  animation: 0.2s ease-in deleteArticle forwards;
+  animation-delay: 0.1s;
+}
+
+@keyframes deleteArticle {
+  from {
+    height: 6rem;
+    padding: 0.75rem;
+    margin-bottom: 1.2rem;
+    opacity: 1;
+    transform: scale(1);
+  }
+  
+  to {
+    height: 0rem;
+    padding: 0rem;
+    margin-bottom: 0rem;
+    opacity: 0;
+    transform: scale(0);
+  }
+}
+
+section.delete-animation {
+  transform-origin: top;
+  animation: 0.2s ease-in deleteArticle forwards;
+  animation-delay: 0.1s;
+}
+
+@keyframes deleteArticle {
+  from {
+    height: 11rem;
+    padding-top: 1.25rem;
+    opacity: 1;
+    transform: scale(1);
+  }
+  
+  to {
+    height: 0rem;
+    padding-top: 0rem;
+    opacity: 0;
+    transform: scale(0);
+  }
+}

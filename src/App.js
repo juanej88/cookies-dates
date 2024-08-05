@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import Header from './components/Header';
 import Main from './components/Main';
@@ -128,6 +128,9 @@ const App = () => {
     updateModal();
   };
 
+  // deleteEl gets updated with the functions updateModal when a user wants to delete an event, then it's used to add an animation if it's indeed deleted
+  const [deletedEl, setDeletedEl] = useState(undefined);
+
   // -- This section updates the modal status according to the clicked source --
   const [modal, setModal] = useState({show: false, type: ''});
   const updateModal = (event, data) => {
@@ -159,33 +162,69 @@ const App = () => {
           return {show: false, type: ''};
       };
     });
+
+    if(eventID === 'delete-event') {
+      setDeletedEl(event.target.parentNode.parentNode.parentNode);
+    } else {
+      setDeletedEl(undefined);
+    };
   };
 
-  // -- Delete Event --
+  // -- Start: Delete Event --
+  const [eventToDelete, setEventToDelete] = useState(false);
   const deleteEvent = eventData => {
-    const { id, day, month, displayYear } = eventData;
-    setEventsObj(prevState => {
-      const newState = {...prevState};
-      if (newState[displayYear][month][day].length > 1) {
-        const idx = newState[displayYear][month][day].findIndex(event => {
-          return event.id === id;
-        });
-        // delete event in the array day
-        newState[displayYear][month][day].splice(idx, 1);
-      } else if (Object.keys(newState[displayYear][month]).length > 1) {
-        // delete event and day
-        delete newState[displayYear][month][day];
-      } else if (Object.keys(newState[displayYear]).length > 1) {
-        // delete event, day and month
-        delete newState[displayYear][month];
-      } else {
-        // delete event, day, month and year
-        delete newState[displayYear];
-      };
-      return newState;
-    });
+    const { day, month, displayYear } = eventData;
+    // the conditions will add the class delete-animation to the correct DOM element
+    if (eventsObj[displayYear][month][day].length > 1) {
+      deletedEl.classList.add('delete-animation');
+    } else if (Object.keys(eventsObj[displayYear][month]).length > 1) {
+      deletedEl.classList.add('delete-animation');
+    } else if (Object.keys(eventsObj[displayYear]).length > 1) {
+      deletedEl.parentNode.classList.add('delete-animation');
+    } else {
+      deletedEl.parentNode.parentNode.classList.add('delete-animation');
+    };
     updateModal();
+    setEventToDelete(eventData);
   };
+
+  // it deletes the event from eventsObj after 0.3s once the animation is done
+  useEffect(() => {
+    const timeoutID = setTimeout(() => {
+      if(eventToDelete) {
+        const { id, day, month, displayYear } = eventToDelete;
+        if (eventsObj[displayYear][month][day].length > 1) {
+          const idx = eventsObj[displayYear][month][day].findIndex(event => event.id === id);
+          // delete event in the array day
+          setEventsObj(prevState => {
+            prevState[displayYear][month][day].splice(idx, 1);
+            return prevState;
+          });
+        } else if (Object.keys(eventsObj[displayYear][month]).length > 1) {
+          // delete event and day
+          setEventsObj(prevState => {
+            delete prevState[displayYear][month][day];
+            return prevState;
+          });
+        } else if (Object.keys(eventsObj[displayYear]).length > 1) {
+          // delete event, day and month
+          setEventsObj(prevState => {
+            delete prevState[displayYear][month];
+            return prevState;
+          });
+        } else {
+          // delete event, day, month and year
+          setEventsObj(prevState => {
+            delete prevState[displayYear];
+            return prevState;
+          });
+        };
+        setEventToDelete(false);
+      };
+    }, 300);
+    return () => clearTimeout(timeoutID);
+  }, [eventToDelete, eventsObj]);
+// -- End: Delete Event --
 
   return (
     <div className="App">
