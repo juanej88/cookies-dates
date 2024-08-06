@@ -139,8 +139,11 @@ const App = () => {
     : event.target.parentNode.id;
 
     // it gets the event-card data to update and delete events, else, it blanks the form to add event
-    if (data) setFormData(data);
-    else setFormData({
+    if (data) {
+      const formattedDate = data.date.split('-').reverse().join('/');
+      data.dateInput = formattedDate;
+      setFormData(data);
+    } else setFormData({
       id: 99, // I need to remove it once it's sent to the back-end
       event: 'birthday',
       name: '',

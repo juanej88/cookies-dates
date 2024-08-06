@@ -84,6 +84,7 @@ const AddEvent = props => {
       const dateInput = document.getElementById('date-input');
       dateInput.setSelectionRange(cursorPosition, cursorPosition);
     };
+    // console.log(props.formData);
   }, [props.formData.dateInput, cursorPosition]);
 
   // it validates the date
@@ -155,7 +156,7 @@ const AddEvent = props => {
         </fieldset>
         
         <button type='submit' id='save-date' disabled={!isFormValid.nameValid || !isFormValid.dateValid}>
-          Add
+          {props.btnTag}
         </button>
       </form>
   );
