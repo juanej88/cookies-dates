@@ -123,7 +123,7 @@ const App = () => {
       month: '',
       year: '',
       date: '',
-      new: true,
+      show: true,
     });
     updateModal();
   };
@@ -152,7 +152,7 @@ const App = () => {
       month: '',
       year: '',
       date: '',
-      new: true,
+      show: true,
     });
     
     setModal(() => {
@@ -177,7 +177,7 @@ const App = () => {
   const [eventToDelete, setEventToDelete] = useState(false);
   const deleteEvent = eventData => {
     const { day, month, displayYear } = eventData;
-    // the conditions will add the class delete-animation to the correct DOM element
+    // the conditions will add the classes show-event and delete-animation to the correct DOM element
     if (eventsObj[displayYear][month][day].length > 1) {
       deletedEl.classList.add('delete-animation');
     } else if (Object.keys(eventsObj[displayYear][month]).length > 1) {

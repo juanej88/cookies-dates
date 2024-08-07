@@ -57,9 +57,9 @@ const Main = props => {
       const formattedDate = new Date(eventDate).toLocaleDateString(undefined, dateFormat);
       return (
         // -----------------      ATTENTION       ------------------------
-        // I need to toggle the event.new to false after 0.3 seconds!!
+        // I need to toggle the event.show to false after 0.3 seconds!!
         // -----------------      ATTENTION       ------------------------
-          <Event key={event.id} event={event.event} new={event.new} name={event.name} date={formattedDate} currentNode={currentNode} setCurrentNode={setCurrentNode} updateModal={props.updateModal} openMoreOptions={openMoreOptions} data={event}></Event>
+          <Event key={event.id} event={event.event} show={event.show} name={event.name} date={formattedDate} currentNode={currentNode} setCurrentNode={setCurrentNode} updateModal={props.updateModal} openMoreOptions={openMoreOptions} data={event}></Event>
       );
     });
   };
@@ -101,20 +101,19 @@ const Main = props => {
     );
   });
 
-  // it scrolls to an event which has been created on the add Event form and centers it to the screen height
+  // it scrolls to an event which has been created and updated, and centers it to the screen height
   useEffect(() => {
-    const newEvent = document.getElementById('newEvent');
+    const showEvent = document.getElementsByClassName('show-event')[0];
     const windowHeight = window.innerHeight;
-    if(newEvent) {
+    if(showEvent) {
       window.scrollTo({
-        // 36px is half of the newEvent height
-        top: newEvent.offsetTop + 36 - (windowHeight / 2),
+        // 36px is half of the showEvent height
+        top: showEvent.offsetTop + 36 - (windowHeight / 2),
       });
-      // it removes the id newEvent after the animation has concluded (0.3s)  so the id can be reused for future new events
+      // it removes the class show-event after the animation has concluded (0.3s) so the class can be reused for future show events
       const timeOutId = setTimeout(() => {
-        newEvent.removeAttribute('id');
+        showEvent.classList.remove('show-event');
       }, 300);
-
       return () => clearTimeout(timeOutId);
     };
   }, [props.eventsObj]);

@@ -141,15 +141,15 @@
   color: hsl(0, 75%, 50%);
 }
 
-/* Animation for New Events added to the DOM when updating eventsObj state */
+/* Animation for Events added and updated to the DOM when updating eventsObj state */
 
-#newEvent {
+.show-event {
   opacity: 0;
-  animation: 0.2s ease-in showNewEvent forwards;
+  animation: 0.2s ease-in showEvent forwards;
   animation-delay: 0.1s;
 }
 
-@keyframes showNewEvent {
+@keyframes showEvent {
   from {
     scale: 0.9;
     opacity: 0;
@@ -245,11 +245,11 @@ article.delete-animation {
 
 section.delete-animation {
   transform-origin: top;
-  animation: 0.2s ease-in deleteArticle forwards;
+  animation: 0.2s ease-in deleteSection forwards;
   animation-delay: 0.1s;
 }
 
-@keyframes deleteArticle {
+@keyframes deleteSection {
   from {
     height: 11rem;
     padding-top: 1.25rem;

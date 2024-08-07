@@ -2,8 +2,10 @@ import '../assets/styles/Event.css';
 import ActionButton from './ActionButton';
 
 const Event = props => { 
+  const getClassName = () => props.show ? 'show-event' : '';
+  
   return (
-    <aside className={`event-card ${props.event}`} id={`${props.new ? 'newEvent' : ''}`}>
+    <aside className={`event-card ${props.event} ${getClassName()}`}>
       <div className='event-container'>
         <span></span>
         <p>{props.name}</p>
