@@ -113,6 +113,21 @@ const AddEvent = props => {
     };
   }, [props.formData.date, props.formData.day]);
 
+  // this function compares the data when the user wants to update an event, if there is no change, the update button will be disabled
+  const [originalEvent] = useState(props.formData.event);
+  const [originalName] = useState(props.formData.name);
+  const [originalDate] = useState(props.formData.date);
+  const compareData = () => {
+    if (
+      props.type === 'update' && 
+      props.formData.event === originalEvent && 
+      props.formData.name === originalName && 
+      props.formData.date === originalDate
+      ) {
+        return false;
+      };
+    return true;
+  };
 
   // -*-*- End: Name and Date Inputs Validation -*-*-
 
@@ -134,11 +149,11 @@ const AddEvent = props => {
   
   // it removes the focus of the inputs when the user opens the update modal
   useEffect(() => {
-    if(props.blur) {
+    if(props.type === 'update') {
       document.getElementById('name-input').blur();
       document.getElementById('date-input').blur();
     }
-  }, [props.blur]);
+  }, [props.type]);
 
   return (
       <form id='event-form' onSubmit={props.handleForm} autoComplete="off">
@@ -186,7 +201,7 @@ const AddEvent = props => {
           }
         </fieldset>
         
-        <button type='submit' id='save-date' disabled={!isFormValid.nameValid || !isFormValid.dateValid}>
+        <button type='submit' id='save-date' disabled={!isFormValid.nameValid || !isFormValid.dateValid || !compareData()}>
           {props.btnTag}
         </button>
       </form>

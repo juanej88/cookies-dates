@@ -124,10 +124,10 @@ const Main = props => {
       {props.modal.show && 
         <Modal updateModal={props.updateModal} eventID={props.modal.type}>
           {props.modal.type === 'add-event' &&
-            <AddEvent handleForm={props.handleForm} formData={props.formData}setFormData={props.setFormData} btnTag={'Add'} />
+            <AddEvent handleForm={props.handleForm} formData={props.formData}setFormData={props.setFormData} btnTag={'Add'} type={'add'} />
           }
           {props.modal.type === 'update-event' &&
-            <AddEvent handleForm={props.handleForm} formData={props.formData}setFormData={props.setFormData} btnTag={'Update'} blur={true} />
+            <AddEvent handleForm={props.handleForm} formData={props.formData}setFormData={props.setFormData} btnTag={'Update'} type={'update'} />
           }
           {props.modal.type === 'delete-event' &&
           <DeleteEvent data={props.formData} deleteEvent={props.deleteEvent} />
