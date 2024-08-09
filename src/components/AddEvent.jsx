@@ -2,15 +2,7 @@ import { useState, useEffect } from 'react';
 import '../assets/styles/AddEvent.css';
 
 const AddEvent = props => {
-  const [isFormValid, setIsFormValid] = useState({
-    nameValid: false,
-    dateValid: false,
-  });
-
-  const validateDate = (inputDate, inputDay) => {
-    const newDay = new Date(inputDate).getDate();
-    return newDay === inputDay;
-  };
+  // -*-*- Start: Update Form Data -*-*-
 
   const [cursorPosition, setCursorPosition] = useState(0);
 
@@ -63,20 +55,10 @@ const AddEvent = props => {
           year: Number(year),
           date: date,
         });
-        validateDate(date, Number(day)) ? 
-          setIsFormValid({
-            ...isFormValid,
-            dateValid: true,
-          })
-        :
-          setIsFormValid({
-            ...isFormValid,
-            dateValid: false,
-          });
       };
     };
   };
-  
+
   // it moves the cursor to the previous position when a user edits the date input from the beginning to the second last character
   useEffect(() => {
     // the if statement prevents the name input autofocus to be passed to the date input
@@ -87,7 +69,19 @@ const AddEvent = props => {
     // console.log(props.formData);
   }, [props.formData.dateInput, cursorPosition]);
 
-  // it validates the date
+
+  // -*-*- End: Update Form Data -*-*-
+
+
+  // -*-*- Start: Name and Date Inputs Validation -*-*-
+
+
+  const [isFormValid, setIsFormValid] = useState({
+    nameValid: false,
+    dateValid: false,
+  });
+
+  // it validates the name
   useEffect(() => {
     const validateName = () => {
       // nameRegex asserts to have a name input of minimum 2 characters (together or separate) up to 25, excluding whitespaces around them, and does not accept the following characters @#$%^*=+?<>
@@ -100,14 +94,51 @@ const AddEvent = props => {
     });
   }, [props.formData.name]);
 
-  const [outOfFocus, setOutOfFocus] = useState({name: false, dateInput: false});
+  // it validates the date
+  useEffect(() => {
+    const validateDate = (inputDate, inputDay) => {
+      const newDay = new Date(inputDate).getDate();
+      return newDay === inputDay;
+    };
 
+    if (props.formData.date.length === 10) {
+      const result = validateDate(props.formData.date, props.formData.day);
+      setIsFormValid(prevState => {
+        return {...prevState, dateValid: result};
+      });
+    } else {
+      setIsFormValid(prevState => {
+        return {...prevState, dateValid: false};
+      });
+    };
+  }, [props.formData.date, props.formData.day]);
+
+
+  // -*-*- End: Name and Date Inputs Validation -*-*-
+
+
+  // it controls the blur of each input to show an error message when the user does not type the expect input
+  const [outOfFocus, setOutOfFocus] = useState({name: false, dateInput: false});
   const handleOnBlur = event => {
     const eventName = event.target.name;
-    setOutOfFocus(prevState => {
-      return {...prevState, [eventName]: true};
-    });
+    if (props.formData[eventName].length === 0) {
+      setOutOfFocus(prevState => {
+        return {...prevState, [eventName]: false};
+      });
+    } else {
+      setOutOfFocus(prevState => {
+        return {...prevState, [eventName]: true};
+      });
+    };
   };
+  
+  // it removes the focus of the inputs when the user opens the update modal
+  useEffect(() => {
+    if(props.blur) {
+      document.getElementById('name-input').blur();
+      document.getElementById('date-input').blur();
+    }
+  }, [props.blur]);
 
   return (
       <form id='event-form' onSubmit={props.handleForm} autoComplete="off">
