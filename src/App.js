@@ -104,12 +104,16 @@ const App = () => {
     month: '',
     year: '',
     date: '',
-    new: true,
+    show: false,
   });
 
-  const saveDate = event => {
+  const saveDate = async (event, data, originalData) => {
     event.preventDefault();
-    const newDate = {events: [formData]};
+    if (data.operation === 'update-event') {
+      await deleteEvent(originalData);
+      data.show = true;
+    };  
+    const newDate = {events: [data]};
     checkYear(newDate);
 
     setFormData({
@@ -137,11 +141,11 @@ const App = () => {
     const eventID = !event ? undefined
     : event.target.id ? event.target.id 
     : event.target.parentNode.id;
-
     // it gets the event-card data to update and delete events, else, it blanks the form to add event
     if (data) {
       const formattedDate = data.date.split('-').reverse().join('/');
       data.dateInput = formattedDate;
+      data.operation = eventID;
       setFormData(data);
     } else setFormData({
       id: 99, // I need to remove it once it's sent to the back-end
@@ -153,6 +157,7 @@ const App = () => {
       year: '',
       date: '',
       show: true,
+      operation: eventID,
     });
     
     setModal(() => {
@@ -173,29 +178,38 @@ const App = () => {
     };
   };
 
-  // -- Start: Delete Event --
+
+  // -*-*- Start: Delete Event -*-*-
+
+
   const [eventToDelete, setEventToDelete] = useState(false);
   const deleteEvent = eventData => {
     const { day, month, displayYear } = eventData;
-    // the conditions will add the classes show-event and delete-animation to the correct DOM element
-    if (eventsObj[displayYear][month][day].length > 1) {
-      deletedEl.classList.add('delete-animation');
-    } else if (Object.keys(eventsObj[displayYear][month]).length > 1) {
-      deletedEl.classList.add('delete-animation');
-    } else if (Object.keys(eventsObj[displayYear]).length > 1) {
-      deletedEl.parentNode.classList.add('delete-animation');
-    } else {
-      deletedEl.parentNode.parentNode.classList.add('delete-animation');
+    // the conditions will add the class delete-animation to the correct DOM element
+    if(eventData.operation === 'delete-event') {
+      if (eventsObj[displayYear][month][day].length > 1) {
+        deletedEl.classList.add('delete-animation');
+      } else if (Object.keys(eventsObj[displayYear][month]).length > 1) {
+        deletedEl.classList.add('delete-animation');
+      } else if (Object.keys(eventsObj[displayYear]).length > 1) {
+        deletedEl.parentNode.classList.add('delete-animation');
+      } else {
+        deletedEl.parentNode.parentNode.classList.add('delete-animation');
+      };
     };
-    updateModal();
     setEventToDelete(eventData);
+    updateModal();
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve('resolved');
+      }, 1);
+    });
   };
 
-  // it deletes the event from eventsObj after 0.3s once the animation is done
+  // it deletes the event from eventsObj
   useEffect(() => {
-    const timeoutID = setTimeout(() => {
-      if(eventToDelete) {
-        const { id, day, month, displayYear } = eventToDelete;
+    const deleteEventFromDOM = () => {
+      const { id, day, month, displayYear } = eventToDelete;
         if (eventsObj[displayYear][month][day].length > 1) {
           const idx = eventsObj[displayYear][month][day].findIndex(event => event.id === id);
           // delete event in the array day
@@ -223,11 +237,23 @@ const App = () => {
           });
         };
         setEventToDelete(false);
+    };
+
+    const timeoutID = setTimeout(() => {
+      if(eventToDelete && eventToDelete.operation === 'delete-event') {
+        deleteEventFromDOM();
       };
     }, 300);
+
+    if(eventToDelete && eventToDelete.operation === 'update-event') {
+      deleteEventFromDOM();
+    };
+
     return () => clearTimeout(timeoutID);
   }, [eventToDelete, eventsObj]);
-// -- End: Delete Event --
+
+
+  // -*-*- End: Delete Event -*-*-
 
   return (
     <div className="App">

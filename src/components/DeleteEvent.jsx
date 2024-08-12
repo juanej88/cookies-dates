@@ -1,4 +1,5 @@
 import '../assets/styles/DeleteEvent.css';
+import { useEffect } from 'react';
 
 const DeleteEvent = props => { 
   const getMessage = () => {
@@ -6,18 +7,22 @@ const DeleteEvent = props => {
     endChar[endChar.length - 1] === 's' ? endChar = `'` :
     endChar = `'s`;
     return props.data.event === 'birthday' ?
-    <p>Are you sure you want to delete <strong>{props.data.name}{endChar}</strong> birthday?</p> :
-    <p>Are you sure you want to delete the event titled <strong>"{props.data.name}"</strong>?</p>
+    <p><strong>{props.data.name}{endChar}</strong> birthday will be deleted.</p> :
+    <p>The event titled <strong>"{props.data.name}"</strong> will be deleted.</p>
   };
 
   const handleClick = () => {
     props.deleteEvent(props.data);
   };
 
+  useEffect(() => {
+    console.log(props.data);
+  });
+
   return (
     <aside className='delete-message-container'>
       {getMessage()}
-      <button type='submit' onClick={handleClick}>Yes</button>
+      <button type='submit' onClick={handleClick}>Delete</button>
     </aside>
   );
 };

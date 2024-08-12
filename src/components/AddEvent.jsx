@@ -114,15 +114,13 @@ const AddEvent = props => {
   }, [props.formData.date, props.formData.day]);
 
   // this function compares the data when the user wants to update an event, if there is no change, the update button will be disabled
-  const [originalEvent] = useState(props.formData.event);
-  const [originalName] = useState(props.formData.name);
-  const [originalDate] = useState(props.formData.date);
+  const [originalData] = useState(props.formData);
   const compareData = () => {
     if (
       props.type === 'update' && 
-      props.formData.event === originalEvent && 
-      props.formData.name === originalName && 
-      props.formData.date === originalDate
+      props.formData.event === originalData.event && 
+      props.formData.name === originalData.name && 
+      props.formData.date === originalData.date
       ) {
         return false;
       };
@@ -155,8 +153,12 @@ const AddEvent = props => {
     }
   }, [props.type]);
 
+  const handleForm = event => {
+    props.handleForm(event, props.formData, originalData);
+  };
+
   return (
-      <form id='event-form' onSubmit={props.handleForm} autoComplete="off">
+      <form id='event-form' onSubmit={handleForm} autoComplete='off'>
         <fieldset className='event-options-container'>
           <legend className='event-options-title'>Type</legend>
           <input type='radio' name='event' id='birthday' className='event-options' value='birthday' onChange={updateFormData} checked={props.formData.event === 'birthday'} />
