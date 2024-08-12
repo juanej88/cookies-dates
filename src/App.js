@@ -202,7 +202,7 @@ const App = () => {
     return new Promise(resolve => {
       setTimeout(() => {
         resolve('resolved');
-      }, 1);
+      }, 50);
     });
   };
 
