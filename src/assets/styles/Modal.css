@@ -1,5 +1,5 @@
 #modal-container {
-  background-color: hsla(0, 0%, 0%, 85%);
+  background-color: var(--modal-bg-colour);
   position: fixed;
   z-index: 50;
   top: 0;
@@ -12,7 +12,7 @@
 }
 
 .modal-window {
-  background-color: hsl(0, 0%, 100%);
+  background-color: var(--main-bg-colour);
   border-radius: 0.5rem;
   padding: 0.5rem 0.5rem 1rem;
   width: calc(100% - 1rem);

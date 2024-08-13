@@ -1,9 +1,9 @@
 .event-card {
   height: 3.5rem;
   width: 100%;
-  background-color: hsl(0, 0%, 100%);
-  border-right: 1px solid hsl(0, 0%, 90%);
-  border-bottom: 1px solid hsl(0, 0%, 90%);
+  background-color: var(--main-bg-colour);
+  border-right: 1px solid var(--line-colour);
+  border-bottom: 1px solid var(--line-colour);
   box-shadow: 1px 1px 4px 0 hsla(0, 0%, 0%, 10%);
   display: grid;
   grid-template-columns: 4fr 5rem 2rem;
@@ -13,7 +13,7 @@
 
 .event-card:first-of-type {
   margin-top: 0.75rem;
-  border-top: 1px solid hsl(0, 0%, 90%);
+  border-top: 1px solid var(--line-colour);
 }
 
 .event-card:nth-child(2) {
@@ -42,11 +42,11 @@
 }
 
 .event-card.special > .event-container > span {
-  background-color: hsl(250, 80%, 65%);
+  background-color: var(--special-colour);
 }
 
 .event-card.birthday > .event-container > span {
-  background-color: hsl(0, 80%, 65%);
+  background-color: var(--birthday-colour);
 }
 
 .event-card:nth-child(2) > .event-container > span {
@@ -75,7 +75,7 @@
   width: 2rem;
   height: 80%;
   overflow: hidden;
-  background-color: hsl(0, 0%, 100%);
+  background-color: var(--main-bg-colour);
   border-left: 1px solid transparent;
   border-radius: 0 0.5rem 0.5rem 0;
   display: grid;
@@ -85,13 +85,13 @@
 }
 
 .event-card:hover > .more-options-container {
-  border-left-color: hsl(0, 0%, 90%);
+  border-left-color: var(--line-colour);
 }
 
 .more-options-container.open-more-options {
   width: 10rem;
   right: 8rem;
-  border-left-color: hsl(0, 0%, 90%);
+  border-left-color: var(--line-colour);
   animation: 0.1s ease-out openLeft forwards;
 }
 
@@ -138,7 +138,7 @@
 }
 
 .delete-btn > span {
-  color: hsl(0, 75%, 50%);
+  color: var(--red);
 }
 
 /* Animation for Events added and updated to the DOM when updating eventsObj state */
@@ -171,30 +171,6 @@
   .event-card > p:last-child {
     padding: 0 2rem;
   }
-}
-
-.deletion-window {
-  background-color: hsla(0, 0%, 0%, 85%);
-  position: fixed;
-  z-index: 50;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.deletion-message-container {
-  background-color: hsl(0, 0%, 95%);
-  border-radius: 0.5rem;
-  padding: 0.5rem 1rem 1.25rem;
-  width: 90%;
-  max-width: 500px;
-  display: grid;
-  grid-template-rows: 1fr repeat(4, 2fr);
-  align-items: end;
 }
 
 /* -- Deletion animations (aside, article and section) */

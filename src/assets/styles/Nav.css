@@ -6,7 +6,6 @@
 }
 
 .add-event-btn > span {
-  color: hsl(0, 0%, 0%);
   font-variation-settings:
   'FILL' 0,
   'wght' 700,
@@ -23,10 +22,4 @@
 
 .menu-btn > .menu-icon.menu-icon-active {
   background-image: url('../icons/menuIcon2.png');
-}
-
-@media only screen and (min-width: 768px) {
-  .menu-btn:hover {
-    background-color: hsl(0, 0%, 95%);
-  }
 }

@@ -1,8 +1,8 @@
 .action-btn {
   height: 2.25rem;
   width: 2.25rem;
-  background-color: hsl(0, 0%, 100%);
-  box-shadow: 0 0 4px 0 hsla(0, 0%, 0%, 20%);
+  background-color: var(--main-bg-colour);
+  box-shadow: 0 0 4px 0 var(--box-shadow-colour);
   border-radius: 50%;
   border: none;
   cursor: pointer;
@@ -13,7 +13,7 @@
 }
 
 .action-btn:hover {
-  background-color: hsl(0, 0%, 95%);
+  background-color: var(--hover-btn-colour);
 }
 
 .action-btn:hover span {

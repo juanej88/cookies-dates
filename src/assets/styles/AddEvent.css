@@ -27,14 +27,14 @@ input.event-options {
 }
 
 input.event-options:focus + label {
-  outline: 2px solid hsl(210, 60%, 35%);
+  outline: 2px solid var(--blue);
 }
 
 .event-label {
   height: 2.5rem;
-  background-color: hsl(0, 0%, 90%);
-  box-shadow: 1px 1px 4px 0 hsla(0, 0%, 0%, 10%);
-  border: 1px solid hsl(0, 0%, 90%);
+  background-color: var(--disabled-bg-colour);
+  box-shadow: 1px 1px 4px 0 var(--light-box-shadow-colour);
+  border: 1px solid var(--line-colour);
   border-radius: 0.5rem;
   text-align: center;
   font-size: 1.2rem;
@@ -51,16 +51,16 @@ input.event-options:focus + label {
 }
 
 .event-options:checked + label {
-  background-color: hsl(0, 0%, 100%);
+  background-color: var(--main-bg-colour);
   border-radius: 0.25rem 0.5rem 0.5rem 0.25rem;
 }
 
 #birthday:checked + label > span {
-  background-color: hsl(0, 80%, 65%);
+  background-color: var(--birthday-colour);
 }
 
 #special:checked + label >  span {
-  background-color: hsl(260, 80%, 65%);
+  background-color: var(--special-colour);
 }
 
 /* -- Second and Third Fieldset: Name/Title and Date -- */
@@ -77,9 +77,9 @@ input.event-options:focus + label {
   grid-row: 2;
   height: 2.5rem;
   width: 100%;
-  background-color: hsl(0, 0%, 100%);
-  box-shadow: 1px 1px 4px 0 hsla(0, 0%, 0%, 10%);
-  border: 1px solid hsl(0, 0%, 90%);
+  background-color: var(--main-bg-colour);
+  box-shadow: 1px 1px 4px 0 var(--light-box-shadow-colour);
+  border: 1px solid var(--line-colour);
   border-radius: 0.5rem;
   font-family: "Wix Madefor Display", sans-serif;
   font-size: 1.2rem;
@@ -87,8 +87,8 @@ input.event-options:focus + label {
 }
 
 .form-input-container > input:focus {
-  outline: 2px solid hsl(210, 60%, 35%);
-  caret-color: hsl(210, 60%, 35%);
+  outline: 2px solid var(--blue);
+  caret-color: var(--blue);
 }
 
 /* Valid and Invalid icons */
@@ -112,23 +112,23 @@ span.checker {
 #name-input + span.valid,
 #date-input + span.valid {
   display: flex;
-  color: hsl(210, 60%, 35%);
+  color: var(--blue);
 }
 
 #name-input + span.invalid,
 #date-input + span.invalid {
   display: flex;
-  color: hsl(0, 75%, 50%);
+  color: var(--red);
 }
 
 /* -- Add Button -- */
 #save-date {
   height: 2.5rem;
   width: 50%;
-  background-color: hsl(210, 60%, 35%);
-  color: hsl(0, 0%, 100%);
-  box-shadow: 1px 1px 4px 0 hsla(0, 0%, 0%, 10%);
-  border: 1px solid hsl(0, 0%, 90%);
+  background-color: var(--blue);
+  color: var(--main-bg-colour);
+  box-shadow: 1px 1px 4px 0 var(--light-box-shadow-colour);
+  border: 1px solid var(--line-colour);
   border-radius: 0.5rem;
   justify-self: center;
   font-family: "Wix Madefor Display", sans-serif;
@@ -138,7 +138,7 @@ span.checker {
 }
 
 #save-date:disabled {
-  background-color: hsl(0, 0%, 90%);
-  color: hsl(0, 0%, 20%);
+  background-color: var(--disabled-bg-colour);
+  color: var(--disabled-font-colour);
   cursor: not-allowed;
 }

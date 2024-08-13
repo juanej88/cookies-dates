@@ -16,10 +16,10 @@
 .delete-message-container > button {
   height: 2.5rem;
   width: 50%;
-  background-color: hsl(0, 75%, 50%);
-  color: hsl(0, 0%, 100%);
-  box-shadow: 1px 1px 4px 0 hsla(0, 0%, 0%, 10%);
-  border: 1px solid hsl(0, 0%, 90%);
+  background-color: var(--red);
+  color: var(--main-bg-colour);
+  box-shadow: 1px 1px 4px 0 var(--box-shadow-colour);
+  border: none;
   border-radius: 0.5rem;
   justify-self: center;
   align-self: end;

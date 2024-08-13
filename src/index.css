@@ -8,8 +8,24 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+:root {
+  --main-bg-colour: hsl(0, 0%, 100%);
+  --header-bg-colour: hsla(0, 0%, 100%, 95%);
+  --modal-bg-colour: hsla(0, 0%, 0%, 85%);
+  --hover-btn-colour: hsl(0, 0%, 95%);
+  --line-colour: hsl(0, 0%, 90%);
+  --box-shadow-colour: hsla(0, 0%, 0%, 20%);
+  --light-box-shadow-colour: hsla(0, 0%, 0%, 10%);
+  --special-colour: hsl(250, 80%, 65%);
+  --birthday-colour: hsl(0, 80%, 65%);
+  --red: hsl(0, 75%, 50%);
+  --blue: hsl(210, 60%, 35%);
+  --disabled-bg-colour: hsl(0, 0%, 90%);
+  --disabled-font-colour: hsl(0, 0%, 20%);
+}
+
 body {
   font-family: "Wix Madefor Display", sans-serif;
-  background-color: hsl(0, 0%, 94%);
+  background-color: var(--hover-btn-colour);
   min-width: 400px;
 }
