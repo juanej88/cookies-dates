@@ -17,7 +17,7 @@
   height: 2.5rem;
   width: 50%;
   background-color: var(--red);
-  color: var(--main-bg-colour);
+  color: var(--white);
   box-shadow: 1px 1px 4px 0 var(--box-shadow-colour);
   border: none;
   border-radius: 0.5rem;

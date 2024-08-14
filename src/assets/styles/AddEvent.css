@@ -38,6 +38,7 @@ input.event-options:focus + label {
   border-radius: 0.5rem;
   text-align: center;
   font-size: 1.2rem;
+  color: var(--disabled-font-colour);
   display: grid;
   grid-template-columns: 0.25rem 1fr;
   align-items: center;
@@ -52,6 +53,7 @@ input.event-options:focus + label {
 
 .event-options:checked + label {
   background-color: var(--main-bg-colour);
+  color: var(--main-font-colour);
   border-radius: 0.25rem 0.5rem 0.5rem 0.25rem;
 }
 
@@ -126,7 +128,7 @@ span.checker {
   height: 2.5rem;
   width: 50%;
   background-color: var(--blue);
-  color: var(--main-bg-colour);
+  color: var(--white);
   box-shadow: 1px 1px 4px 0 var(--light-box-shadow-colour);
   border: 1px solid var(--line-colour);
   border-radius: 0.5rem;

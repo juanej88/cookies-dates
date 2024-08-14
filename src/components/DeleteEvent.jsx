@@ -7,8 +7,8 @@ const DeleteEvent = props => {
     endChar[endChar.length - 1] === 's' ? endChar = `'` :
     endChar = `'s`;
     return props.data.event === 'birthday' ?
-    <p><strong>{props.data.name}{endChar}</strong> birthday will be deleted.</p> :
-    <p>The event titled <strong>"{props.data.name}"</strong> will be deleted.</p>
+    <p>Delete <strong>{props.data.name}{endChar}</strong> birthday?</p> :
+    <p>Delete the event titled <strong>"{props.data.name}"</strong>?</p>
   };
 
   const handleClick = () => {

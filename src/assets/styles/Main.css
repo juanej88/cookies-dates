@@ -22,7 +22,7 @@ article.month-events {
   max-width: 500px;
   display: flex;
   flex-direction: column;
-  background-color: hsl(0, 0%, 100%);
+  background-color: var(--main-bg-colour);
   box-shadow: 1px 1px 4px 0 var(--box-shadow-colour);
   border-radius: 0.5rem;
 }
