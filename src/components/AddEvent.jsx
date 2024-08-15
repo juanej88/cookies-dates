@@ -15,22 +15,29 @@ const AddEvent = props => {
     } else {
       // it formats the date input to display DD/MM/YYYY
       let dateInput = e.target.value.split('');
-      dateInput.forEach((element, idx) => {
-        if ((idx === 2 || idx === 5) && element !== '/') {
-          dateInput.splice(idx, 0, '/');
-        } else if ((idx === 2 || idx === 5) && element === '/') {
-          if(dateInput.length === idx + 1) dateInput.splice(idx, 1);
-        } else if((idx !== 2 || idx !== 5) && element === '/') {
-          dateInput.splice(idx, 1);
-        }
-      });
+      let formattedInput = [];
+      // if the user deletes a '/', then the previous number is deleted as well
+      if (dateInput.length < props.formData.dateInput.length && props.formData.dateInput[props.formData.dateInput.length - 1] === '/') {
+        dateInput.pop();
+        formattedInput = dateInput;
+      } else {
+        dateInput = dateInput.filter(element => element !== '/');
+        dateInput.forEach((element, idx) => {
+          formattedInput.push(element);
+          if (idx === 1 || idx === 3) {
+            formattedInput.push('/');
+          };
+        });
+      };
+      dateInput = formattedInput.join('');
+
       // it updates the cursor position if the user edits the input from the beginning to the second last character
-      if (dateInput.length - props.formData.dateInput.length > 1) {
+      // if the '/' is added, the cursor jumps 1 extra space
+      if (dateInput.length - props.formData.dateInput.length === 2) {
         setCursorPosition(e.target.selectionStart + 1);
       } else {
         setCursorPosition(e.target.selectionStart);
-      }
-      dateInput = dateInput.join('');
+      };
       if(dateInput.length !== 10) {
         props.setFormData({
           ...props.formData,
