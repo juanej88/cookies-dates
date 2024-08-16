@@ -13,7 +13,7 @@ const AddEvent = props => {
         [e.target.name]: e.target.value,
       });
     } else {
-      // it formats the date input to display DD/MM/YYYY
+      // it formats the date input to display the forward slashes in DD/MM/YYYY
       let dateInput = e.target.value.split('');
       let formattedInput = [];
       // if the user deletes a '/', then the previous number is deleted as well
@@ -38,7 +38,31 @@ const AddEvent = props => {
       } else {
         setCursorPosition(e.target.selectionStart);
       };
-      if(dateInput.length !== 10) {
+
+      if (dateInput.length === 10) {
+        const [day, month, year] = dateInput.split('/');
+        const date = dateInput.split('/').reverse().join('-');
+        props.setFormData({
+          ...props.formData,
+          [e.target.name]: dateInput,
+          day: Number(day),
+          month: Number(month),
+          year: Number(year),
+          date: date,
+        });
+      } else if (dateInput.length === 6) {
+        const [day, month] = dateInput.split('/');
+        let date = dateInput.split('/').reverse().join('-');
+        date = '2024' + date;
+        props.setFormData({
+          ...props.formData,
+          [e.target.name]: dateInput,
+          day: Number(day),
+          month: Number(month),
+          year: null,
+          date: date,
+        });
+      } else {
         props.setFormData({
           ...props.formData,
           [e.target.name]: dateInput,
@@ -50,17 +74,6 @@ const AddEvent = props => {
         setIsFormValid({
           ...isFormValid,
           dateValid: false,
-        });
-      } else {
-        const [day, month, year] = dateInput.split('/');
-        const date = dateInput.split('/').reverse().join('-');
-        props.setFormData({
-          ...props.formData,
-          [e.target.name]: dateInput,
-          day: Number(day),
-          month: Number(month),
-          year: Number(year),
-          date: date,
         });
       };
     };
@@ -107,8 +120,10 @@ const AddEvent = props => {
       const newDay = new Date(inputDate).getDate();
       return newDay === inputDay;
     };
-
-    if (props.formData.date.length === 10) {
+    // the first condition checks if the birthday date is valid (either with dd/mm or with dd/mm/yyyy) or if the special event is valid as long as the user inputs dd/mm/yyyy
+    if ((props.formData.date &&
+      props.formData.event === 'birthday') ||
+      (props.formData.year && props.formData.event === 'special')) {
       const result = validateDate(props.formData.date, props.formData.day);
       setIsFormValid(prevState => {
         return {...prevState, dateValid: result};
@@ -118,7 +133,7 @@ const AddEvent = props => {
         return {...prevState, dateValid: false};
       });
     };
-  }, [props.formData.date, props.formData.day]);
+  }, [props.formData.date, props.formData.day, props.formData.year, props.formData.event]);
 
   // this function compares the data when the user wants to update an event, if there is no change, the update button will be disabled
   const [originalData] = useState(props.formData);
