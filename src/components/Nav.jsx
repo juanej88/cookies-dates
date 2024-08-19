@@ -1,13 +1,7 @@
-import { useState } from 'react';
 import '../assets/styles/Nav.css';
 import ActionButton from './ActionButton';
 
 const Nav = props => {
-  const [displayMenu, setDisplayMenu] = useState(false);
-  const openMenu = () => {
-    setDisplayMenu(prevState => !prevState);
-  };
-
   return (
     <nav id='action-buttons'>
       <ActionButton id='add-event' className='add-event-btn' handleClick={props.updateModal}>
@@ -15,9 +9,9 @@ const Nav = props => {
           add
         </span>
       </ActionButton>
-      <ActionButton id='menu' className='menu-btn' handleClick={openMenu}>
+      <ActionButton id='menu' className='menu-btn' handleClick={props.toggleDisplayMenu}>
         <span 
-          className={`menu-icon ${displayMenu ? 'menu-icon-active' : ''}`}
+          className={`menu-icon ${props.displayMenu ? 'menu-icon-active' : ''}`}
         ></span>
       </ActionButton>
     </nav>
