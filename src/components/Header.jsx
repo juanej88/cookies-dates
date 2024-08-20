@@ -2,15 +2,15 @@ import { useState } from 'react';
 import '../assets/styles/Header.css';
 import Nav from './Nav';
 import Menu from './Menu';
-import React from 'react';
 
 const Header = props => {
   const options = {weekday: 'short', day: '2-digit', month: 'short'};
   const today = new Date().toLocaleString(undefined, options);
 
-  const [displayMenu, setDisplayMenu] = useState(false);
+  const [displayMenu, setDisplayMenu] = useState(null);
 
   const toggleDisplayMenu = () => {
+    displayMenu === null ? setDisplayMenu(true) :
     setDisplayMenu(prevState => !prevState);
   };
   
@@ -22,7 +22,7 @@ const Header = props => {
       <div className='menu-container'>
         <p>{today}</p>
         <Nav updateModal={props.updateModal} displayMenu={displayMenu} toggleDisplayMenu={toggleDisplayMenu} />
-        {displayMenu && <Menu />}
+        <Menu displayMenu={displayMenu} />
       </div>
     </header>
   );
