@@ -1,80 +1,30 @@
-#menu-options-container {
+.menu-modal {
   position: absolute;
-  top: 4rem;
-  right: -7rem;
+  top: 3.5rem;
+  right: 0;
+  width: 100vw;
+  height: calc(100vh - 3.5rem);
+  background-color: var(--modal-bg-colour);
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+
+.menu-options-container {
   background-color: var(--main-bg-colour);
   box-shadow: 1px 1px 4px 0 var(--box-shadow-colour);
   border-radius: 0.5rem;
+  margin: 0.5rem;
   padding: 0.25rem 0.25rem;
-  display: none;
+  display: flex;
   flex-direction: column;
   min-width: 7rem;
-}
-
-#menu-options-container.display-menu {
-  display: flex;
-  animation: 0.15s ease-in displayMenu forwards;
-}
-
-@keyframes displayMenu {
-  from {
-    right: -7rem;
-    opacity: 0;
-  }
-
-  to {
-    right: 0.5rem;
-    opacity: 1;
-  }
-}
-
-#menu-options-container.hide-menu {
-  display: flex;
-  animation: 0.15s ease-in hideMenu forwards;
-}
-
-@keyframes hideMenu {
-  from {
-    display: flex;
-    right: 0.5rem;
-    opacity: 1;
-  }
-
-  to {
-    display: none;
-    right: -7rem;
-    opacity: 0;
-  }
+  max-width: 7rem;
 }
 
 @media only screen and (min-width: 768px) {
-  #menu-options-container {
-    top: 4.25rem;
-  }
-
-  @keyframes displayMenu {
-    from {
-      right: -7rem;
-      opacity: 0;
-    }
-
-    to {
-      right: 1rem;
-      opacity: 1;
-    }
-  }
-
-  @keyframes hideMenu {
-    from {
-      display: flex;
-      right: 1rem;
-    }
-
-    to {
-      display: none;
-      right: -7rem;
-      opacity: 0;
-    }
+  .menu-options-container {
+    margin: 0.75rem 1rem;
   }
 }
 
