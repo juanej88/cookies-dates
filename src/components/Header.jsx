@@ -7,10 +7,9 @@ const Header = props => {
   const options = {weekday: 'short', day: '2-digit', month: 'short'};
   const today = new Date().toLocaleString(undefined, options);
 
-  const [displayMenu, setDisplayMenu] = useState(null);
+  const [displayMenu, setDisplayMenu] = useState(false);
 
   const toggleDisplayMenu = () => {
-    displayMenu === null ? setDisplayMenu(true) :
     setDisplayMenu(prevState => !prevState);
   };
   
@@ -22,7 +21,7 @@ const Header = props => {
       <div className='menu-container'>
         <p>{today}</p>
         <Nav updateModal={props.updateModal} displayMenu={displayMenu} toggleDisplayMenu={toggleDisplayMenu} />
-        {displayMenu && <Menu displayMenu={displayMenu} />}
+        {displayMenu && <Menu displayMenu={displayMenu} toggleDisplayMenu={toggleDisplayMenu} />}
       </div>
     </header>
   );
