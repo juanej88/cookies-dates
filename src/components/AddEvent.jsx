@@ -179,6 +179,13 @@ const AddEvent = props => {
     props.handleForm(event, props.formData, originalData);
   };
 
+  const [nameErrorMsg, setNameErrorMsg] = useState('');
+  useEffect(() => {
+    !isFormValid.nameValid && props.formData.name.length < 2 ?
+      setNameErrorMsg('The name must be at least 2 characters long')
+    : setNameErrorMsg('The name contains invalid characters: @#$%^*=+?<>');
+  }, [isFormValid.nameValid, props.formData.name]);
+
   return (
       <form id='event-form' onSubmit={handleForm} autoComplete='off'>
         <fieldset className='event-options-container'>
@@ -198,31 +205,34 @@ const AddEvent = props => {
         <fieldset className='form-input-container'>
           <label htmlFor='name-input'>Name</label>
           <input type='text' name='name' id='name-input' minLength='2' maxLength='25' value={props.formData.name} onChange={updateFormData} placeholder='John Smith' required onBlur={handleOnBlur} autoFocus />
-          {isFormValid.nameValid &&
-            <span className='material-symbols-outlined checker valid'>
-              check
-            </span>
-          }
-          {!isFormValid.nameValid && outOfFocus.name &&
-            <span className='material-symbols-outlined checker invalid'>
-              close
-            </span>
-          }
+          <span className={
+            `material-symbols-outlined checker ${
+              isFormValid.nameValid ? 'valid'
+              : !isFormValid.nameValid && outOfFocus.name ? 'invalid'
+              : ''
+            }`
+          }>
+            {isFormValid.nameValid ? 'check' : 'close'}
+          </span>
+          <p className={!isFormValid.nameValid && outOfFocus.name ? 'error-msg' : 'error-msg hide-error-msg'}>
+            {nameErrorMsg}
+          </p>
         </fieldset>
 
         <fieldset className='form-input-container'>
           <label htmlFor='date-input'>Date</label>
           <input type='text' name='dateInput' id='date-input' min-length='5' maxLength='10' value={props.formData.dateInput} onChange={updateFormData} inputMode='numeric' placeholder='dd/mm/yyyy' required onBlur={handleOnBlur} />
-          {isFormValid.dateValid &&
-            <span className='material-symbols-outlined checker valid'>
-              check
-            </span>
-          }
-          {!isFormValid.dateValid && outOfFocus.dateInput &&
-            <span className='material-symbols-outlined checker invalid'>
-              close
-            </span>
-          }
+          <span className={
+            `material-symbols-outlined checker ${
+              isFormValid.dateValid ? 'valid' 
+              : !isFormValid.dateValid && outOfFocus.dateInput ? 'invalid' 
+              : ''
+            }`}>
+            {isFormValid.dateValid ? 'check' : 'close'}
+          </span>
+          <p className={!isFormValid.dateValid && outOfFocus.dateInput ? 'error-msg' : 'error-msg hide-error-msg'}>
+            The date must be in the format dd/mm/yyyy
+          </p>
         </fieldset>
         
         <button type='submit' id='save-date' disabled={!isFormValid.nameValid || !isFormValid.dateValid || !compareData()}>

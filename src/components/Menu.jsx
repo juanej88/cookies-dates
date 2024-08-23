@@ -6,7 +6,7 @@ const Menu = props => {
   useEffect(() => {
     const closeMenu = event => {
       // the following 2 lines are used to prevent the menu to close when the menu-btn is clicked for the first time
-      const eventId = event.target.parentNode.id ? event.target.parentNode.id : event.target.id;
+      const eventId = event.target.id === 'menu' ? 'menu' : event.target.parentNode.id;
       if (eventId !== 'menu') props.toggleDisplayMenu();
     };
     document.addEventListener('click', closeMenu);
