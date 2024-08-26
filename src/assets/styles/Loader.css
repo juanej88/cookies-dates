@@ -1,0 +1,25 @@
+#loader {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background-color: var(--main-bg-colour);
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader-img {
+  width: 3.75rem;
+  height: 3.75rem;
+  background-image: url('../icons/menu-icon-1.png');
+  background-size: cover;
+}
+
+@media (prefers-color-scheme: dark) {
+  .loader-img {
+    background-image: url('../icons/menu-icon-dark-1.png');
+  }
+}
