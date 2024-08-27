@@ -14,12 +14,39 @@
 .loader-img {
   width: 3.75rem;
   height: 3.75rem;
-  background-image: url('../icons/menu-icon-1.png');
   background-size: cover;
 }
 
+.loader-img-1 {
+  background-image: url('../icons/menu-icon-1.png');
+}
+
+.loader-img-2 {
+  background-image: url('../icons/menu-icon-2.png');
+}
+
+.loader-img-3 {
+  background-image: url('../icons/menu-icon-3.png');
+}
+
+.loader-img-4 {
+  background-image: url('../icons/menu-icon-4.png');
+}
+
 @media (prefers-color-scheme: dark) {
-  .loader-img {
+  .loader-img-1 {
     background-image: url('../icons/menu-icon-dark-1.png');
+  }
+
+  .loader-img-2 {
+    background-image: url('../icons/menu-icon-dark-2.png');
+  }
+
+  .loader-img-3 {
+    background-image: url('../icons/menu-icon-dark-3.png');
+  }
+
+  .loader-img-4 {
+    background-image: url('../icons/menu-icon-dark-4.png');
   }
 }

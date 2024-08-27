@@ -21,7 +21,7 @@
 }
 
 .menu-btn > .menu-icon.menu-icon-active {
-  background-image: url('../icons/menu-icon-2.png');
+  background-image: url('../icons/menu-icon-4.png');
 }
 
 @media (prefers-color-scheme: dark) {
@@ -30,6 +30,6 @@
   }
   
   .menu-btn > .menu-icon.menu-icon-active {
-    background-image: url('../icons/menu-icon-dark-2.png');
+    background-image: url('../icons/menu-icon-dark-4.png');
   }
 }
