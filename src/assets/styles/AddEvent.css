@@ -123,10 +123,14 @@ span.checker {
   color: var(--red);
 }
 
-.error-msg {
-  padding-top: 0.15rem;
-  text-align: right;
+.input-info {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.25rem 0.25rem 0;
   font-size: 0.85rem;
+}
+
+.error-msg {
   color: var(--red);
 }
 

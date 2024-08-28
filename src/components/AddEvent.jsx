@@ -104,8 +104,8 @@ const AddEvent = props => {
   // it validates the name
   useEffect(() => {
     const validateName = () => {
-      // nameRegex asserts to have a name input of minimum 2 characters (together or separate) up to 25, excluding whitespaces around them, and does not accept the following characters @#$%^*=+?<>
-      const nameRegex = /^\s*[^\s@#$%^*=+?<>]{1}\s*[^\s@#$%^*=+?<>]{1}[^@#$%^*=+?<>]{0,23}$/;
+      // nameRegex asserts to have a name input of minimum 2 characters (together or separate) up to 25, excluding whitespaces around them, and does not accept the following characters @#$%^*=+?
+      const nameRegex = /^\s*[^\s@#$%^*=+?]{1}\s*[^\s@#$%^*=+?]{1}[^@#$%^*=+?]{0,23}$/;
       const isNameValid = nameRegex.test(props.formData.name);
       return isNameValid;
     };
@@ -183,7 +183,7 @@ const AddEvent = props => {
   useEffect(() => {
     !isFormValid.nameValid && props.formData.name.length < 2 ?
       setNameErrorMsg('The name must be at least 2 characters long')
-    : setNameErrorMsg('The name contains invalid characters: @#$%^*=+?<>');
+    : setNameErrorMsg('The name contains invalid characters: @#$%^*=+?');
   }, [isFormValid.nameValid, props.formData.name]);
 
   return (
@@ -214,9 +214,12 @@ const AddEvent = props => {
           }>
             {isFormValid.nameValid ? 'check' : 'close'}
           </span>
-          <p className={!isFormValid.nameValid && outOfFocus.name ? 'error-msg' : 'error-msg hide-error-msg'}>
-            {nameErrorMsg}
-          </p>
+          <div className='input-info'>
+            <p className={!isFormValid.nameValid && outOfFocus.name ? 'error-msg' : 'error-msg hide-error-msg'}>
+              {nameErrorMsg}
+            </p>
+            <p>{props.formData.name.length}/25</p>
+          </div>
         </fieldset>
 
         <fieldset className='form-input-container'>
@@ -230,9 +233,11 @@ const AddEvent = props => {
             }`}>
             {isFormValid.dateValid ? 'check' : 'close'}
           </span>
-          <p className={!isFormValid.dateValid && outOfFocus.dateInput ? 'error-msg' : 'error-msg hide-error-msg'}>
-            The date must be in the format dd/mm/yyyy
-          </p>
+          <div className='input-info'>
+            <p className={!isFormValid.dateValid && outOfFocus.dateInput ? 'error-msg' : 'error-msg hide-error-msg'}>
+              The date must be in the format dd/mm/yyyy
+            </p>
+          </div>
         </fieldset>
         
         <button type='submit' id='save-date' disabled={!isFormValid.nameValid || !isFormValid.dateValid || !compareData()}>
