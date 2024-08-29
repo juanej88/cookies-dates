@@ -178,10 +178,11 @@ const AddEvent = props => {
   const handleForm = event => {
     props.handleForm(event, props.formData, originalData);
   };
-
+  
+  // this useEffect determines the nameErrorMsg according to the user input
   const [nameErrorMsg, setNameErrorMsg] = useState('');
   useEffect(() => {
-    !isFormValid.nameValid && props.formData.name.length < 2 ?
+    !isFormValid.nameValid && props.formData.name.trim().length < 2 ?
       setNameErrorMsg('The name must be at least 2 characters long')
     : setNameErrorMsg('The name contains invalid characters: @#$%^*=+?');
   }, [isFormValid.nameValid, props.formData.name]);
