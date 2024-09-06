@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import '../assets/styles/AddEvent.css';
+import '../assets/styles/EventForm.css';
 
-const AddEvent = props => {
+const EventForm = props => {
   // -*-*- Start: Update Form Data -*-*-
 
   const [cursorPosition, setCursorPosition] = useState(0);
@@ -248,4 +248,4 @@ const AddEvent = props => {
   );
 };
 
-export default AddEvent;
+export default EventForm;
