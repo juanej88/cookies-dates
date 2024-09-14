@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import Header from './components/Header';
+// import Login from './components/authentication/Login';
 import Main from './components/Main';
 import Footer from './components/Footer';
 import futureEvents from './assets/helper_functions/futureEvents';
@@ -257,17 +258,18 @@ const App = () => {
 
   return (
     <div className="App">
-      <Header updateModal={updateModal} />
-      <Main 
-        eventsObj={eventsObj}
-        modal={modal}
-        updateModal={updateModal}
-        formData={formData}
-        setFormData={setFormData}
-        handleForm={saveDate}
-        deleteEvent={deleteEvent}
-      /> 
-      <Footer />
+        <Header updateModal={updateModal} />
+        <Main 
+          eventsObj={eventsObj}
+          modal={modal}
+          updateModal={updateModal}
+          formData={formData}
+          setFormData={setFormData}
+          handleForm={saveDate}
+          deleteEvent={deleteEvent}
+        />
+        {/* <Login /> */}
+        <Footer />
     </div>
   );
 }

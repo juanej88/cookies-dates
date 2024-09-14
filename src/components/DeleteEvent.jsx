@@ -1,5 +1,4 @@
 import '../assets/styles/DeleteEvent.css';
-import { useEffect } from 'react';
 
 const DeleteEvent = props => { 
   const getMessage = () => {
@@ -14,10 +13,6 @@ const DeleteEvent = props => {
   const handleClick = () => {
     props.deleteEvent(props.data);
   };
-
-  useEffect(() => {
-    console.log(props.data);
-  });
 
   return (
     <aside className='delete-message-container'>
