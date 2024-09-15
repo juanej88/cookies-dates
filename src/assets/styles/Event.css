@@ -4,7 +4,7 @@
   background-color: var(--main-bg-colour);
   border-right: 1px solid var(--line-colour);
   border-bottom: 1px solid var(--line-colour);
-  box-shadow: 1px 1px 4px 0 hsla(0, 0%, 0%, 10%);
+  box-shadow: 1px 1px 4px 0 var(--light-box-shadow-colour);
   display: grid;
   grid-template-columns: 4fr 5rem 2rem;
   column-gap: 0.5rem;

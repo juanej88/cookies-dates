@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import Header from './components/Header';
-// import Login from './components/authentication/Login';
+import Login from './components/Login/Login';
 import Main from './components/Main';
 import Footer from './components/Footer';
 import futureEvents from './assets/helper_functions/futureEvents';
@@ -256,10 +256,12 @@ const App = () => {
 
   // -*-*- End: Delete Event -*-*-
 
+  const [user, setUser] = useState(null);
+
   return (
     <div className="App">
         <Header updateModal={updateModal} />
-        <Main 
+        {user && <Main 
           eventsObj={eventsObj}
           modal={modal}
           updateModal={updateModal}
@@ -267,8 +269,8 @@ const App = () => {
           setFormData={setFormData}
           handleForm={saveDate}
           deleteEvent={deleteEvent}
-        />
-        {/* <Login /> */}
+        />}
+        {!user && <Login updateUser={setUser} />}
         <Footer />
     </div>
   );
