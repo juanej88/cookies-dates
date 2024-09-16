@@ -257,10 +257,13 @@ const App = () => {
   // -*-*- End: Delete Event -*-*-
 
   const [user, setUser] = useState(null);
+  useEffect(() => {
+    setUser(localStorage.getItem('user'));
+  }, [user]);
 
   return (
     <div className="App">
-        <Header updateModal={updateModal} />
+        <Header updateModal={updateModal} updateUser={setUser} />
         {user && <Main 
           eventsObj={eventsObj}
           modal={modal}

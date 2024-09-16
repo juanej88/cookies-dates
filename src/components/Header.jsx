@@ -21,7 +21,7 @@ const Header = props => {
       <div className='menu-container'>
         <p>{today}</p>
         <Nav updateModal={props.updateModal} displayMenu={displayMenu} toggleDisplayMenu={toggleDisplayMenu} />
-        {displayMenu && <Menu displayMenu={displayMenu} toggleDisplayMenu={toggleDisplayMenu} />}
+        {displayMenu && <Menu displayMenu={displayMenu} toggleDisplayMenu={toggleDisplayMenu} updateUser={props.updateUser} />}
       </div>
     </header>
   );

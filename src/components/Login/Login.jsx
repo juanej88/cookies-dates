@@ -7,17 +7,24 @@ const Login = props => {
   const googleLogin = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
       try {
-        const response = await axios.post(`${process.env.REACT_APP_GOOGLE_LOGIN_END_POINT}`, {
-          token: tokenResponse.access_token,
-        });
-        props.updateUser(response.data);
+        const response = await axios.post(`${process.env.REACT_APP_GOOGLE_LOGIN_END_POINT}`, 
+        { token: tokenResponse.access_token },
+        { withCredentials: true });
         console.log('Login successful', response.data);
+        props.updateUser(response.data.first_name);
+        localStorage.setItem('authToken', response.data.token);
+        localStorage.setItem('user', response.data.first_name);
       } catch (error) {
         console.error('Login failed', error);
       }
     },
     onFailure: error => console.log('Login Failed:', error),
   });
+
+  const guestLogin = () => {
+    props.updateUser('guest');
+    localStorage.setItem('user', 'guest');
+  };
 
   return (
     <main id='login-main'>
@@ -28,7 +35,7 @@ const Login = props => {
           Continue with Google
         </button>
         <p>or</p>
-        <button id='demo-mode-btn' onClick={() => props.updateUser('guest')}>
+        <button id='demo-mode-btn' onClick={guestLogin}>
           Explore Demo Mode
         </button>
       </section>

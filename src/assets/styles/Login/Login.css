@@ -10,7 +10,7 @@
   background-color: var(--main-bg-colour);
   box-shadow: 1px 1px 4px 0 var(--light-box-shadow-colour);
   border-radius: 0.5rem;
-  padding: 1rem;
+  padding: 1rem 1rem 1.25rem;
   width: calc(100% - 1rem);
   max-width: 500px;
   display: flex;

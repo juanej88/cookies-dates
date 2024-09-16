@@ -12,11 +12,17 @@ const Menu = props => {
     document.addEventListener('click', closeMenu);
     return () => document.removeEventListener('click', closeMenu);
   });
+
+  const logOutUser = () => {
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('user');
+    props.updateUser(null);
+  };
   
   return (
     <section className='menu-modal'>
       <article className='menu-options-container'>
-        <button id='log-out-btn'>
+        <button id='log-out-btn' onClick={logOutUser}>
           Log out
           <span className="material-symbols-outlined">logout</span>
         </button>
