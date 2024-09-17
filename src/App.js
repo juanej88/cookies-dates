@@ -263,7 +263,7 @@ const App = () => {
 
   return (
     <div className="App">
-        <Header updateModal={updateModal} updateUser={setUser} />
+        <Header updateModal={updateModal} user={user} updateUser={setUser} />
         {user && <Main 
           eventsObj={eventsObj}
           modal={modal}
