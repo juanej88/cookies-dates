@@ -20,8 +20,8 @@ const Header = props => {
       </a>
       <div className='menu-container'>
         <p>{today}</p>
-        {props.user && <Nav updateModal={props.updateModal} displayMenu={displayMenu} toggleDisplayMenu={toggleDisplayMenu} />}
-        {displayMenu && <Menu displayMenu={displayMenu} toggleDisplayMenu={toggleDisplayMenu} updateUser={props.updateUser} />}
+        {props.login && <Nav updateModal={props.updateModal} displayMenu={displayMenu} toggleDisplayMenu={toggleDisplayMenu} />}
+        {displayMenu && <Menu displayMenu={displayMenu} toggleDisplayMenu={toggleDisplayMenu} setLogin={props.setLogin} />}
       </div>
     </header>
   );

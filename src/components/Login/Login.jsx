@@ -4,16 +4,36 @@ import '../../assets/styles/Login/Login.css';
 import googleIcon from '../../assets/icons/google.svg';
 
 const Login = props => {
+    // Retrieve events from API after login is successful and authToken is set
+  const getUserData = async authToken => {
+    const endPoint = `${process.env.REACT_APP_EVENTS_END_POINT}`;
+    try {
+      const response = await axios.get(endPoint, {
+        headers: {
+          Authorization: `Token ${authToken}`
+        }
+      });
+      console.log('Response: ', response);
+      props.setUserEvents(response.data);
+      props.setLoading(false);
+      props.setLogin(true);
+    } catch (error) {
+      console.error('Data failed', error);
+    };
+  };
+
   const googleLogin = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
+      props.setLoading(true);
       try {
         const response = await axios.post(`${process.env.REACT_APP_GOOGLE_LOGIN_END_POINT}`, 
         { token: tokenResponse.access_token },
         { withCredentials: true });
         console.log('Login successful', response.data);
-        props.updateUser(response.data.first_name);
-        localStorage.setItem('authToken', response.data.token);
+        props.setUser(response.data.first_name);
         localStorage.setItem('user', response.data.first_name);
+        localStorage.setItem('authToken', response.data.token);
+        getUserData(response.data.token);
       } catch (error) {
         console.error('Login failed', error);
       }
@@ -22,10 +42,12 @@ const Login = props => {
   });
 
   const guestLogin = () => {
-    props.updateUser('guest');
+    props.setUser('guest');
     localStorage.setItem('user', 'guest');
+    props.setLoading(false);
+    props.setLogin(true);
   };
-
+  
   return (
     <main id='login-main'>
       <section className='login-container'>

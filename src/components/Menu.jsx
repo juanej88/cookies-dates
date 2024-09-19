@@ -16,7 +16,7 @@ const Menu = props => {
   const logOutUser = () => {
     localStorage.removeItem('authToken');
     localStorage.removeItem('user');
-    props.updateUser(null);
+    props.setLogin(false);
   };
   
   return (

@@ -256,15 +256,26 @@ const App = () => {
 
   // -*-*- End: Delete Event -*-*-
 
+  const [loading, setLoading] = useState(false);
+  const [login, setLogin] = useState(
+    localStorage.getItem('authToken') ? true : false
+  );
   const [user, setUser] = useState(null);
   useEffect(() => {
     setUser(localStorage.getItem('user'));
   }, [user]);
 
+  const [userEvents, setUserEvents] = useState(null);
+  
+  useEffect(() => {
+    console.log(loading);
+    console.log(userEvents);
+  }, [userEvents, loading]);
+
   return (
     <div className="App">
-        <Header updateModal={updateModal} user={user} updateUser={setUser} />
-        {user && <Main 
+        <Header updateModal={updateModal} login={login} setLogin={setLogin} />
+        {login && <Main 
           eventsObj={eventsObj}
           modal={modal}
           updateModal={updateModal}
@@ -273,7 +284,12 @@ const App = () => {
           handleForm={saveDate}
           deleteEvent={deleteEvent}
         />}
-        {!user && <Login updateUser={setUser} />}
+        {!login && <Login
+          setLogin={setLogin}
+          setLoading={setLoading}
+          setUser={setUser}
+          setUserEvents={setUserEvents}
+        />}
         <Footer />
     </div>
   );
