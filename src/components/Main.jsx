@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import '../assets/styles/Main.css';
-import Loader from './Loader';
 import Modal from './Modal';
 import EventForm from './EventForm';
 import DeleteEvent from './DeleteEvent';
@@ -119,11 +118,8 @@ const Main = props => {
     };
   }, [props.eventsObj]);
 
-  const [showLoader] = useState(false);
-
   return (
     <main className='events'>
-      {showLoader && <Loader/>}
       {getYears}
       {props.modal.show && 
         <Modal updateModal={props.updateModal} eventID={props.modal.type}>

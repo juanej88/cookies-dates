@@ -3,6 +3,7 @@ import './App.css';
 import Header from './components/Header';
 import Login from './components/Login/Login';
 import Main from './components/Main';
+import Loader from './components/Loader';
 import Footer from './components/Footer';
 import futureEvents from './assets/helper_functions/futureEvents';
 
@@ -261,20 +262,19 @@ const App = () => {
     localStorage.getItem('authToken') ? true : false
   );
   const [user, setUser] = useState(null);
+  const [userEvents, setUserEvents] = useState(null);
   useEffect(() => {
     setUser(localStorage.getItem('user'));
   }, [user]);
-
-  const [userEvents, setUserEvents] = useState(null);
   
   useEffect(() => {
-    console.log(loading);
     console.log(userEvents);
-  }, [userEvents, loading]);
+  }, [userEvents]);
 
   return (
     <div className="App">
         <Header updateModal={updateModal} login={login} setLogin={setLogin} />
+        {loading && <Loader/>}
         {login && <Main 
           eventsObj={eventsObj}
           modal={modal}
