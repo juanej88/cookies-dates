@@ -5,10 +5,11 @@ import Login from './components/Login/Login';
 import Main from './components/Main';
 import Loader from './components/Loader';
 import Footer from './components/Footer';
-import futureEvents from './assets/helper_functions/futureEvents';
+import sortEvents from './assets/helper_functions/sortEvents';
+import dummyData from './assets/helper_functions/dummyData';
 
 const App = () => {
-  const [eventsObj, setEventsObj] = useState(futureEvents);
+  const [eventsObj, setEventsObj] = useState(sortEvents(dummyData));
 
   const createEventFromYear = (year, month, day, event) => {
     setEventsObj(prevState => {
