@@ -5,14 +5,16 @@ import Login from './components/Login/Login';
 import Main from './components/Main';
 import Loader from './components/Loader';
 import Footer from './components/Footer';
-import sortEvents from './assets/helper_functions/sortEvents';
-import dummyData from './assets/helper_functions/dummyData';
 
 const App = () => {
-  const [eventsObj, setEventsObj] = useState(sortEvents(dummyData));
+  const [userEvents, setUserEvents] = useState({});
+
+  useEffect(() => {
+    console.log(userEvents);
+  }, [userEvents]);
 
   const createEventFromYear = (year, month, day, event) => {
-    setEventsObj(prevState => {
+    setUserEvents(prevState => {
       return {
         ...prevState,
         [year]: {[month]: {[day]: [{...event, displayYear: year}]}},
@@ -21,7 +23,7 @@ const App = () => {
   };
 
   const createEventFromMonth = (year, month, day, event) => {
-    setEventsObj(prevState => {
+    setUserEvents(prevState => {
       return {
         ...prevState,
         [year]: {
@@ -33,7 +35,7 @@ const App = () => {
   };
 
   const createEventFromDay = (year, month, day, event) => {
-    setEventsObj(prevState => {
+    setUserEvents(prevState => {
       return {
         ...prevState,
         [year]: {
@@ -48,7 +50,7 @@ const App = () => {
   };
 
   const createEventOnly = (year, month, day, event) => {
-    setEventsObj(prevState => {
+    setUserEvents(prevState => {
       return {
         ...prevState,
         [year]: {
@@ -66,11 +68,11 @@ const App = () => {
   };
 
   const checkEventObj = (year, month, day, event) => {
-    if(!(year in eventsObj)) {
+    if(!(year in userEvents)) {
       createEventFromYear(year, month, day, event);
-    } else if(!(month in eventsObj[year])) {
+    } else if(!(month in userEvents[year])) {
       createEventFromMonth(year, month, day, event);
-    } else if(!(day in eventsObj[year][month])) {
+    } else if(!(day in userEvents[year][month])) {
       createEventFromDay(year, month, day, event);
     } else {
       createEventOnly(year, month, day, event);
@@ -190,11 +192,11 @@ const App = () => {
     const { day, month, displayYear } = eventData;
     // the conditions will add the class delete-animation to the correct DOM element
     if(eventData.operation === 'delete-event') {
-      if (eventsObj[displayYear][month][day].length > 1) {
+      if (userEvents[displayYear][month][day].length > 1) {
         deletedEl.classList.add('delete-animation');
-      } else if (Object.keys(eventsObj[displayYear][month]).length > 1) {
+      } else if (Object.keys(userEvents[displayYear][month]).length > 1) {
         deletedEl.classList.add('delete-animation');
-      } else if (Object.keys(eventsObj[displayYear]).length > 1) {
+      } else if (Object.keys(userEvents[displayYear]).length > 1) {
         deletedEl.parentNode.classList.add('delete-animation');
       } else {
         deletedEl.parentNode.parentNode.classList.add('delete-animation');
@@ -209,32 +211,32 @@ const App = () => {
     });
   };
 
-  // it deletes the event from eventsObj
+  // it deletes the event from userEvents
   useEffect(() => {
     const deleteEventFromDOM = () => {
       const { id, day, month, displayYear } = eventToDelete;
-        if (eventsObj[displayYear][month][day].length > 1) {
-          const idx = eventsObj[displayYear][month][day].findIndex(event => event.id === id);
+        if (userEvents[displayYear][month][day].length > 1) {
+          const idx = userEvents[displayYear][month][day].findIndex(event => event.id === id);
           // delete event in the array day
-          setEventsObj(prevState => {
+          setUserEvents(prevState => {
             prevState[displayYear][month][day].splice(idx, 1);
             return prevState;
           });
-        } else if (Object.keys(eventsObj[displayYear][month]).length > 1) {
+        } else if (Object.keys(userEvents[displayYear][month]).length > 1) {
           // delete event and day
-          setEventsObj(prevState => {
+          setUserEvents(prevState => {
             delete prevState[displayYear][month][day];
             return prevState;
           });
-        } else if (Object.keys(eventsObj[displayYear]).length > 1) {
+        } else if (Object.keys(userEvents[displayYear]).length > 1) {
           // delete event, day and month
-          setEventsObj(prevState => {
+          setUserEvents(prevState => {
             delete prevState[displayYear][month];
             return prevState;
           });
         } else {
           // delete event, day, month and year
-          setEventsObj(prevState => {
+          setUserEvents(prevState => {
             delete prevState[displayYear];
             return prevState;
           });
@@ -253,7 +255,7 @@ const App = () => {
     };
 
     return () => clearTimeout(timeoutID);
-  }, [eventToDelete, eventsObj]);
+  }, [eventToDelete, userEvents]);
 
 
   // -*-*- End: Delete Event -*-*-
@@ -263,21 +265,16 @@ const App = () => {
     localStorage.getItem('authToken') ? true : false
   );
   const [user, setUser] = useState(null);
-  const [userEvents, setUserEvents] = useState(null);
   useEffect(() => {
     setUser(localStorage.getItem('user'));
   }, [user]);
-  
-  useEffect(() => {
-    console.log(userEvents);
-  }, [userEvents]);
 
   return (
     <div className="App">
         <Header updateModal={updateModal} login={login} setLogin={setLogin} />
         {loading && <Loader/>}
         {login && <Main 
-          eventsObj={eventsObj}
+          userEvents={userEvents}
           modal={modal}
           updateModal={updateModal}
           formData={formData}

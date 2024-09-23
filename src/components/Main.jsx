@@ -59,21 +59,21 @@ const Main = props => {
         // -----------------      ATTENTION       ------------------------
         // I need to toggle the event.show to false after 0.3 seconds!!
         // -----------------      ATTENTION       ------------------------
-          <Event key={event.id} event={event.event} show={event.show} name={event.name} date={formattedDate} currentNode={currentNode} setCurrentNode={setCurrentNode} updateModal={props.updateModal} openMoreOptions={openMoreOptions} data={event}></Event>
+          <Event key={event.id} event={event.event_type} show={event.show} name={event.name} date={formattedDate} currentNode={currentNode} setCurrentNode={setCurrentNode} updateModal={props.updateModal} openMoreOptions={openMoreOptions} data={event}></Event>
       );
     });
   };
 
   const getDays = (year, month, days) => {
     return days.map(day => {
-      return getEvents(props.eventsObj[year][month][day]);
+      return getEvents(props.userEvents[year][month][day]);
     });
   };
 
   const getMonths = (year, months) => {
     return months.map(month => {
-      const days = Object.keys(props.eventsObj[year][month]);
-      const firstDate = props.eventsObj[year][month][days[0]][0]['date'];
+      const days = Object.keys(props.userEvents[year][month]);
+      const firstDate = props.userEvents[year][month][days[0]][0]['date'];
       const monthText = new Date(firstDate).toLocaleDateString(undefined, {month: 'long'});
       return (
         <article key={`${year}${month}`} className='month-events'>
@@ -84,7 +84,7 @@ const Main = props => {
     });
   };
 
-  const yearsArr = Object.keys(props.eventsObj);
+  const yearsArr = Object.keys(props.userEvents);
   const getYears = yearsArr.map(year => {
 
     // CHECK !!
@@ -92,7 +92,7 @@ const Main = props => {
     // CHECK !!
 
     const title = Number(year) === thisYear ? 'Upcoming Events' : year;
-    const months = Object.keys(props.eventsObj[year]);
+    const months = Object.keys(props.userEvents[year]);
     return (
       <section key={year} className='events-section'>
         <h1>{title}</h1>
@@ -116,7 +116,7 @@ const Main = props => {
       }, 300);
       return () => clearTimeout(timeOutId);
     };
-  }, [props.eventsObj]);
+  }, [props.userEvents]);
 
   return (
     <main className='events'>

@@ -1,4 +1,3 @@
-// import dummyData from './dummyData';
 class Events {
   constructor() {
     this.events = {}
@@ -33,23 +32,23 @@ class Events {
   sort(data) {
     const today = new Date();
     const thisYear = today.getFullYear();
-    data.events.forEach(event => {
+    data.forEach(event => {
+      const [eventYear, eventMonth, eventDay] = event.date.split('-');
       let eventDate = new Date(event.date).setFullYear(thisYear);
-      if (event.year > thisYear) {
+      if (eventYear > thisYear) {
         // pass data as it is if the event is in the upcoming years
-        this.addEvent(event.year, event.month, event.day, event);
+        this.addEvent(eventYear, eventMonth, eventDay, event);
       } else if (eventDate >= today) {
         // pass thisYear for the events which haven't passed
-        this.addEvent(thisYear, event.month, event.day, event);
+        this.addEvent(thisYear, eventMonth, eventDay, event);
       } else {
         // pass next year for the events that have passed
-        this.addEvent(thisYear + 1, event.month, event.day, event);
+        this.addEvent(thisYear + 1, eventMonth, eventDay, event);
       };
     });
     return this.events;
   };
 };
-
 
 const sortEvents = data => {
   const sortedEvents = new Events();

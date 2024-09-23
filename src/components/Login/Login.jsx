@@ -2,6 +2,8 @@ import axios from 'axios';
 import { useGoogleLogin } from '@react-oauth/google';
 import '../../assets/styles/Login/Login.css';
 import googleIcon from '../../assets/icons/google.svg';
+import dummyData from '../../assets/helper_functions/dummyData';
+import sortEvents from '../../assets/helper_functions/sortEvents';
 
 const Login = props => {
     // Retrieve events from API after login is successful and authToken is set
@@ -14,7 +16,7 @@ const Login = props => {
         }
       });
       console.log('Response: ', response);
-      props.setUserEvents(response.data);
+      props.setUserEvents(sortEvents(response.data));
       props.setLoading(false);
       props.setLogin(true);
     } catch (error) {
@@ -44,6 +46,7 @@ const Login = props => {
   const guestLogin = () => {
     props.setUser('guest');
     localStorage.setItem('user', 'guest');
+    props.setUserEvents(sortEvents(dummyData.data));
     props.setLoading(false);
     props.setLogin(true);
   };

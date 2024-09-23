@@ -1,5 +1,5 @@
 const dummyData = {
-  events: [
+  data: [
     {
       id: 1,
       name: 'Tim Cook',
@@ -7,7 +7,7 @@ const dummyData = {
       month: 11,
       year: 1960,
       date: '1960-11-01',
-      event: 'birthday',
+      event_type: 'birthday',
     },
     {
       id: 2,
@@ -16,7 +16,7 @@ const dummyData = {
       month: 10,
       year: 1955,
       date: '1955-10-28',
-      event: 'birthday',
+      event_type: 'birthday',
     },
     {
       id: 3,
@@ -25,7 +25,7 @@ const dummyData = {
       month: 5,
       year: 1984,
       date: '1984-05-14',
-      event: 'birthday',
+      event_type: 'birthday',
     },
     {
       id: 4,
@@ -34,7 +34,7 @@ const dummyData = {
       month: 6,
       year: 1971,
       date: '1971-06-28',
-      event: 'birthday',
+      event_type: 'birthday',
     },
     {
       id: 5,
@@ -43,7 +43,7 @@ const dummyData = {
       month: 3,
       year: 1973,
       date: '1973-03-26',
-      event: 'birthday',
+      event_type: 'birthday',
     },
     {
       id: 6,
@@ -52,7 +52,7 @@ const dummyData = {
       month: 1,
       year: 1964,
       date: '1964-01-12',
-      event: 'birthday',
+      event_type: 'birthday',
     },
     {
       id: 7,
@@ -61,7 +61,7 @@ const dummyData = {
       month: 2,
       year: 1983,
       date: '1983-02-21',
-      event: 'birthday',
+      event_type: 'birthday',
     },
     {
       id: 8,
@@ -70,7 +70,7 @@ const dummyData = {
       month: 10,
       year: 1960,
       date: '1960-10-08',
-      event: 'birthday',
+      event_type: 'birthday',
     },
     {
       id: 9,
@@ -79,7 +79,7 @@ const dummyData = {
       month: 8,
       year: 1981,
       date: '1981-08-29',
-      event: 'birthday',
+      event_type: 'birthday',
     },
     {
       id: 10,
@@ -88,7 +88,7 @@ const dummyData = {
       month: 11,
       year: 1979,
       date: '1979-11-17',
-      event: 'birthday',
+      event_type: 'birthday',
     },
     {
       id: 11,
@@ -97,7 +97,7 @@ const dummyData = {
       month: 3,
       year: 1985,
       date: '1985-03-13',
-      event: 'birthday',
+      event_type: 'birthday',
     },
     {
       id: 12,
@@ -106,7 +106,7 @@ const dummyData = {
       month: 7,
       year: 1961,
       date: '1961-07-04',
-      event: 'birthday',
+      event_type: 'birthday',
     },
     {
       id: 13,
@@ -115,7 +115,7 @@ const dummyData = {
       month: 1,
       year: 1956,
       date: '1956-01-31',
-      event: 'birthday',
+      event_type: 'birthday',
     },
     {
       id: 14,
@@ -124,7 +124,7 @@ const dummyData = {
       month: 1,
       year: 1981,
       date: '1981-01-01',
-      event: 'birthday',
+      event_type: 'birthday',
     },
     {
       id: 15,
@@ -133,7 +133,7 @@ const dummyData = {
       month: 10,
       year: 1992,
       date: '1992-10-18',
-      event: 'birthday',
+      event_type: 'birthday',
     },
     {
       id: 16,
@@ -142,7 +142,7 @@ const dummyData = {
       month: 9,
       year: 1954,
       date: '1954-09-06',
-      event: 'birthday',
+      event_type: 'birthday',
     },
     {
       id: 17,
@@ -151,7 +151,7 @@ const dummyData = {
       month: 5,
       year: 1963,
       date: '1963-05-27',
-      event: 'birthday',
+      event_type: 'birthday',
     },
     {
       id: 18,
@@ -160,7 +160,7 @@ const dummyData = {
       month: 8,
       year: 1950,
       date: '1950-08-11',
-      event: 'birthday',
+      event_type: 'birthday',
     },
     {
       id: 18,
@@ -169,7 +169,7 @@ const dummyData = {
       month: 8,
       year: 1978,
       date: '1978-08-25',
-      event: 'birthday',
+      event_type: 'birthday',
     },
     {
       id: 19,
@@ -178,7 +178,7 @@ const dummyData = {
       month: 8,
       year: 1944,
       date: '1944-08-17',
-      event: 'birthday',
+      event_type: 'birthday',
     },
     {
       id: 20,
@@ -187,7 +187,7 @@ const dummyData = {
       month: 2,
       year: 1972,
       date: '1972-02-17',
-      event: 'birthday',
+      event_type: 'birthday',
     },
     {
       id: 21,
@@ -196,7 +196,7 @@ const dummyData = {
       month: 12,
       year: 1983,
       date: '1983-12-30',
-      event: 'birthday',
+      event_type: 'birthday',
     },
     {
       id: 22,
@@ -205,7 +205,7 @@ const dummyData = {
       month: 12,
       year: 1969,
       date: '1969-12-28',
-      event: 'birthday',
+      event_type: 'birthday',
     },
     {
       id: 23,
@@ -214,7 +214,7 @@ const dummyData = {
       month: 7,
       year: 2025,
       date: '2025-07-19',
-      event: 'special',
+      event_type: 'special',
     },
     {
       id: 24,
@@ -223,7 +223,7 @@ const dummyData = {
       month: 9,
       year: 2024,
       date: '2024-09-14',
-      event: 'special',
+      event_type: 'special',
     },
     {
       id: 25,
@@ -232,7 +232,7 @@ const dummyData = {
       month: 8,
       year: 2026,
       date: '2026-08-01',
-      event: 'special',
+      event_type: 'special',
     },
     {
       id: 26,
@@ -241,7 +241,7 @@ const dummyData = {
       month: 12,
       year: 2022,
       date: '2022-12-02',
-      event: 'special',
+      event_type: 'special',
     },
   ]
 };
