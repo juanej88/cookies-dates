@@ -37,13 +37,13 @@ class Events {
       let eventDate = new Date(event.date).setFullYear(thisYear);
       if (eventYear > thisYear) {
         // pass data as it is if the event is in the upcoming years
-        this.addEvent(eventYear, eventMonth, eventDay, event);
+        this.addEvent(eventYear, Number(eventMonth), Number(eventDay), event);
       } else if (eventDate >= today) {
         // pass thisYear for the events which haven't passed
-        this.addEvent(thisYear, eventMonth, eventDay, event);
+        this.addEvent(thisYear, Number(eventMonth), Number(eventDay), event);
       } else {
         // pass next year for the events that have passed
-        this.addEvent(thisYear + 1, eventMonth, eventDay, event);
+        this.addEvent(thisYear + 1, Number(eventMonth), Number(eventDay), event);
       };
     });
     return this.events;

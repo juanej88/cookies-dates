@@ -40,35 +40,27 @@ const EventForm = props => {
       };
 
       if (dateInput.length === 10) {
-        const [day, month, year] = dateInput.split('/');
         const date = dateInput.split('/').reverse().join('-');
         props.setFormData({
           ...props.formData,
           [e.target.name]: dateInput,
-          day: Number(day),
-          month: Number(month),
-          year: Number(year),
+          full_date: true,
           date: date,
         });
       } else if (dateInput.length === 6) {
-        const [day, month] = dateInput.split('/');
         let date = dateInput.split('/').reverse().join('-');
         date = '2024' + date;
         props.setFormData({
           ...props.formData,
           [e.target.name]: dateInput,
-          day: Number(day),
-          month: Number(month),
-          year: null,
+          full_date: false,
           date: date,
         });
       } else {
         props.setFormData({
           ...props.formData,
           [e.target.name]: dateInput,
-          day: '',
-          month: '',
-          year: '',
+          full_date: false,
           date: '',
         });
         setIsFormValid({
@@ -122,9 +114,10 @@ const EventForm = props => {
     };
     // the first condition checks if the birthday date is valid (either with dd/mm or with dd/mm/yyyy) or if the special event is valid as long as the user inputs dd/mm/yyyy
     if ((props.formData.date &&
-      props.formData.event === 'birthday') ||
-      (props.formData.year && props.formData.event === 'special')) {
-      const result = validateDate(props.formData.date, props.formData.day);
+      props.formData.event_type === 'birthday') ||
+      (props.formData.full_date && props.formData.event_type === 'special')) {
+      const eventDay = props.formData.date.split('-')[2];
+      const result = validateDate(props.formData.date, Number(eventDay));
       setIsFormValid(prevState => {
         return {...prevState, dateValid: result};
       });
@@ -133,7 +126,7 @@ const EventForm = props => {
         return {...prevState, dateValid: false};
       });
     };
-  }, [props.formData.date, props.formData.day, props.formData.year, props.formData.event]);
+  }, [props.formData.date, props.formData.day, props.formData.full_date, props.formData.event_type]);
 
   // this function compares the data when the user wants to update an event, if there is no change, the update button will be disabled
   const [originalData] = useState(props.formData);
@@ -191,12 +184,12 @@ const EventForm = props => {
       <form id='event-form' onSubmit={handleForm} autoComplete='off'>
         <fieldset className='event-options-container'>
           <legend className='event-options-title'>Type</legend>
-          <input type='radio' name='event' id='birthday' className='event-options' value='birthday' onChange={updateFormData} checked={props.formData.event === 'birthday'} />
+          <input type='radio' name='event_type' id='birthday' className='event-options' value='birthday' onChange={updateFormData} checked={props.formData.event_type === 'birthday'} />
           <label htmlFor='birthday' className='event-label'>
             <span></span>
             Birthday
           </label>
-          <input type='radio' name='event' id='special' className='event-options' value='special' onChange={updateFormData} checked={props.formData.event === 'special'} />
+          <input type='radio' name='event_type' id='special' className='event-options' value='special' onChange={updateFormData} checked={props.formData.event_type === 'special'} />
           <label htmlFor='special' className='event-label'>
             <span></span>
             Special Event

@@ -86,28 +86,26 @@ const App = () => {
     const thisYear = today.getFullYear();
 
     data.events.forEach(event => {
+      const [eventYear, eventMonth, eventDay] = event.date.split('-');
       let eventDate = new Date(event.date).setFullYear(thisYear);
-      if (event.year > thisYear) {
+      if (eventYear > thisYear) {
         // pass data as it is if the event is in the upcoming years
-        checkEventObj(event.year, event.month, event.day, event);
+        checkEventObj(eventYear, Number(eventMonth), Number(eventDay), event);
       } else if (eventDate >= today) {
         // pass thisYear for the events which haven't passed
-        checkEventObj(thisYear, event.month, event.day, event);
+        checkEventObj(thisYear, Number(eventMonth), Number(eventDay), event);
       } else {
         // pass next year for the events that have passed
-        checkEventObj(thisYear + 1, event.month, event.day, event);
+        checkEventObj(thisYear + 1, Number(eventMonth), Number(eventDay), event);
       };
     });
   };
 
   const [formData, setFormData] = useState({
     id: 99, // I need to remove it once it's sent to the back-end
-    event: 'birthday',
+    event_type: 'birthday',
     name: '',
     dateInput: '',
-    day: '',
-    month: '',
-    year: '',
     date: '',
     show: false,
   });
@@ -125,12 +123,9 @@ const App = () => {
       // I need to remove it once it's sent to the back-end 
       // and generate a random number
       id: 100,
-      event: 'birthday',
+      event_type: 'birthday',
       name: '',
       dateInput: '',
-      day: '',
-      month: '',
-      year: '',
       date: '',
       show: true,
     });
@@ -154,12 +149,9 @@ const App = () => {
       setFormData(data);
     } else setFormData({
       id: 99, // I need to remove it once it's sent to the back-end
-      event: 'birthday',
+      event_type: 'birthday',
       name: '',
       dateInput: '',
-      day: '',
-      month: '',
-      year: '',
       date: '',
       show: true,
       operation: eventID,

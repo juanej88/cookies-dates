@@ -4,7 +4,6 @@ import Modal from './Modal';
 import EventForm from './EventForm';
 import DeleteEvent from './DeleteEvent';
 import Event from './Event';
-// import useConsoleLog from '../assets/helper_functions/useConsoleLog';
 
 const Main = props => {
   const today = new Date();
@@ -86,11 +85,6 @@ const Main = props => {
 
   const yearsArr = Object.keys(props.userEvents);
   const getYears = yearsArr.map(year => {
-
-    // CHECK !!
-    // -> I need to check the edge case when a user enters a birthday without a year
-    // CHECK !!
-
     const title = Number(year) === thisYear ? 'Upcoming Events' : year;
     const months = Object.keys(props.userEvents[year]);
     return (
