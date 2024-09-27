@@ -103,7 +103,7 @@ const App = () => {
   };
 
   const [formData, setFormData] = useState({
-    id: 99, // I need to remove it once it's sent to the back-end
+    id: 100,
     event_type: 'birthday',
     name: '',
     dateInput: '',
@@ -133,6 +133,14 @@ const App = () => {
           }
         });
         console.log('The event was added successfully', response.data);
+        setFormData(prevState => {
+          return {
+            ...prevState,
+            id: response.data.id,
+          };
+        });
+        data = { ...data, id: response.data.id };
+        checkYear({events: [data]}); // Add event to the DOM
       } catch (error) {
         console.error('Add Event failed', error);
         return;
@@ -141,14 +149,17 @@ const App = () => {
     if (data.operation === 'update-event') {
       await deleteEvent(originalData);
       data.show = true;
-    };  
-    const newDate = {events: [data]};
-    checkYear(newDate);
+      checkYear({events: [data]});
+    };
+
+    if(!authToken) {
+      checkYear({events: [data]});
+    };
 
     setFormData({
       // I need to remove it once it's sent to the back-end 
       // and generate a random number
-      id: 100,
+      id: 101,
       event_type: 'birthday',
       name: '',
       dateInput: '',
@@ -174,7 +185,7 @@ const App = () => {
       data.operation = eventID;
       setFormData(data);
     } else setFormData({
-      id: 99, // I need to remove it once it's sent to the back-end
+      id: 100,
       event_type: 'birthday',
       name: '',
       dateInput: '',
