@@ -5,7 +5,7 @@ import Login from './components/Login/Login';
 import Main from './components/Main';
 import Loader from './components/Loader';
 import Footer from './components/Footer';
-import axios from 'axios';
+import eventApi from './assets/helper_functions/eventApi';
 
 const App = () => {
   const [userEvents, setUserEvents] = useState({});
@@ -114,45 +114,17 @@ const App = () => {
   const saveDate = async (event, data, originalData) => {
     event.preventDefault();
     const authToken = localStorage.getItem('authToken');
-    if(data.operation === 'add-event' && authToken) {
-      const endPoint = `${process.env.REACT_APP_EVENTS_END_POINT}`;
-      const payload = {
-        name: data.name,
-        date: data.date,
-        full_date: data.full_date,
-        event_type: data.event_type,
-        notify: true, // I need to change it once I add it in the form
-        notification_days: 0, // I need to change it once I add it in the form
-      };
-      try {
-        const response = await axios.post(endPoint, payload, {
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization': `Token ${authToken}`,
-          }
-        });
-        console.log('The event was added successfully', response.data);
-        setFormData(prevState => {
-          return {
-            ...prevState,
-            id: response.data.id,
-          };
-        });
-        data = { ...data, id: response.data.id };
-        checkYear({events: [data]}); // Add event to the DOM
-      } catch (error) {
-        console.error('Add Event failed', error);
-        return;
-      };
-    };
-    if (data.operation === 'update-event') {
-      await deleteEvent(originalData);
-      data.show = true;
+
+    if(authToken) {
+      const response = await eventApi(data, authToken);
+      checkYear({events: [response]});
+    } else {
       checkYear({events: [data]});
     };
 
-    if(!authToken) {
+    if (data.operation === 'update-event') {
+      await deleteEvent(originalData);
+      data.show = true;
       checkYear({events: [data]});
     };
 
