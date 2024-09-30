@@ -6,6 +6,7 @@ import Main from './components/Main';
 import Loader from './components/Loader';
 import Footer from './components/Footer';
 import eventApi from './assets/helper_functions/eventApi';
+import createClientEvent from './assets/helper_functions/createClientEvent';
 
 const App = () => {
   const [userEvents, setUserEvents] = useState({});
@@ -13,94 +14,6 @@ const App = () => {
   useEffect(() => {
     console.log(userEvents);
   }, [userEvents]);
-
-  const createEventFromYear = (year, month, day, event) => {
-    setUserEvents(prevState => {
-      return {
-        ...prevState,
-        [year]: {[month]: {[day]: [{...event, displayYear: year}]}},
-      };
-    });
-  };
-
-  const createEventFromMonth = (year, month, day, event) => {
-    setUserEvents(prevState => {
-      return {
-        ...prevState,
-        [year]: {
-          ...prevState[year],
-          [month]: {[day]: [{...event, displayYear: year}]},
-        },
-      };
-    });
-  };
-
-  const createEventFromDay = (year, month, day, event) => {
-    setUserEvents(prevState => {
-      return {
-        ...prevState,
-        [year]: {
-          ...prevState[year],
-          [month]: {
-            ...prevState[year][month],
-            [day]: [{...event, displayYear: year}]
-          },
-        },
-      };
-    });
-  };
-
-  const createEventOnly = (year, month, day, event) => {
-    setUserEvents(prevState => {
-      return {
-        ...prevState,
-        [year]: {
-          ...prevState[year],
-          [month]: {
-            ...prevState[year][month],
-            [day]: [
-              ...prevState[year][month][day],
-              {...event, displayYear: year}
-            ],
-          },
-        },
-      };
-    });
-  };
-
-  const checkEventObj = (year, month, day, event) => {
-    if(!(year in userEvents)) {
-      createEventFromYear(year, month, day, event);
-    } else if(!(month in userEvents[year])) {
-      createEventFromMonth(year, month, day, event);
-    } else if(!(day in userEvents[year][month])) {
-      createEventFromDay(year, month, day, event);
-    } else {
-      createEventOnly(year, month, day, event);
-    };
-  };
-  
-  const checkYear = data => {
-    // newDate gets formatted to pass the first second of the current day to the today variable so it can add the events which are on the current day to the top of the Upcoming Events
-    const newDate = new Date().toLocaleDateString(undefined, {day: '2-digit', month: 'short',  year:'numeric'});
-    const today = new Date(newDate);
-    const thisYear = today.getFullYear();
-
-    data.events.forEach(event => {
-      const [eventYear, eventMonth, eventDay] = event.date.split('-');
-      let eventDate = new Date(event.date).setFullYear(thisYear);
-      if (eventYear > thisYear) {
-        // pass data as it is if the event is in the upcoming years
-        checkEventObj(eventYear, Number(eventMonth), Number(eventDay), event);
-      } else if (eventDate >= today) {
-        // pass thisYear for the events which haven't passed
-        checkEventObj(thisYear, Number(eventMonth), Number(eventDay), event);
-      } else {
-        // pass next year for the events that have passed
-        checkEventObj(thisYear + 1, Number(eventMonth), Number(eventDay), event);
-      };
-    });
-  };
 
   const [formData, setFormData] = useState({
     id: 100,
@@ -118,11 +31,13 @@ const App = () => {
       if(data.operation === 'update-event') await deleteEvent(originalData);
       const response = await eventApi(data, authToken);
       response.show = true;
-      checkYear({events: [response]});
+      createClientEvent(response, userEvents, setUserEvents);
+      // createClientEvent({events: [response]});
     } else {
       if(data.operation === 'update-event') await deleteEvent(originalData);
       data.show = true;
-      checkYear({events: [data]});
+      createClientEvent(data, userEvents, setUserEvents);
+      // createClientEvent({events: [data]});
     };
 
     setFormData({

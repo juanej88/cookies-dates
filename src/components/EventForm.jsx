@@ -133,7 +133,7 @@ const EventForm = props => {
   const compareData = () => {
     if (
       props.type === 'update' && 
-      props.formData.event === originalData.event && 
+      props.formData.event_type === originalData.event_type && 
       props.formData.name === originalData.name && 
       props.formData.date === originalData.date
       ) {
