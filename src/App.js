@@ -114,16 +114,13 @@ const App = () => {
   const saveDate = async (event, data, originalData) => {
     event.preventDefault();
     const authToken = localStorage.getItem('authToken');
-
     if(authToken) {
+      if(data.operation === 'update-event') await deleteEvent(originalData);
       const response = await eventApi(data, authToken);
+      response.show = true;
       checkYear({events: [response]});
     } else {
-      checkYear({events: [data]});
-    };
-
-    if (data.operation === 'update-event') {
-      await deleteEvent(originalData);
+      if(data.operation === 'update-event') await deleteEvent(originalData);
       data.show = true;
       checkYear({events: [data]});
     };
@@ -190,7 +187,10 @@ const App = () => {
 
   const [eventToDelete, setEventToDelete] = useState(false);
   const deleteEvent = eventData => {
-    const { day, month, displayYear } = eventData;
+    const { displayYear } = eventData;
+    let [ day, month ] = eventData.dateInput.split('/');
+    day = Number(day);
+    month = Number(month);
     // the conditions will add the class delete-animation to the correct DOM element
     if(eventData.operation === 'delete-event') {
       if (userEvents[displayYear][month][day].length > 1) {
@@ -215,7 +215,10 @@ const App = () => {
   // it deletes the event from userEvents
   useEffect(() => {
     const deleteEventFromDOM = () => {
-      const { id, day, month, displayYear } = eventToDelete;
+      const { id, displayYear } = eventToDelete;
+      let [ day, month ] = eventToDelete.dateInput.split('/');
+      day = Number(day);
+      month = Number(month);
         if (userEvents[displayYear][month][day].length > 1) {
           const idx = userEvents[displayYear][month][day].findIndex(event => event.id === id);
           // delete event in the array day
