@@ -82,10 +82,13 @@ const App = () => {
   };
 
   const [eventToDelete, setEventToDelete] = useState(null);
-  const deleteEvent = event => {
+  const deleteEvent = async event => {
+    const authToken = localStorage.getItem('authToken');
     if(event.operation === 'update-event') {
       deleteClientEvent(event, userEvents, setUserEvents, domEventToDelete, setDomEventToDelete);
     } else {
+      const response = await eventApi(event, authToken);
+      console.log(response);
       const { displayYear } = event;
       let [ day, month ] = event.dateInput.split('/');
       day = Number(day);
