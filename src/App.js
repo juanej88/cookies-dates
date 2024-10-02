@@ -71,12 +71,12 @@ const App = () => {
     event.preventDefault();
     const authToken = localStorage.getItem('authToken');
     if(authToken) {
-      if(data.operation === 'update-event') deleteEvent(originalData);
+      if(data.operation === 'update-event') await deleteEvent(originalData);
       const response = await eventApi(data, authToken);
       response.show = true;
       createClientEvent(response, userEvents, setUserEvents);
     } else {
-      if(data.operation === 'update-event') deleteEvent(originalData);
+      if(data.operation === 'update-event') await deleteEvent(originalData);
       data.show = true;
       createClientEvent(data, userEvents, setUserEvents);
     };
