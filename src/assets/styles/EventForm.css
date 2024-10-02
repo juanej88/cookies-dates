@@ -1,6 +1,6 @@
 #event-form {
   display: grid;
-  grid-template-rows: repeat(3, 2fr) 1.5fr;
+  grid-template-rows: repeat(4, 2fr) 1.25fr;
   align-items: start;
 }
 
@@ -74,7 +74,8 @@ input.event-options:focus + label {
   padding: 0 0 0.25rem 0.25rem;
 }
 
-.form-input-container > input {
+.form-input-container > input,
+.form-input-container > select {
   grid-column: 1;
   grid-row: 2;
   height: 2.5rem;
@@ -86,15 +87,23 @@ input.event-options:focus + label {
   font-family: "Wix Madefor Display", sans-serif;
   font-size: 1.2rem;
   text-align: center;
+  text-align-last: center;
+  appearance: none;
 }
 
-.form-input-container > input:focus {
+.form-input-container > select {
+  cursor: pointer;
+}
+
+.form-input-container > input:focus,
+.form-input-container > select:focus {
   outline: 2px solid var(--blue);
   caret-color: var(--blue);
 }
 
 /* Valid and Invalid icons and text */
-span.checker {
+span.checker,
+span.arrow-down {
   grid-column: 1;
   grid-row: 2;
   justify-self: end;
@@ -107,6 +116,16 @@ span.checker {
   font-variation-settings:
   'FILL' 0,
   'wght' 700,
+  'GRAD' 0,
+  'opsz' 24
+}
+
+span.arrow-down {
+  display: flex;
+  font-size: 1.25rem;
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 500,
   'GRAD' 0,
   'opsz' 24
 }

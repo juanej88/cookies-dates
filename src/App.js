@@ -43,6 +43,8 @@ const App = () => {
       name: '',
       dateInput: '',
       date: '',
+      notify: true,
+      notification_days: 0,
       show: true,
       operation: eventID,
     });

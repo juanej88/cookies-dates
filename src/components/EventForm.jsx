@@ -7,10 +7,17 @@ const EventForm = props => {
   const [cursorPosition, setCursorPosition] = useState(0);
 
   const updateFormData = e => {
-    if(e.target.name !== 'dateInput') {
+    if(e.target.name !== 'dateInput' && e.target.name !== 'notification_days') {
       props.setFormData({
         ...props.formData,
         [e.target.name]: e.target.value,
+      });
+    } else if(e.target.name === 'notification_days') {
+      const notify = e.target.value !== '25' ? true : false;
+      props.setFormData({
+        ...props.formData,
+        [e.target.name]: Number(e.target.value),
+        notify: notify,
       });
     } else {
       // it formats the date input to display the forward slashes in DD/MM/YYYY
@@ -135,7 +142,8 @@ const EventForm = props => {
       props.type === 'update' && 
       props.formData.event_type === originalData.event_type && 
       props.formData.name === originalData.name && 
-      props.formData.date === originalData.date
+      props.formData.date === originalData.date &&
+      props.formData.notification_days === originalData.notification_days
       ) {
         return false;
       };
@@ -179,6 +187,13 @@ const EventForm = props => {
       setNameErrorMsg('The name must be at least 2 characters long')
     : setNameErrorMsg('The name contains invalid characters: @#$%^*=+?');
   }, [isFormValid.nameValid, props.formData.name]);
+
+  const getOptions = () => {
+    const options = [['25', 'None'], ['0', 'On the same day'], ['1', '1 day before'], ['2', '2 days before'], ['7', '1 week before'], ['14', '2 weeks before']];
+    return options.map((option, idx) => {
+      return <option key={idx} value={option[0]}>{option[1]}</option>
+    });
+  };
 
   return (
       <form id='event-form' onSubmit={handleForm} autoComplete='off'>
@@ -232,6 +247,14 @@ const EventForm = props => {
               The date must be in the format dd/mm/yyyy
             </p>
           </div>
+        </fieldset>
+
+        <fieldset className='form-input-container'>
+          <label htmlFor='notification_days'>Notification</label>
+          <select name='notification_days' id='notification_days' value={props.formData.notification_days} onChange={updateFormData}>
+            {getOptions()}
+          </select>
+          <span className='material-symbols-outlined arrow-down'>keyboard_arrow_down</span>
         </fieldset>
         
         <button type='submit' id='save-date' disabled={!isFormValid.nameValid || !isFormValid.dateValid || !compareData()}>

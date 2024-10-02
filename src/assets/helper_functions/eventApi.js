@@ -58,8 +58,8 @@ const eventApi = (data, authToken) => {
     date: data.date,
     full_date: data.full_date,
     event_type: data.event_type,
-    notify: true, // I need to change it once I add it in the form
-    notification_days: 0, // I need to change it once I add it in the form
+    notify: data.notify,
+    notification_days: data.notification_days,
   };
   
   if(data.operation === 'add-event') {
