@@ -27,9 +27,14 @@ const Login = props => {
   const googleLogin = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
       props.setLoading(true);
+      const timezoneOffset = new Date().getTimezoneOffset();
+      const endPoint = `${process.env.REACT_APP_GOOGLE_LOGIN_END_POINT}`;
+      const payload = {
+        token: tokenResponse.access_token,
+        timezoneOffset,
+      };
       try {
-        const response = await axios.post(`${process.env.REACT_APP_GOOGLE_LOGIN_END_POINT}`, 
-        { token: tokenResponse.access_token },
+        const response = await axios.post(endPoint, payload,
         { withCredentials: true });
         console.log('Login successful', response.data);
         props.setUser(response.data.first_name);
@@ -38,7 +43,7 @@ const Login = props => {
         getUserData(response.data.token);
       } catch (error) {
         console.error('Login failed', error);
-      }
+      };
     },
     onFailure: error => console.log('Login Failed:', error),
   });
