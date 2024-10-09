@@ -79,7 +79,7 @@
   border-left: 1px solid transparent;
   border-radius: 0 0.5rem 0.5rem 0;
   display: grid;
-  grid-template-columns: 2rem repeat(2, 2.25rem);
+  grid-template-columns: 2rem repeat(3, 2.25rem);
   column-gap: 0.5rem;
   align-items: center;
 }
@@ -88,7 +88,7 @@
   border-left-color: var(--line-colour);
 }
 
-.more-options-container.open-more-options {
+.open-more-options.twoOptions {
   width: 10rem;
   right: 8rem;
   border-left-color: var(--line-colour);
@@ -107,7 +107,7 @@
   }
 }
 
-.more-options-container.close-more-options {
+.close-more-options.twoOptions {
   animation: 0.1s ease-in closeRight forwards;
 }
 
@@ -115,6 +115,41 @@
   from {
     width: 8rem;
     right: 6rem;
+  }
+
+  to {
+    width: 2rem;
+    right: 0rem;
+  }
+}
+
+.open-more-options.threeOptions {
+  width: 10rem;
+  right: 8rem;
+  border-left-color: var(--line-colour);
+  animation: 0.1s ease-out openLeftThree forwards;
+}
+
+@keyframes openLeftThree {
+  from {
+    width: 2rem;
+    right: 0rem;
+  }
+
+  to {
+    width: 10.75rem;
+    right: 8.75rem;
+  }
+}
+
+.close-more-options.threeOptions {
+  animation: 0.1s ease-in closeRightThree forwards;
+}
+
+@keyframes closeRightThree {
+  from {
+    width: 10.75rem;
+    right: 8.75rem;
   }
 
   to {
