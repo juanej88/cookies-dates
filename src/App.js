@@ -54,6 +54,7 @@ const App = () => {
         case 'add-event':
         case 'update-event':
         case 'delete-event':
+        case 'create-message':
           return {show: true, type: eventID};
         default:
           return {show: false, type: ''};

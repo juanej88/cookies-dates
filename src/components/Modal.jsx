@@ -17,6 +17,7 @@ const Modal = props => {
     return props.eventID === 'add-event' ? 'New Event'
     : props.eventID === 'update-event' ? 'Update Event'
     : props.eventID === 'delete-event' ? 'Delete Event'
+    : props.eventID === 'create-message' ? 'Create Message'
     : 'Event';
   };
 

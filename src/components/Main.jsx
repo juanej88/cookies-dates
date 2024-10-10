@@ -3,6 +3,7 @@ import '../assets/styles/Main.css';
 import Modal from './Modal';
 import EventForm from './EventForm';
 import DeleteEvent from './DeleteEvent';
+import CreateMessage from './CreateMessage';
 import Event from './Event';
 
 const Main = props => {
@@ -118,13 +119,16 @@ const Main = props => {
       {props.modal.show && 
         <Modal updateModal={props.updateModal} eventID={props.modal.type}>
           {props.modal.type === 'add-event' &&
-            <EventForm handleForm={props.handleForm} formData={props.formData}setFormData={props.setFormData} btnTag={'Add'} type={'add'} />
+          <EventForm handleForm={props.handleForm} formData={props.formData}setFormData={props.setFormData} btnTag={'Add'} type={'add'} />
           }
           {props.modal.type === 'update-event' &&
-            <EventForm handleForm={props.handleForm} formData={props.formData}setFormData={props.setFormData} btnTag={'Update'} type={'update'} />
+          <EventForm handleForm={props.handleForm} formData={props.formData}setFormData={props.setFormData} btnTag={'Update'} type={'update'} />
           }
           {props.modal.type === 'delete-event' &&
           <DeleteEvent data={props.formData} deleteEvent={props.deleteEvent} />
+          }
+          {props.modal.type === 'create-message' &&
+          <CreateMessage data={props.formData} />
           }
         </Modal>
       }

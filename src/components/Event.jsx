@@ -21,7 +21,7 @@ const Event = props => {
         </span>
 
         {props.event === 'birthday' && 
-        <ActionButton id='compose-event' className='compose-btn' handleClick={props.updateModal} data={props.data}>
+        <ActionButton id='create-message' className='create-message-btn' handleClick={props.updateModal} data={props.data}>
           <span className='material-symbols-outlined'>
             text_snippet
           </span>
