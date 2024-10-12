@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react';
 import '../assets/styles/CreateMessage.css';
+import getChatgptMessage from '../assets/helper_functions/getChatgptMessage';
 
 const CreateMessage = props => {
   const [userInputValue, setUserInputValue] = useState('');
@@ -17,15 +18,27 @@ const CreateMessage = props => {
   
   const token = localStorage.getItem('authToken');
   const getUserInstructions = () => {
-    return token ? `Create a birthday message for ${props.data.name}! You can share a few details to personalise it, or simply press 'Create' and we'll handle the rest!` : `Create birthday messages for your loved ones! Share a few details to personalise it, or simply press 'Create' and we'll handle the rest! Log in now to get started!`
-  }
+    return token ? `Create a birthday message for ${props.data.name}! You can share a few details to personalise it, or simply press 'Create' and we'll handle the rest!` : `Create birthday messages for your loved ones! Share a few details to personalise them, or simply press 'Create' and we'll handle the rest! Log in with Google now to get started!`;
+  };
+
+  const [message, setMessage] = useState(props.data.previous_message ? props.data.previous_message : getUserInstructions());
+
+  const getMessage = async event => {
+    const response = await getChatgptMessage(props.data, userInputValue, token);
+    if (response.status === 200) {
+      setMessage(response.data.previous_message);
+      props.data.previous_message = response.data.previous_message;
+      props.updatePreviousMessage(props.data);
+      setUserInputValue('');
+    };
+  };
 
   return (
     <aside className='create-message-container'>
-      <p>{getUserInstructions()}</p>
+      <p>{message}</p>
       <textarea id='user-input' name='user-input' maxLength='200' ref={textareaRef} value={userInputValue} onChange={handleInputChange} placeholder='Write a funny message in Spanish' autoFocus></textarea>
       <p>{userInputValue.length}/200</p>
-      <button type='submit' disabled={!token}>Create</button>
+      <button type='submit' onClick={getMessage} disabled={!token}>Create</button>
     </aside>
   );
 };

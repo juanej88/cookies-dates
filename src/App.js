@@ -120,6 +120,11 @@ const App = () => {
     return () => clearTimeout(timeoutID);
   }, [eventToDelete, setEventToDelete, userEvents, setUserEvents]);
 
+  const updatePreviousMessage = event => {
+    deleteClientEvent(event, userEvents, setUserEvents);
+    createClientEvent(event, userEvents, setUserEvents);
+  };
+
   return (
     <div className="App">
         <Header updateModal={updateModal} login={login} setLogin={setLogin} />
@@ -132,6 +137,7 @@ const App = () => {
           setFormData={setFormData}
           handleForm={saveEvent}
           deleteEvent={deleteEvent}
+          updatePreviousMessage={updatePreviousMessage}
         />}
         {!login && <Login
           setLogin={setLogin}
