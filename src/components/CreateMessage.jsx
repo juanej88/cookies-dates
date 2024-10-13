@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
 import '../assets/styles/CreateMessage.css';
 import getChatgptMessage from '../assets/helper_functions/getChatgptMessage';
+import { useEffect } from 'react';
 
 const CreateMessage = props => {
   const [userInputValue, setUserInputValue] = useState('');
@@ -22,8 +23,10 @@ const CreateMessage = props => {
   };
 
   const [message, setMessage] = useState(props.data.previous_message ? props.data.previous_message : getUserInstructions());
+  const [creating, setCreating] = useState(false);
 
-  const getMessage = async event => {
+  const getMessage = async () => {
+    setCreating(true);
     const response = await getChatgptMessage(props.data, userInputValue, token);
     if (response.status === 200) {
       setMessage(response.data.previous_message);
@@ -31,14 +34,43 @@ const CreateMessage = props => {
       props.updatePreviousMessage(props.data);
       setUserInputValue('');
     };
+    setCreating(false);
   };
+
+  const [clipboardStatus, setClipboardStatus] = useState('');
+
+  const copyToClipboard = () => {
+    if(props.data.previous_message) {
+      navigator.clipboard.writeText(message).then(
+        function() {
+          setClipboardStatus(`Copied`);
+        },
+        function() {
+          setClipboardStatus(`The message could't be copied`);
+        }
+      );
+    };    
+  };
+
+  useEffect(() => {
+    console.log(clipboardStatus);
+  }, [clipboardStatus]);
 
   return (
     <aside className='create-message-container'>
-      <p>{message}</p>
-      <textarea id='user-input' name='user-input' maxLength='200' ref={textareaRef} value={userInputValue} onChange={handleInputChange} placeholder='Write a funny message in Spanish' autoFocus></textarea>
-      <p>{userInputValue.length}/200</p>
-      <button type='submit' onClick={getMessage} disabled={!token}>Create</button>
+      <div className='message-container' onClick={copyToClipboard}>
+        <p>{message}</p>
+        {/* <span className='material-symbols-outlined copy-icon'>
+          content_copy
+        </span> */}
+      </div>
+      <p className='info-text'>Messages Left This Month: 9</p>
+      <textarea id='user-input' name='user-input' maxLength='200' ref={textareaRef} value={userInputValue} onChange={handleInputChange} placeholder='Write a funny message in Spanish'></textarea>
+      <p className='info-text'>{userInputValue.length}/200</p>
+      <button type='submit' onClick={getMessage} disabled={!token || creating}>
+        {!creating && 'Create'}
+        {creating && 'Creating...'}
+      </button>
     </aside>
   );
 };

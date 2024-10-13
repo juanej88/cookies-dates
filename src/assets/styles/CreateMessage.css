@@ -5,13 +5,36 @@
   align-items: center;
 }
 
-.create-message-container > p {
+.message-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 1px 1px 4px 0 var(--box-shadow-colour);
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.message-container > p {
   font-size: 1.1rem;
-  padding: 0 0.5rem;
-  margin-bottom: 1rem;
+  padding: 0.5rem;
+}
+
+.copy-icon {
+  color: var(--disabled-font-colour);
+  font-size: 1rem;
+  padding-right: 0.25rem;
+}
+
+.info-text {
+  align-self: flex-end;
+  padding: 0.25rem 0.25rem 0;
+  font-size: 0.85rem;
 }
 
 #user-input {
+  margin-top: 1rem;
+  min-height: 2.5rem;
   height: 2.5rem;
   max-height: 6rem;
   width: 100%;
@@ -30,12 +53,6 @@
   caret-color: var(--blue);
 }
 
-#user-input ~ p {
-  align-self: flex-end;
-  padding: 0.25rem 0.25rem 0;
-  font-size: 0.85rem;
-}
-
 .create-message-container > button {
   height: 2.5rem;
   width: 50%;
@@ -50,6 +67,9 @@
   font-weight: 500;
   cursor: pointer;
   margin-top: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .create-message-container > button:disabled {
