@@ -27,7 +27,7 @@ const Modal = props => {
         <aside className='modal-title-container'>
           <h2>{getTitle()}</h2>
           <ActionButton id='close-btn' handleClick={props.updateModal}>
-            <span className="material-symbols-outlined">
+            <span className='material-symbols-outlined'>
               close
             </span>
           </ActionButton>

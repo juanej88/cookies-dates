@@ -1,7 +1,6 @@
-import { useState, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import '../assets/styles/CreateMessage.css';
 import getChatgptMessage from '../assets/helper_functions/getChatgptMessage';
-import { useEffect } from 'react';
 
 const CreateMessage = props => {
   const [userInputValue, setUserInputValue] = useState('');
@@ -37,34 +36,64 @@ const CreateMessage = props => {
     setCreating(false);
   };
 
-  const [clipboardStatus, setClipboardStatus] = useState('');
-
+  const [clipboardStatus, setClipboardStatus] = useState('Copy');
   const copyToClipboard = () => {
     if(props.data.previous_message) {
       navigator.clipboard.writeText(message).then(
         function() {
-          setClipboardStatus(`Copied`);
+          setClipboardStatus('Copied');
         },
         function() {
-          setClipboardStatus(`The message could't be copied`);
+          setClipboardStatus('Try again');
         }
       );
     };    
   };
-
   useEffect(() => {
-    console.log(clipboardStatus);
+    const toggleClipboardStatus = setTimeout(() => {
+      if(clipboardStatus !== 'Copy') setClipboardStatus('Copy');
+    }, 2000);
+    return () => clearTimeout(toggleClipboardStatus);
   }, [clipboardStatus]);
+
+  const shareToWhatsapp = () => {
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappShareLink = `https://api.whatsapp.com/send?text=${encodedMessage}`;
+    window.open(whatsappShareLink, '_blank');
+  };
+
+  const shareViaSMS = () => {
+    const encodedMessage = encodeURIComponent(message);
+    const smsLink = `sms:?body=${encodedMessage}`;
+    window.open(smsLink, '_blank');
+  };
 
   return (
     <aside className='create-message-container'>
-      <div className='message-container' onClick={copyToClipboard}>
+      <div className='message-container'>
         <p>{message}</p>
-        {/* <span className='material-symbols-outlined copy-icon'>
-          content_copy
-        </span> */}
+        <div className='share-container'>
+          <div className='share-icon-container'>
+            <button className='share-btn' onClick={copyToClipboard}>
+              <i className='fa-regular fa-copy'></i>
+            </button>
+            <p className='icon-text'>{clipboardStatus}</p>
+          </div>
+          <div className='share-icon-container'>
+            <button className='share-btn' onClick={shareViaSMS}>
+              <i className='fa-regular fa-comment'></i>
+            </button>
+            <p className='icon-text'>Message</p>
+          </div>
+          <div className='share-icon-container'>
+            <button className='share-btn' onClick={shareToWhatsapp}>
+            <i className='fa-brands fa-whatsapp'></i>
+            </button>
+            <p className='icon-text'>WhatsApp</p>
+          </div>
+        </div>
       </div>
-      <p className='info-text'>Messages Left This Month: 9</p>
+      <p className='info-text'>Messages Left: 9</p>
       <textarea id='user-input' name='user-input' maxLength='200' ref={textareaRef} value={userInputValue} onChange={handleInputChange} placeholder='Write a funny message in Spanish'></textarea>
       <p className='info-text'>{userInputValue.length}/200</p>
       <button type='submit' onClick={getMessage} disabled={!token || creating}>
