@@ -1,6 +1,7 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
 import '../assets/styles/CreateMessage.css';
 import getChatgptMessage from '../assets/helper_functions/getChatgptMessage';
+import ShareOptions from './ShareOptions';
 
 const CreateMessage = props => {
   const [userInputValue, setUserInputValue] = useState('');
@@ -36,62 +37,11 @@ const CreateMessage = props => {
     setCreating(false);
   };
 
-  const [clipboardStatus, setClipboardStatus] = useState('Copy');
-  const copyToClipboard = () => {
-    if(props.data.previous_message) {
-      navigator.clipboard.writeText(message).then(
-        function() {
-          setClipboardStatus('Copied');
-        },
-        function() {
-          setClipboardStatus('Try again');
-        }
-      );
-    };    
-  };
-  useEffect(() => {
-    const toggleClipboardStatus = setTimeout(() => {
-      if(clipboardStatus !== 'Copy') setClipboardStatus('Copy');
-    }, 2000);
-    return () => clearTimeout(toggleClipboardStatus);
-  }, [clipboardStatus]);
-
-  const shareToWhatsapp = () => {
-    const encodedMessage = encodeURIComponent(message);
-    const whatsappShareLink = `https://api.whatsapp.com/send?text=${encodedMessage}`;
-    window.open(whatsappShareLink, '_blank');
-  };
-
-  const shareViaSMS = () => {
-    const encodedMessage = encodeURIComponent(message);
-    const smsLink = `sms:?body=${encodedMessage}`;
-    window.open(smsLink, '_blank');
-  };
-
   return (
     <aside className='create-message-container'>
       <div className='message-container'>
         <p>{message}</p>
-        <div className='share-container'>
-          <div className='share-icon-container'>
-            <button className='share-btn' onClick={copyToClipboard}>
-              <i className='fa-regular fa-copy'></i>
-            </button>
-            <p className='icon-text'>{clipboardStatus}</p>
-          </div>
-          <div className='share-icon-container'>
-            <button className='share-btn' onClick={shareViaSMS}>
-              <i className='fa-regular fa-comment'></i>
-            </button>
-            <p className='icon-text'>Message</p>
-          </div>
-          <div className='share-icon-container'>
-            <button className='share-btn' onClick={shareToWhatsapp}>
-            <i className='fa-brands fa-whatsapp'></i>
-            </button>
-            <p className='icon-text'>WhatsApp</p>
-          </div>
-        </div>
+        <ShareOptions message={message}/>
       </div>
       <p className='info-text'>Messages Left: 9</p>
       <textarea id='user-input' name='user-input' maxLength='200' ref={textareaRef} value={userInputValue} onChange={handleInputChange} placeholder='Write a funny message in Spanish'></textarea>
