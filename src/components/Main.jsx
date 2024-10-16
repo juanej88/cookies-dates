@@ -128,7 +128,7 @@ const Main = props => {
           <DeleteEvent data={props.formData} deleteEvent={props.deleteEvent} />
           }
           {props.modal.type === 'create-message' &&
-          <CreateMessage data={props.formData} updatePreviousMessage={props.updatePreviousMessage} />
+          <CreateMessage data={props.formData} user={props.user} updateUser={props.updateUser} updatePreviousMessage={props.updatePreviousMessage} />
           }
         </Modal>
       }

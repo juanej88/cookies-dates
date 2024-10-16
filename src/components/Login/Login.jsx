@@ -37,8 +37,12 @@ const Login = props => {
         const response = await axios.post(endPoint, payload,
         { withCredentials: true });
         console.log('Login successful', response.data);
-        props.setUser(response.data.first_name);
+        props.setUser({
+          firstName: response.data.first_name,
+          messagesLeft: response.data.messages_left,
+        });
         localStorage.setItem('user', response.data.first_name);
+        localStorage.setItem('messagesLeft', response.data.messages_left);
         localStorage.setItem('authToken', response.data.token);
         getUserData(response.data.token);
       } catch (error) {
@@ -49,7 +53,10 @@ const Login = props => {
   });
 
   const guestLogin = () => {
-    props.setUser('guest');
+    props.setUser({
+      firstName: 'guest',
+      messagesLeft: 0,
+    });
     localStorage.setItem('user', 'guest');
     props.setUserEvents(sortEvents(dummyData.data));
     props.setLoading(false);

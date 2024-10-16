@@ -19,8 +19,23 @@ const App = () => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    setUser(localStorage.getItem('user'));
+    if (!user) {
+      setUser({
+        firstName: localStorage.getItem('user'),
+        messagesLeft: localStorage.getItem('messagesLeft'),
+      });
+    };
   }, [user]);
+
+  const updateUser = (key, value) => {
+    localStorage.setItem(key, value);
+    setUser(prevStatus => {
+      return {
+        ...prevStatus,
+        [key]: value,
+      };
+    });
+  };
 
   // domEventToDelete gets updated with the functions updateModal when a user wants to delete an event, then it's used to add an animation if it's indeed deleted
   const [domEventToDelete, setDomEventToDelete] = useState(undefined);
@@ -131,6 +146,8 @@ const App = () => {
         {loading && <Loader/>}
         {login && <Main 
           userEvents={userEvents}
+          user={user}
+          updateUser={updateUser}
           modal={modal}
           updateModal={updateModal}
           formData={formData}

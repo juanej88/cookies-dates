@@ -33,6 +33,9 @@ const CreateMessage = props => {
       props.data.previous_message = response.data.previous_message;
       props.updatePreviousMessage(props.data);
       setUserInputValue('');
+      props.updateUser('messagesLeft', response.data.messages_left);
+    } else {
+      console.log('Status:', response.status, '\nDetail:', response.data.detail);
     };
     setCreating(false);
   };
@@ -43,10 +46,10 @@ const CreateMessage = props => {
         <p>{message}</p>
         <ShareOptions message={message}/>
       </div>
-      <p className='info-text'>Messages Left: 9</p>
+      <p className='info-text'>Messages Left: {props.user.messagesLeft}</p>
       <textarea id='user-input' name='user-input' maxLength='200' ref={textareaRef} value={userInputValue} onChange={handleInputChange} placeholder='Write a funny message in Spanish'></textarea>
       <p className='info-text'>{userInputValue.length}/200</p>
-      <button type='submit' onClick={getMessage} disabled={!token || creating}>
+      <button type='submit' onClick={getMessage} disabled={!token || creating || !props.user.messagesLeft}>
         {!creating && 'Create'}
         {creating && 'Creating...'}
       </button>

@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const getChatgptMessage = async (data, personDetails, authToken) => {
+  let apiError;
   const endPoint = `${process.env.REACT_APP_CHATGPT_END_POINT}${data.id}`;
   const payload = {
     person_details: personDetails
@@ -16,8 +17,9 @@ const getChatgptMessage = async (data, personDetails, authToken) => {
     console.log('The ChatGPT Message was created successfully', response);
     return response;
   } catch (error) {
-    console.error('Get ChatGPT Message failed', error);
+    apiError = error.response;
   };
+  return apiError;
 };
 
 export default getChatgptMessage;
