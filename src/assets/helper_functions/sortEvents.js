@@ -30,7 +30,8 @@ class Events {
   };
 
   sort(data) {
-    const today = new Date();
+    const genericToday = new Date().toLocaleDateString(undefined, {day: '2-digit', month: 'short',  year:'numeric'});
+    const today = new Date(genericToday);
     const thisYear = today.getFullYear();
     data.forEach(event => {
       const [eventYear, eventMonth, eventDay] = event.date.split('-');

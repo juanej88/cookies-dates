@@ -30,6 +30,16 @@ const ShareOptions = props => {
     const whatsappShareLink = `https://api.whatsapp.com/send?text=${encodedMessage}`;
     window.open(whatsappShareLink, '_blank');
   };
+
+  useEffect(() => {
+    const hideShareOptions = event => {
+      if (!event.target.closest('.message-container')) {
+        props.toggleShareOptions();
+      };
+    };
+    window.addEventListener('click', hideShareOptions);
+    return () => window.removeEventListener('click', hideShareOptions);
+  });
   
   return (
     <div className='share-container'>

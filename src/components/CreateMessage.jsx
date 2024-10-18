@@ -40,11 +40,16 @@ const CreateMessage = props => {
     setCreating(false);
   };
 
+  const [showShareOptions, setShowShareOptions] = useState(false);
+  const toggleShareOptions = () => {
+    setShowShareOptions(prevState => !prevState);
+  };
+
   return (
     <aside className='create-message-container'>
       <div className='message-container'>
-        <p>{message}</p>
-        <ShareOptions message={message}/>
+        <p onClick={toggleShareOptions}>{message}</p>
+        {showShareOptions && <ShareOptions message={message} toggleShareOptions={toggleShareOptions} />}
       </div>
       <p className='info-text'>Messages Left: {props.user.messagesLeft}</p>
       <textarea id='user-input' name='user-input' maxLength='200' ref={textareaRef} value={userInputValue} onChange={handleInputChange} placeholder='Write a funny message in Spanish'></textarea>
