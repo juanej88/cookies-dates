@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import { useState, useEffect } from 'react';
 import '../assets/styles/EventForm.css';
 
@@ -79,13 +80,13 @@ const EventForm = props => {
   };
 
   // it moves the cursor to the previous position when a user edits the date input from the beginning to the second last character
+  const dateInputEl = useRef();
   useEffect(() => {
     // the if statement prevents the name input autofocus to be passed to the date input
-    if(props.formData.dateInput !== '') {
+    if(props.formData.dateInput !== '' && document.activeElement === dateInputEl.current) {
       const dateInput = document.getElementById('date-input');
       dateInput.setSelectionRange(cursorPosition, cursorPosition);
     };
-    // console.log(props.formData);
   }, [props.formData.dateInput, cursorPosition]);
 
 
@@ -213,7 +214,7 @@ const EventForm = props => {
 
         <fieldset className='form-input-container'>
           <label htmlFor='name-input'>Name</label>
-          <input type='text' name='name' id='name-input' minLength='2' maxLength='25' value={props.formData.name} onChange={updateFormData} placeholder='John Smith' required onBlur={handleOnBlur} autoFocus />
+          <input type='text' name='name' id='name-input' minLength='2' maxLength='25' value={props.formData.name} onChange={updateFormData} placeholder='John Smith' required onBlur={handleOnBlur} autoFocus={props.formData.operation === 'add-event'} />
           <span className={
             `material-symbols-outlined checker ${
               isFormValid.nameValid ? 'valid'
@@ -233,7 +234,7 @@ const EventForm = props => {
 
         <fieldset className='form-input-container'>
           <label htmlFor='date-input'>Date</label>
-          <input type='text' name='dateInput' id='date-input' min-length='5' maxLength='10' value={props.formData.dateInput} onChange={updateFormData} inputMode='numeric' placeholder='dd/mm/yyyy' required onBlur={handleOnBlur} />
+          <input type='text' name='dateInput' id='date-input' min-length='5' maxLength='10' value={props.formData.dateInput} onChange={updateFormData} inputMode='numeric' placeholder='dd/mm/yyyy' required onBlur={handleOnBlur} ref={dateInputEl} />
           <span className={
             `material-symbols-outlined checker ${
               isFormValid.dateValid ? 'valid' 
