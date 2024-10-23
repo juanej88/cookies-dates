@@ -3,27 +3,10 @@ import { useGoogleLogin } from '@react-oauth/google';
 import '../../assets/styles/Login/Login.css';
 import googleIcon from '../../assets/icons/google.svg';
 import dummyData from '../../assets/helper_functions/dummyData';
+import getAllEvents from '../../assets/helper_functions/getAllEvents';
 import sortEvents from '../../assets/helper_functions/sortEvents';
 
 const Login = props => {
-    // Retrieve events from API after login is successful and authToken is set
-  const getUserData = async authToken => {
-    const endPoint = `${process.env.REACT_APP_EVENTS_END_POINT}`;
-    try {
-      const response = await axios.get(endPoint, {
-        headers: {
-          Authorization: `Token ${authToken}`
-        }
-      });
-      console.log('Response: ', response);
-      props.setUserEvents(sortEvents(response.data));
-      props.setLoading(false);
-      props.setLogin(true);
-    } catch (error) {
-      console.error('Data failed', error);
-    };
-  };
-
   const googleLogin = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
       props.setLoading(true);
@@ -44,7 +27,8 @@ const Login = props => {
         localStorage.setItem('user', response.data.first_name);
         localStorage.setItem('messagesLeft', response.data.messages_left);
         localStorage.setItem('authToken', response.data.token);
-        getUserData(response.data.token);
+        // Retrieve events from API
+        getAllEvents(response.data.token, props.setUserEvents, props.setLoading, props.setLogin);
       } catch (error) {
         console.error('Login failed', error);
       };

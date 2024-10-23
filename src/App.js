@@ -5,6 +5,7 @@ import Login from './components/Login/Login';
 import Main from './components/Main';
 import Loader from './components/Loader';
 import Footer from './components/Footer';
+import getAllEvents from './assets/helper_functions/getAllEvents';
 import eventApi from './assets/helper_functions/eventApi';
 import createClientEvent from './assets/helper_functions/createClientEvent';
 import deleteClientEvent from './assets/helper_functions/deleteClientEvent';
@@ -12,11 +13,16 @@ import deleteClientEvent from './assets/helper_functions/deleteClientEvent';
 const App = () => {
   const [userEvents, setUserEvents] = useState({});
   const [formData, setFormData] = useState({});
-  const [loading, setLoading] = useState(false);
-  const [login, setLogin] = useState(
-    localStorage.getItem('authToken') ? true : false
-  );
+  const [authToken] = useState(localStorage.getItem('authToken'));
+  const [loading, setLoading] = useState(authToken ? true : false);
+  const [login, setLogin] = useState(authToken ? true : false);
   const [user, setUser] = useState(null);
+  
+  useEffect(() => {
+    if(authToken) {
+      getAllEvents(authToken, setUserEvents, setLoading, setLogin);
+    };
+  }, [authToken]);
 
   useEffect(() => {
     if (!user) {
@@ -85,7 +91,6 @@ const App = () => {
 
   const saveEvent = async (event, data, originalData) => {
     event.preventDefault();
-    const authToken = localStorage.getItem('authToken');
     if(authToken) {
       if(data.operation === 'update-event') await deleteEvent(originalData);
       const response = await eventApi(data, authToken);
@@ -101,7 +106,6 @@ const App = () => {
 
   const [eventToDelete, setEventToDelete] = useState(null);
   const deleteEvent = async event => {
-    const authToken = localStorage.getItem('authToken');
     if(event.operation === 'update-event') {
       deleteClientEvent(event, userEvents, setUserEvents, domEventToDelete, setDomEventToDelete);
     } else {
