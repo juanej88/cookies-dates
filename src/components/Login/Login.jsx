@@ -19,13 +19,14 @@ const Login = props => {
       try {
         const response = await axios.post(endPoint, payload,
         { withCredentials: true });
-        console.log('Login successful', response.data);
+        if(process.env.REACT_APP_MODE === 'DEV') {
+          console.log('Login successful', response.data);
+        };
         props.setUser({
           firstName: response.data.first_name,
           messagesLeft: response.data.messages_left,
         });
         localStorage.setItem('user', response.data.first_name);
-        localStorage.setItem('messagesLeft', response.data.messages_left);
         localStorage.setItem('authToken', response.data.token);
         // Retrieve events from API
         getAllEvents(response.data.token, props.setUserEvents, props.setLoading, props.setLogin);

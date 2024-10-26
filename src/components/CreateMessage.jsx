@@ -35,7 +35,9 @@ const CreateMessage = props => {
       setUserInputValue('');
       props.updateUser('messagesLeft', response.data.messages_left);
     } else {
-      console.log('Status:', response.status, '\nDetail:', response.data.detail);
+      if(process.env.REACT_APP_MODE === 'DEV') {
+        console.log('Status:', response.status, '\nDetail:', response.data.detail);
+      };
     };
     setCreating(false);
   };

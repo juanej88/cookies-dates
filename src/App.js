@@ -20,7 +20,12 @@ const App = () => {
   
   useEffect(() => {
     if(authToken) {
-      getAllEvents(authToken, setUserEvents, setLoading, setLogin);
+      const setUpEvents = async () => {
+        await getAllEvents(authToken, setUserEvents, setLoading, setLogin);
+        const messagesLeft = localStorage.getItem('messagesLeft');
+        updateUser('messagesLeft', messagesLeft);
+      };
+      setUpEvents();
     };
   }, [authToken]);
 

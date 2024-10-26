@@ -9,8 +9,11 @@ const getAllEvents = async (authToken, setUserEvents, setLoading, setLogin) => {
         Authorization: `Token ${authToken}`
       }
     });
-    console.log('Response: ', response);
-    setUserEvents(sortEvents(response.data));
+    if(process.env.REACT_APP_MODE === 'DEV') {
+      console.log('Response: ', response);
+    };
+    localStorage.setItem('messagesLeft', response.data.messages_left);
+    setUserEvents(sortEvents(response.data.events));
     setLoading(false);
     setLogin(true);
   } catch (error) {

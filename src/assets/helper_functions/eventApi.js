@@ -10,11 +10,15 @@ const createEvent = async (data, payload, authToken) => {
         'Authorization': `Token ${authToken}`,
       }
     });
-    console.log('The event was added successfully', response.data);
+    if(process.env.REACT_APP_MODE === 'DEV') {
+      console.log('The event was added successfully', response.data);
+    };
     data = { ...data, id: response.data.id };
     return data;
   } catch (error) {
-    console.error('Add Event failed', error);
+    if(process.env.REACT_APP_MODE === 'DEV') {
+      console.error('Add Event failed', error);
+    };
   };
 };
 
@@ -28,10 +32,14 @@ const updateEvent = async (data, payload, authToken) => {
         'Authorization': `Token ${authToken}`,
       }
     });
-    console.log('The event was updated successfully', response.data);
+    if(process.env.REACT_APP_MODE === 'DEV') {
+      console.log('The event was updated successfully', response.data);
+    };
     return data;
   } catch (error) {
-    console.error('Update Event failed', error);
+    if(process.env.REACT_APP_MODE === 'DEV') {
+      console.error('Update Event failed', error);
+    };
   };
 };
 
@@ -45,10 +53,14 @@ const deleteEvent = async (data, authToken) => {
         'Authorization': `Token ${authToken}`,
       }
     });
-    console.log('The event was deleted successfully', response);
+    if(process.env.REACT_APP_MODE === 'DEV') {
+      console.log('The event was deleted successfully', response);
+    };
     return response;
   } catch (error) {
-    console.error('Delete Event failed', error);
+    if(process.env.REACT_APP_MODE === 'DEV') {
+      console.error('Delete Event failed', error);
+    };
   };
 };
 

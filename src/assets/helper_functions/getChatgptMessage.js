@@ -14,7 +14,9 @@ const getChatgptMessage = async (data, personDetails, authToken) => {
         'Authorization': `Token ${authToken}`,
       }
     });
-    console.log('The ChatGPT Message was created successfully', response);
+    if(process.env.REACT_APP_MODE === 'DEV') {
+      console.log('The ChatGPT Message was created successfully', response);
+    };
     return response;
   } catch (error) {
     apiError = error.response;
