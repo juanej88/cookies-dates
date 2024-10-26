@@ -6,17 +6,17 @@ const Footer = () => {
   return(
     <footer>
       <div>
-        <p>Copyright &#xa9; {getYear()} Cookies & Dates</p>
+        <p>&#xa9; {getYear()} Cookies & Dates</p>
       </div>
       <div>
         <p>
-          Made by <a 
+          Developed by <a 
           href='https://juanespinosa.netlify.app/'
           target='_blank'
           rel="noreferrer"
           title="Visit Juan's Portfolio"
           >
-            Juan Espinosa Jorrin
+            Juan Espinosa
           </a>
         </p>
       </div>

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import '../assets/styles/Main.css';
+import GetStarted from './GetStarted';
 import Modal from './Modal';
 import EventForm from './EventForm';
 import DeleteEvent from './DeleteEvent';
@@ -116,6 +117,9 @@ const Main = props => {
   return (
     <main className='events'>
       {getYears}
+      {Object.keys(props.userEvents).length === 0 && 
+        <GetStarted updateModal={props.updateModal} />
+      }
       {props.modal.show && 
         <Modal updateModal={props.updateModal} eventID={props.modal.type}>
           {props.modal.type === 'add-event' &&

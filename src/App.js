@@ -109,8 +109,7 @@ const App = () => {
     if(event.operation === 'update-event') {
       deleteClientEvent(event, userEvents, setUserEvents, domEventToDelete, setDomEventToDelete);
     } else {
-      const response = await eventApi(event, authToken);
-      console.log(response);
+      if(authToken) await eventApi(event, authToken);
       const { displayYear } = event;
       let [ day, month ] = event.dateInput.split('/');
       day = Number(day);
