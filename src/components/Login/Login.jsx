@@ -26,6 +26,7 @@ const Login = props => {
           firstName: response.data.first_name,
           messagesLeft: response.data.messages_left,
         });
+        localStorage.setItem('messagesLeft', response.data.messages_left);
         localStorage.setItem('user', response.data.first_name);
         localStorage.setItem('authToken', response.data.token);
         // Retrieve events from API

@@ -18,6 +18,15 @@ const App = () => {
   const [login, setLogin] = useState(authToken ? true : false);
   const [user, setUser] = useState(null);
   
+  const updateUser = (key, value) => {
+    localStorage.setItem(key, value);
+    setUser(prevStatus => {
+      return {
+        ...prevStatus,
+        [key]: value,
+      };
+    });
+  };
   useEffect(() => {
     if(authToken) {
       const setUpEvents = async () => {
@@ -37,16 +46,6 @@ const App = () => {
       });
     };
   }, [user]);
-
-  const updateUser = (key, value) => {
-    localStorage.setItem(key, value);
-    setUser(prevStatus => {
-      return {
-        ...prevStatus,
-        [key]: value,
-      };
-    });
-  };
 
   // domEventToDelete gets updated with the functions updateModal when a user wants to delete an event, then it's used to add an animation if it's indeed deleted
   const [domEventToDelete, setDomEventToDelete] = useState(undefined);
