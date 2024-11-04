@@ -13,7 +13,7 @@ import deleteClientEvent from './assets/helper_functions/deleteClientEvent';
 const App = () => {
   const [userEvents, setUserEvents] = useState({});
   const [formData, setFormData] = useState({});
-  const [authToken] = useState(localStorage.getItem('authToken'));
+  const [authToken, setAuthToken] = useState(localStorage.getItem('authToken'));
   const [loading, setLoading] = useState(authToken ? true : false);
   const [login, setLogin] = useState(authToken ? true : false);
   const [user, setUser] = useState(null);
@@ -168,6 +168,7 @@ const App = () => {
           setLoading={setLoading}
           setUser={setUser}
           setUserEvents={setUserEvents}
+          setAuthToken={setAuthToken}
         />}
         <Footer />
     </div>

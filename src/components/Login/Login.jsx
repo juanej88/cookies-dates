@@ -29,6 +29,7 @@ const Login = props => {
         localStorage.setItem('messagesLeft', response.data.messages_left);
         localStorage.setItem('user', response.data.first_name);
         localStorage.setItem('authToken', response.data.token);
+        props.setAuthToken(response.data.token);
         // Retrieve events from API
         getAllEvents(response.data.token, props.setUserEvents, props.setLoading, props.setLogin);
       } catch (error) {

@@ -236,8 +236,8 @@ const dummyData = {
     // },
     // {
     //   id: 26,
-    //   name: 'Road Trip Syd-Per',
-    //   date: '2022-12-02',
+    //   name: 'Road Trip Syd to Per',
+    //   date: '2022-07-25',
     //   full_date: true,
     //   event_type: 'special',
     //   notify: true,
