@@ -128,8 +128,8 @@ const App = () => {
         domEventToDelete.parentNode.parentNode.classList.add('delete-animation');
       };
       setEventToDelete(event);
+      updateModal();
     };
-    updateModal();
   };
 
   // it deletes the event from userEvents once the animation is concluded

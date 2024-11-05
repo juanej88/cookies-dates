@@ -29,3 +29,9 @@
   font-weight: 500;
   cursor: pointer;
 }
+
+.delete-message-container > button:disabled {
+  background-color: var(--disabled-bg-colour);
+  color: var(--disabled-font-colour);
+  cursor: default;
+}

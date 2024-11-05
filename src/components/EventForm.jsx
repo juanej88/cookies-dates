@@ -177,7 +177,9 @@ const EventForm = props => {
     }
   }, [props.type]);
 
+  const [btnTag, setBtnTag] = useState(props.btnTag);
   const handleForm = event => {
+    setBtnTag(btnTag === 'Add' ? 'Adding...' : 'Updating...');
     props.handleForm(event, props.formData, originalData);
   };
   
@@ -258,8 +260,8 @@ const EventForm = props => {
           <span className='material-symbols-outlined arrow-down'>keyboard_arrow_down</span>
         </fieldset>
         
-        <button type='submit' id='save-date' disabled={!isFormValid.nameValid || !isFormValid.dateValid || !compareData()}>
-          {props.btnTag}
+        <button type='submit' id='save-date' disabled={!isFormValid.nameValid || !isFormValid.dateValid || !compareData() || btnTag === 'Adding...' || btnTag === 'Updating...'}>
+          {btnTag}
         </button>
       </form>
   );

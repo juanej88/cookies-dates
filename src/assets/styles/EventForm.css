@@ -177,5 +177,5 @@ span.arrow-down {
 #save-date:disabled {
   background-color: var(--disabled-bg-colour);
   color: var(--disabled-font-colour);
-  cursor: not-allowed;
+  cursor: default;
 }

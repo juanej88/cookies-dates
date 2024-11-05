@@ -14,8 +14,7 @@ const Menu = props => {
   });
 
   const logOutUser = () => {
-    localStorage.removeItem('authToken');
-    localStorage.removeItem('user');
+    localStorage.clear();
     props.setLogin(false);
   };
   

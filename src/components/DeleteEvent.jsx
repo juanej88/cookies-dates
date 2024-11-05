@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import '../assets/styles/DeleteEvent.css';
 
 const DeleteEvent = props => { 
@@ -10,14 +11,16 @@ const DeleteEvent = props => {
     <p>Delete the event titled <strong>"{props.data.name}"</strong>?</p>
   };
 
+  const [deleteTag, setDeleteTag] = useState('Delete')
   const handleClick = () => {
+    setDeleteTag('Deleting...');
     props.deleteEvent(props.data);
   };
 
   return (
     <aside className='delete-message-container'>
       {getMessage()}
-      <button type='submit' onClick={handleClick}>Delete</button>
+      <button type='submit' onClick={handleClick} disabled={deleteTag === 'Deleting...'}>{deleteTag}</button>
     </aside>
   );
 };
