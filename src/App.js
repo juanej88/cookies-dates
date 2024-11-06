@@ -58,8 +58,9 @@ const App = () => {
     : event.target.parentNode.id;
     // it gets the event-card data to update and delete events, else, it blanks the form to add event
     if (data) {
-      const formattedDate = data.date.split('-').reverse().join('/');
-      data.dateInput = formattedDate;
+      const [day, month, year] = data.date.split('-').reverse();
+      if(data.full_date) data.dateInput = [day, month, year].join('/');
+      else data.dateInput = [day, month].join('/');
       data.operation = eventID;
       setFormData(data);
     } else setFormData({
@@ -73,7 +74,7 @@ const App = () => {
       show: true,
       operation: eventID,
     });
-    
+
     setModal(() => {
       switch(eventID) {
         case 'add-event':
