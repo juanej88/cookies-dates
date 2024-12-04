@@ -36,7 +36,7 @@ const CreateMessage = props => {
       props.updateUser('messagesLeft', response.data.messages_left);
     } else {
       if(process.env.REACT_APP_MODE === 'DEV') {
-        console.log('Status:', response.status, '\nDetail:', response.data.detail);
+        console.log('Status:', response.status, '\nDetail:', response);
       };
     };
     setCreating(false);
