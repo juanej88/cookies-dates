@@ -19,7 +19,7 @@ const CreateMessage = props => {
   
   const token = localStorage.getItem('authToken');
   const getUserInstructions = () => {
-    return token ? `Create a birthday message for ${props.data.name}! You can share a few details to personalise it, or simply press 'Create' and we'll handle the rest!` : `Create birthday messages for your loved ones! Share a few details to personalise them, or simply press 'Create' and we'll handle the rest! Log in with Google now to get started!`;
+    return token ? `Create a birthday message for ${props.data.name}! Write a few details to personalise it, or simply press 'Create' and we'll handle the rest. Then, click the message to share it!` : `Create birthday messages for your loved ones! Write a few details to personalise them, or simply press 'Create' and we'll handle the rest. Then, click the message to share it. Log in with Google now to get started!`;
   };
 
   const [message, setMessage] = useState(props.data.previous_message ? props.data.previous_message : getUserInstructions());
