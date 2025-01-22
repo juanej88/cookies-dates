@@ -16,3 +16,10 @@
 - **Database**: MySQL
 - **Integrations**: OpenAI's ChatGPT API for generating custom messages.
 - **Task Scheduling**: GitHub Actions to trigger email notifications at user-friendly times and reset ChatGPT messages every month.
+
+## Deployment 🌐
+
+The app leverages modern cloud infrastructure for seamless performance:
+- **Frontend Hosting**: Netlify (hosted with a custom domain)
+- **Backend Hosting**: Railway (using Docker for containerisation)
+- **Domain**: [https://cookiesanddates.com](https://cookiesanddates.com)
