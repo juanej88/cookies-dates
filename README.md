@@ -8,3 +8,11 @@
 - **Automated Notifications**: Receive timely email reminders for upcoming events.
 - **ChatGPT Integration**: Generate personalised birthday messages, with or without personal details, for your loved ones.
 - **User-Friendly Interface**: Intuitive design for effortless date tracking and customisation.
+
+## Tech Stack 🛠️
+
+- **Frontend**: JavaScript, React, CSS
+- **Backend**: Python, Django, Django Rest Framework
+- **Database**: MySQL
+- **Integrations**: OpenAI's ChatGPT API for generating custom messages.
+- **Task Scheduling**: GitHub Actions to trigger email notifications at user-friendly times and reset ChatGPT messages every month.
