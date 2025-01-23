@@ -23,3 +23,9 @@ The app leverages modern cloud infrastructure for seamless performance:
 - **Frontend Hosting**: Netlify (hosted with a custom domain)
 - **Backend Hosting**: Railway (using Docker for containerisation)
 - **Domain**: [https://cookiesanddates.com](https://cookiesanddates.com)
+
+## Key Highlights 💡
+
+- **10 Free Messages/Month**: Each user gets 10 free ChatGPT-generated messages per month for added value.
+- **Timezone-Sensitive Notifications**: Notifications are scheduled based on user time zones for convenient reminders between 6 AM and 9 AM.
+- **Scalable and Secure**: Built with scalability and data security in mind.
