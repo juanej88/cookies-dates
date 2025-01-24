@@ -2,6 +2,16 @@
 
 **Cookies & Dates** is a user-friendly web application that helps users organise and remember important dates, such as birthdays, anniversaries, or special events. The platform seamlessly integrates data storage and notification services, ensuring users never miss a moment that matters.
 
+Additionally, with **ChatGPT** integration, users can quickly generate personalised messages for their loved ones, making it easier to send thoughtful greetings without the stress of composing them from scratch.
+
+## The Inspiration Behind Cookies & Dates 💡
+
+I built **Cookies & Dates** to solve a problem I faced with remembering important dates like birthdays and anniversaries. I found Facebook's notifications to be overwhelming and irrelevant, reminding me of people I wasn't close to, while my phone's calendar app felt cluttered and inefficient. I also tried other apps, but many were filled with annoying ads or overly complex, making them hard to use.
+
+In addition, I struggled to send quick, thoughtful messages to my loved ones, often missing the opportunity to reach out. To address this, I integrated **ChatGPT** into the app, allowing me to quickly generate personalised messages, making it easier to stay connected with the people I care about.
+
+**Cookies & Dates** offers a simple, user-friendly solution that helps me remember important dates, receive timely reminders, and send meaningful messages without the distractions of ads or complex features.
+
 ## Features 🚀
 
 - **Custom Date Management**: Save and categorise special dates for easy access.
